@@ -20,12 +20,11 @@
 
 ## Binary Communication Table
 
-> First byte will be the command  
-> Second byte the data length  
+> First byte will be the command and the second byte the data length  
 
 | Command | Description |
 | :-----: | :---------: |
-| [`0x01`](#0x01example) | Set LED GPIO pins in use (ex: rgbw gpio pins in use) |
+| [`0x01`](#0x01example) | Set LED GPIO pins in use (ex: rgbw GPIO pins in use) |
 
 <a id="0x01example"></a>
 
