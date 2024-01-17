@@ -5,7 +5,8 @@
 - [What this project needs to do](#what-this-project-needs-to-do)
     - [Checklist](#checklist)
     - [Binary Communication Table](#binary-communication-table)
-    - [Example: Set LED GPIO pins](#example-set-led-gpio-pins)
+    - [Example: Set LED GPIO pin](#example-set-led-gpio-pin)
+    - [Example: Get LED GPIO pins](#example-get-led-gpio-pins)
 
 <!-- /TOC -->
 
@@ -13,8 +14,8 @@
 
 -   [ ] Deliver the last motion time (seconds/microseconds since last motion)
 -   [ ] Enable/Disable motion sensor
--   [ ] [Set LED GPIO configurations for colors (ex: r, g, b, w)](#example-set-led-gpio-pins)
--   [ ] Get current LED GPIO configuration
+-   [ ] [Set LED GPIO configurations for colors (ex: r, g, b, w)](#example-set-led-gpio-pin)
+-   [ ] [Get current LED GPIO configuration]()
 
 ## Binary Communication Table
 
@@ -26,7 +27,7 @@
 
 <a id="0x01example"></a>
 
-## Example: Set LED GPIO pins
+## Example: Set LED GPIO pin 
 
 Binary Example for RGBW stripes:
 
@@ -41,3 +42,7 @@ Binary Example for RGBW stripes:
 ```python
 [0x01, 0x04, 0x00, 0x01, 0x02, 0x03]
 ```
+
+## Example: Get LED GPIO pins
+
+@TODO: ...
