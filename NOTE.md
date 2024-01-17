@@ -19,8 +19,12 @@
 
 Binary Example for RGBW stripes:  
 
-Command "0x01" with data of length 0x04 (4)  
-Data: 0x00 (gp pin nr. 0), 0x01 (gp pin nr. 1), 0x02 (gp pin nr. 2), 0x03 (gp pin nr. 3)  
+**Command** "*0x01*" with data of length *0x04* (4)  
+**Data**:  
+* *0x00* (gp pin nr. 0)
+* *0x01* (gp pin nr. 1)
+* *0x02* (gp pin nr. 2)
+* *0x03* (gp pin nr. 3)  
 
 ```python
 [0x01, 0x04, 0x00, 0x01, 0x02, 0x03]
