@@ -1,4 +1,17 @@
+
+
 # What this project needs to do
+
+<!-- TOC -->
+
+- [What this project needs to do](#what-this-project-needs-to-do)
+    - [Checklist](#checklist)
+    - [Binary Communication Table](#binary-communication-table)
+    - [Example: Set LED GPIO pins](#example-set-led-gpio-pins)
+
+<!-- /TOC -->
+
+## Checklist
 
 - [ ] Deliver the last motion time (seconds/microseconds since last motion)
 - [ ] Enable/Disable motion sensor
@@ -15,7 +28,8 @@
 | [`0x01`](#0x01example) | Set LED GPIO pins in use (ex: rgbw gpio pins in use) |
 
 <a id="0x01example"></a>
-## Example: Set LED GPIO
+
+## Example: Set LED GPIO pins
 
 Binary Example for RGBW stripes:  
 
