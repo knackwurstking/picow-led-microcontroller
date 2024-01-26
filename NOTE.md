@@ -14,8 +14,8 @@
 
 -   [ ] Deliver the last motion time (seconds/microseconds since last motion)
 -   [ ] Enable/Disable motion sensor
--   [ ] [Get the current LED/GPIO configuration for colors (ex: r, g, b, w)](#example-get-led-gpio-pins)
--   [ ] [Set LED/GPIO configurations for colors (ex: r, g, b, w)](#example-set-led-gpio-pins)
+-   [ ] [Get the current LED/GPIO configuration for colors (ex: r, g, b, w)](#0x01example)
+-   [ ] [Set LED/GPIO configurations for colors (ex: r, g, b, w)](#0x02example)
 
 ## Binary Communication Table
 
