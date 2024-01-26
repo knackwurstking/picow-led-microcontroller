@@ -2,11 +2,11 @@
 
 <!-- TOC -->
 
--   [What this project needs to do](#what-this-project-needs-to-do)
-    -   [Checklist](#checklist)
-    -   [Binary Communication Table](#binary-communication-table)
-    -   [Example: Get LED GPIO pins](#example-get-led-gpio-pins)
-    -   [Example: Set LED GPIO pin](#example-set-led-gpio-pin)
+- [What this project needs to do](#what-this-project-needs-to-do)
+    - [Checklist](#checklist)
+    - [Binary Communication Table](#binary-communication-table)
+    - [Example: Get LED GPIO pins](#example-get-led-gpio-pins)
+    - [Example: Set LED GPIO pins](#example-set-led-gpio-pins)
 
 <!-- /TOC -->
 
@@ -15,7 +15,7 @@
 -   [ ] Deliver the last motion time (seconds/microseconds since last motion)
 -   [ ] Enable/Disable motion sensor
 -   [ ] [Get the current LED/GPIO configuration for colors (ex: r, g, b, w)](#example-get-led-gpio-pins)
--   [ ] [Set LED/GPIO configurations for colors (ex: r, g, b, w)](#example-set-led-gpio-pin)
+-   [ ] [Set LED/GPIO configurations for colors (ex: r, g, b, w)](#example-set-led-gpio-pins)
 
 ## Binary Communication Table
 
@@ -39,7 +39,7 @@
 
 <a id="0x02example"></a>
 
-## Example: Set LED GPIO pin
+## Example: Set LED GPIO pins
 
 **Command** `0x02` with data of length `0x04` (4)  
 **Data**:
