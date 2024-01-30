@@ -1,14 +1,10 @@
 # What this project needs to do
 
-<!-- TOC -->
-
 - [What this project needs to do](#what-this-project-needs-to-do)
     - [Checklist](#checklist)
     - [Binary Communication Table](#binary-communication-table)
-    - [Example: Get LED GPIO pins](#example-get-led-gpio-pins)
-    - [Example: Set LED GPIO pins](#example-set-led-gpio-pins)
-
-<!-- /TOC -->
+    - [Example: Get LED GPIO pins](#0x01example)
+    - [Example: Set LED GPIO pins](#0x02example)
 
 ## Checklist
 
@@ -20,6 +16,13 @@
 ## Binary Communication Table
 
 > First byte will be the command and the second byte the data length
+
+@todo:  
+- config: set motion sensor GPIO pin
+- config: get motion sensor GPIO pin
+- config: set server
+- config: get server
+- config: set PWM range (min-max, ex: 0-100, 0-255)
 
 |        Command         | Description                                                        |
 | :--------------------: | :----------------------------------------------------------------- |
