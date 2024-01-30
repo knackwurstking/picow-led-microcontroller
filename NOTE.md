@@ -32,7 +32,9 @@
 - **config**: set PWM range (min-max, ex: 0-100, 0-255) (`0x07`)
 - **info**: get picow temp. (`0x21`)
 - **info**: get picow disk-usage (`0x22`)
-- **led**: ...
+- **info**: get version (ex: v1.0.0) (`0x23`)
+- **led**: set GPIO LED pins duty (pwm-range) (`0x41`)
+- **led**: get GPIO LED pins duty (pwm-range) (`0x42`)
 - **motion**: ...
 
 |        Command         | Description                                                        |
