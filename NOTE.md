@@ -45,7 +45,7 @@
 
 ## Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)
 
-**Command** `0x01` with data of length `0x00` (0)  
+**Command** `0x01` with data (length `0x00`)  
 **Data**:
 
 ```python
@@ -56,7 +56,7 @@
 
 ## Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)
 
-**Command** `0x02` with data  
+**Command** `0x02` with data (length: `0x04`)  
 **Data**:
 
 -   _0x00_ (gp pin nr. 0)
