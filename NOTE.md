@@ -63,7 +63,6 @@
 ### Data (Request)
 
 - **group**: config `0x02`
-- **data**: none
 
 ```python
 [0x02, 0x00]
@@ -72,6 +71,7 @@
 ### Data (Response)
 
 - **group**: config `0x02`
+- **data**: GP pins 0..3
 - **data length**: `0x04` (_dynamic_)
 - **data type**: decimal
 
@@ -86,7 +86,7 @@
 ### Data (Request)
 
 - **group**: config `0x03`
-- **data**: 13 (enable only)
+- **data**: GP13 (enable only)
 - **data length**: `0x01` (1) for enable, `0x00` for disable (_fixed_)
 - **data type**: decimal
 
@@ -101,7 +101,6 @@
 ### Data (Request)
 
 - **group**: config `0x04`
-- **data**: none
 
 ```python
 [0x04, 0x00]
@@ -110,6 +109,7 @@
 ### Data (Response)
 
 - **group**: config `0x04`
+- **data**: GP13
 - **data length**: `0x01` (1) (_fixed_)
 - **data type**: decimal
 
@@ -148,8 +148,6 @@
 ### Data (Request)
 
 - **group**: config `0x06`
-- **data length**: none
-- **data type**: decimal
 
 ```python
 [0x06, 0x00]
