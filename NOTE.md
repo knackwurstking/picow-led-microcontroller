@@ -45,42 +45,50 @@
 
 ## Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)
 
-**Command** `0x02` with data (length: `0x04`)  
-**Data**: (type: decimal)
+### Data (Request)
 
--   _0x00_ (gp pin nr. 0)
--   _0x01_ (gp pin nr. 1)
--   _0x02_ (gp pin nr. 2)
--   _0x03_ (gp pin nr. 3)
+- **group**: config `0x01`
+- **data**: GP pins 0..3
+- **data length**: `0x04` (_dynamic_)
+- **data type**: decimal 
 
 ```python
-[0x02, 0x04, 0x00, 0x01, 0x02, 0x03]
+[0x01, 0x04, 0x00, 0x01, 0x02, 0x03]
 ```
 
 <a id="0x02example"></a>
 
 ## Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)
 
-**Command** `0x01` without data  
-**Data**: (none)
+### Data (Request)
+
+- **group**: config `0x02`
+- **data**: none
 
 ```python
-[0x01, 0x00]
+[0x02, 0x00]
 ```
 
-**Server Response** (type: decimal)  
-*The requested command, data length and pins (see example above)*
+### Data (Response)
+
+- **group**: config `0x02`
+- **data length**: `0x04` (_dynamic_)
+- **data type**: decimal
 
 ```python
-[0x01, 0x04, 0x00, 0x01, 0x02, 0x03]
+[0x02, 0x04, 0x00, 0x01, 0x02, 0x03]
 ```
 
 <a id="0x03example"></a>
 
 ## Example: Set motion sensor GPIO pin
 
-**Command** `0x03` with data of length `0x01` (or `0x00` for disabling the motion sensor)  
-**Data**: GP13 = `0x0d` (type: decimal)
+### Data (Request)
+
+- **group**: config `0x03`
+- **data**: 13 (enable only)
+- **data length**: `0x01` (1) for enable, `0x00` for disable (_fixed_)
+- **data type**: decimal
 
 ```python
 [0x03, 0x01, 0x0d]
@@ -90,14 +98,20 @@
 
 ## Example: Get motion sensor GPIO pin
 
-**Command** `0x04` without data  
-**Data**: (none)
+### Data (Request)
+
+- **group**: config `0x04`
+- **data**: none
 
 ```python
 [0x04, 0x00]
 ```
 
-**Server Response** (type: decimal)
+### Data (Response)
+
+- **group**: config `0x04`
+- **data length**: `0x01` (1) (_fixed_)
+- **data type**: decimal
 
 ```python
 [0x04, 0x01, 0x0d]
@@ -107,8 +121,12 @@
 
 ## Example: Set server address (ex.: "http://rpi-server:50833)"
 
-**Command** `0x05` with data ("http://192.168.178.21:50833", length: 27)  
-**Data** (type: string)
+### Data (Request)
+
+- **group**: config `0x05`
+- **data**: "http://192.168.178.21:50833"
+- **data length**: `0x1b` (27) (_dynamic_)
+- **data type**: string
 
 ```python
 [
@@ -127,18 +145,26 @@
 
 ## Example: Get server address
 
-**Command** `0x06` without data  
-**Data**
+### Data (Request)
+
+- **group**: config `0x06`
+- **data length**: none
+- **data type**: decimal
 
 ```python
 [0x06, 0x00]
 ```
 
-**Server Response** (type: string)
+### Data (Response)
+
+- **group**: config `0x06`
+- **data**: "http://192.168.178.21:50833"
+- **data length**: `0x1b` (27) (_dynamic_)
+- **data type**: string
 
 ```python
 [
-    0x05, # requested command
+    0x06, # requested command
     0x1b, # data string length
     0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, # http://
     0x31, 0x39, 0x32, 0x2e, # 192.
@@ -153,7 +179,16 @@
 
 ## Example: Set PWM range
 
-@todo: ...
+### Data (Request)
+
+- **group**: config `0x07`
+- **data**: pwm-range 0-100
+- **data length**: `0x02` (2) (_fixed_)
+- **data type**: decimal
+
+```python
+[0x07, 0x02, 0x00, 0x64]
+```
 
 <a id="0x21example"></a>
 
