@@ -52,6 +52,13 @@
 [0x01, 0x00]
 ```
 
+**Server Response**  
+*The requested command, data length and pins (see next example)*
+
+```python
+[0x01, 0x04, 0x00, 0x01, 0x02, 0x03]
+```
+
 <a id="0x02example"></a>
 
 ## Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)
