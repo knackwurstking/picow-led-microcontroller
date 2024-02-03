@@ -56,7 +56,7 @@
 
 ## Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)
 
-**Command** `0x02` with data of length `0x04` (4)  
+**Command** `0x02` with data  
 **Data**:
 
 -   _0x00_ (gp pin nr. 0)
@@ -72,7 +72,12 @@
 
 ## Example: Set motion sensor GPIO pin
 
-@todo: ...
+**Command** `0x03` with data of length `0x01` (or `0x00` for disabling the motion sensor)  
+**Data**: GP13 = `0x0d`
+
+```python
+[0x03, 0x01, 0x0d]
+```
 
 <a id="0x04example"></a>
 
