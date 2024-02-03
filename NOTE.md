@@ -2,7 +2,6 @@
 
 - [What this project needs to do](#what-this-project-needs-to-do)
     - [Binary Communication Table](#binary-communication-table)
-        - [todo](#todo)
     - [Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)](#0x01example)
     - [Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)](#0x02example)
     - [Example: Set motion sensor GPIO pin](#0x03example)
@@ -10,6 +9,12 @@
     - [Example: Set server address (ex.: "http://rpi-server:50833)"](#0x05example)
     - [Example: Get server address](#0x06example)
     - [Example: Set PWM range](#0x07example)
+    - [Example: Get picow temp.](#0x21example)
+    - [Example: Get picow disk-usage](#0x22example)
+    - [Example: Get version](#0x23example)
+    - [Example: Set GPIO LED pins duty (pwm-range)](#0x41example)
+    - [Example: Get GPIO LED pins duty (pwm-range)](#0x42example)
+    - [Example: Get motion sensor data](#0x61example)
 
 ## Binary Communication Table
 
@@ -20,23 +25,21 @@
 **led** commands in range from `0x41` - `0x60`  
 **motion** commands in range from `0x61` - `0x80`  
 
-|        Command                | Description                                                        |
-| :---------------------------- | :----------------------------------------------------------------- |
+|        Command                | Description |
+| ----------------------------: | :---------- |
 | config [`0x01`](#0x01example) | Get the current LED/GPIO configuration for colors (ex: r, g, b, w) |
-| config [`0x02`](#0x02example) | Set LED/GPIO configurations for colors (ex: r, g, b, w)            |
-| config [`0x03`](#0x03example) | Set motion sensor GPIO pin                                         |
-| config [`0x04`](#0x04example) | Get motion sensor GPIO pin                                         |
-| config [`0x05`](#0x05example) | Set server address (ex.: "http://rpi-server:50833)"                |
-| config [`0x06`](#0x06example) | Get server address                                                 |
-| config [`0x07`](#0x07example) | Set PWM range                                                      |
-| info   [`0x21`](#0x21example) | Get picow temp.                                                    |
-
-### todo:
-- **info**: get picow disk-usage (`0x22`)
-- **info**: get version (ex: v1.0.0) (`0x23`)
-- **led**: set GPIO LED pins duty (pwm-range) (`0x41`)
-- **led**: get GPIO LED pins duty (pwm-range) (`0x42`)
-- **motion**: get motion sensor data (`0x61`)
+| config [`0x02`](#0x02example) | Set LED/GPIO configurations for colors (ex: r, g, b, w) |
+| config [`0x03`](#0x03example) | Set motion sensor GPIO pin |
+| config [`0x04`](#0x04example) | Get motion sensor GPIO pin |
+| config [`0x05`](#0x05example) | Set server address (ex.: "http://rpi-server:50833)" |
+| config [`0x06`](#0x06example) | Get server address |
+| config [`0x07`](#0x07example) | Set PWM range |
+| info   [`0x21`](#0x21example) | Get picow temp. |
+| info   [`0x22`](#0x22example) | Get picow disk-usage |
+| info   [`0x23`](#0x23example) | Get version |
+| let    [`0x41`](#0x41example) | Set GPIO LED pins duty (pwm-range) |
+| let    [`0x42`](#0x42example) | Get GPIO LED pins duty (pwm-range) |
+| let    [`0x61`](#0x61example) | Get motion sensor data |
 
 <a id="0x01example"></a>
 
@@ -98,5 +101,35 @@
 <a id="0x21example"></a>
 
 ## Example: Get picow temp.
+
+@todo: ...
+
+<a id="0x22example"></a>
+
+## Example: Get picow disk-usage
+
+@todo: ...
+
+<a id="0x23example"></a>
+
+## Example: Get version
+
+@todo: ...
+
+<a id="0x41example"></a>
+
+## Example: Set GPIO LED pins duty (pwm-range)
+
+@todo: ...
+
+<a id="0x42example"></a>
+
+## Example: Get GPIO LED pins duty (pwm-range)
+
+@todo: ...
+
+<a id="0x61example"></a>
+
+## Example: Get motion sensor data
 
 @todo: ...
