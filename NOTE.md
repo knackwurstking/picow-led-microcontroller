@@ -9,7 +9,7 @@
     - [Example: Get motion sensor GPIO pin](#0x04example)
     - [Example: Set server address (ex.: "http://rpi-server:50833)"](#0x05example)
     - [Example: Get server address](#0x06example)
-    - [Example: Set PWM range (min-max, ex: 0-100 or 0-255)](#0x07example)
+    - [Example: Set PWM range](#0x07example)
 
 ## Binary Communication Table
 
@@ -28,7 +28,7 @@
 | config [`0x04`](#0x04example) | Get motion sensor GPIO pin                                         |
 | config [`0x05`](#0x05example) | Set server address (ex.: "http://rpi-server:50833)"                |
 | config [`0x06`](#0x06example) | Get server address                                                 |
-| config [`0x07`](#0x07example) | Set PWM range (min-max, ex: 0-100 or 0-255)                        |
+| config [`0x07`](#0x07example) | Set PWM range                                                      |
 
 ### todo:
 - **info**: get picow temp. (`0x21`)
@@ -91,6 +91,6 @@
 
 <a id="0x07example"></a>
 
-## Example: Set PWM range (min-max, ex: 0-100 or 0-255)
+## Example: Set PWM range
 
 @todo: ...
