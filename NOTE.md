@@ -61,7 +61,7 @@
 
 ## Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)
 
-**Command** `0x01` with data (length `0x00`)  
+**Command** `0x01` without data  
 **Data**:
 
 ```python
@@ -90,7 +90,18 @@
 
 ## Example: Get motion sensor GPIO pin
 
-@todo: ...
+**Command** `0x04` without data  
+**Data**:
+
+```python
+[0x04, 0x00]
+```
+
+**Server Response** `0x0d` = GP13 (see example above)
+
+```python
+[0x04, 0x01, 0x0d]
+```
 
 <a id="0x05example"></a>
 
