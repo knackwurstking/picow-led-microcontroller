@@ -29,9 +29,9 @@
 | config [`0x05`](#0x05example) | Set server address (ex.: "http://rpi-server:50833)"                |
 | config [`0x06`](#0x06example) | Get server address                                                 |
 | config [`0x07`](#0x07example) | Set PWM range                                                      |
+| info   [`0x21`](#0x21example) | Get picow temp.                                                    |
 
 ### todo:
-- **info**: get picow temp. (`0x21`)
 - **info**: get picow disk-usage (`0x22`)
 - **info**: get version (ex: v1.0.0) (`0x23`)
 - **led**: set GPIO LED pins duty (pwm-range) (`0x41`)
@@ -92,5 +92,11 @@
 <a id="0x07example"></a>
 
 ## Example: Set PWM range
+
+@todo: ...
+
+<a id="0x21example"></a>
+
+## Example: Get picow temp.
 
 @todo: ...
