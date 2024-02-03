@@ -2,8 +2,8 @@
 
 - [What this project needs to do](#what-this-project-needs-to-do)
     - [Binary Communication Table](#binary-communication-table)
-    - [Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)](#0x01example)
-    - [Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)](#0x02example)
+    - [Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)](#0x01example)
+    - [Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)](#0x02example)
     - [Example: Set motion sensor GPIO pin](#0x03example)
     - [Example: Get motion sensor GPIO pin](#0x04example)
     - [Example: Set server address (ex.: "http://rpi-server:50833)"](#0x05example)
@@ -27,8 +27,8 @@
 
 |        Command                | Description |
 | ----------------------------: | :---------- |
-| config [`0x01`](#0x01example) | Get the current LED/GPIO configuration for colors (ex: r, g, b, w) |
-| config [`0x02`](#0x02example) | Set LED/GPIO configurations for colors (ex: r, g, b, w) |
+| config [`0x01`](#0x01example) | Set LED/GPIO configurations for colors (ex: r, g, b, w) |
+| config [`0x02`](#0x02example) | Get the current LED/GPIO configuration for colors (ex: r, g, b, w) |
 | config [`0x03`](#0x03example) | Set motion sensor GPIO pin |
 | config [`0x04`](#0x04example) | Get motion sensor GPIO pin |
 | config [`0x05`](#0x05example) | Set server address (ex.: "http://rpi-server:50833)" |
@@ -43,24 +43,6 @@
 
 <a id="0x01example"></a>
 
-## Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)
-
-**Command** `0x01` with data (length `0x00`)  
-**Data**:
-
-```python
-[0x01, 0x00]
-```
-
-**Server Response**  
-*The requested command, data length and pins (see next example)*
-
-```python
-[0x01, 0x04, 0x00, 0x01, 0x02, 0x03]
-```
-
-<a id="0x02example"></a>
-
 ## Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)
 
 **Command** `0x02` with data (length: `0x04`)  
@@ -73,6 +55,24 @@
 
 ```python
 [0x02, 0x04, 0x00, 0x01, 0x02, 0x03]
+```
+
+<a id="0x02example"></a>
+
+## Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)
+
+**Command** `0x01` with data (length `0x00`)  
+**Data**:
+
+```python
+[0x01, 0x00]
+```
+
+**Server Response**  
+*The requested command, data length and pins (see example above)*
+
+```python
+[0x01, 0x04, 0x00, 0x01, 0x02, 0x03]
 ```
 
 <a id="0x03example"></a>
