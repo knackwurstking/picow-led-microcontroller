@@ -46,7 +46,7 @@
 ## Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)
 
 **Command** `0x02` with data (length: `0x04`)  
-**Data**:
+**Data**: (type: decimal)
 
 -   _0x00_ (gp pin nr. 0)
 -   _0x01_ (gp pin nr. 1)
@@ -62,7 +62,7 @@
 ## Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)
 
 **Command** `0x01` without data  
-**Data**:
+**Data**: (none)
 
 ```python
 [0x01, 0x00]
@@ -80,7 +80,7 @@
 ## Example: Set motion sensor GPIO pin
 
 **Command** `0x03` with data of length `0x01` (or `0x00` for disabling the motion sensor)  
-**Data**: GP13 = `0x0d`
+**Data**: GP13 = `0x0d` (type: decimal)
 
 ```python
 [0x03, 0x01, 0x0d]
@@ -91,7 +91,7 @@
 ## Example: Get motion sensor GPIO pin
 
 **Command** `0x04` without data  
-**Data**:
+**Data**: (none)
 
 ```python
 [0x04, 0x00]
@@ -107,7 +107,21 @@
 
 ## Example: Set server address (ex.: "http://rpi-server:50833)"
 
-@todo: ...
+**Command** `0x05` with data ("http://192.168.178.21:50833", length: 27)  
+**Data** (type: string)
+
+```python
+[
+    0x05, # requested command
+    0x1b, # data string length
+    0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, # http://
+    0x31, 0x39, 0x32, 0x2e, # 192.
+    0x31, 0x36, 0x38, 0x2e, # 168.
+    0x31, 0x37, 0x38, 0x2e, # 178.
+    0x32, 0x31, 0x3a, # 21:
+    0x35, 0x30, 0x38, 0x33, 0x33 # 50833
+]
+```
 
 <a id="0x06example"></a>
 
