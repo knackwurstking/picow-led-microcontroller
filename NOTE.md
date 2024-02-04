@@ -283,8 +283,20 @@
 ### Data (Request)
 
 - **group**: led `0x41`
+- **data**: min-max number per pin in order based on [pwm-range configuration](#0x07example) and [LED/GPIO configuration](#0x01example)
+- **data length**: `0x04` (4), (_dynamic_)
+- **data type**: decimal
 
-@todo: ...
+```python
+[
+    0x41,
+    0x04,
+    0x64, # 100
+    0x64, # 100
+    0x64, # 100
+    0x64, # 100
+]
+```
 
 <a id="0x42example"></a>
 
@@ -294,7 +306,27 @@
 
 - **group**: led `0x42`
 
-@todo: ...
+```python
+[0x42, 0x00]
+```
+
+### Data (Response)
+
+- **group**: led `0x42`
+- **data**: min-max number per pin in order based on [pwm-range configuration](#0x07example) and [LED/GPIO configuration](#0x01example)
+- **data length**: `0x04` (4), (_dynamic_)
+- **data type**: decimal
+
+```python
+[
+    0x42,
+    0x04,
+    0x64, # 100
+    0x64, # 100
+    0x64, # 100
+    0x64, # 100
+]
+```
 
 <a id="0x61example"></a>
 
