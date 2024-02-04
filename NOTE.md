@@ -203,15 +203,16 @@
 ### Data (Response)
 
 - **group**: info `0x21`
-- **data**: ...
-- **data length**: ...
-- **data type**: ...
+- **data**: 22.36296 (Celsius)
+- **data length**: `0x08` (8), (_dynamic_)
+- **data type**: float as string
 
 ```python
 [
     0x21,
-    0x00, # TODO: length
-    # TODO: ...
+    0x08,
+    0x32, 0x32, 0x2e, # 22.
+    0x33, 0x36, 0x32, 0x39, 0x36 # 36296
 ]
 ```
 
