@@ -25,21 +25,21 @@
 **led** commands in range from `0x41` - `0x60`  
 **motion** commands in range from `0x61` - `0x80`  
 
-|        Command                | Description |
-| ----------------------------: | :---------- |
-| config [`0x01`](#0x01example) | Set LED/GPIO configurations for colors (ex: r, g, b, w) |
-| config [`0x02`](#0x02example) | Get the current LED/GPIO configuration for colors (ex: r, g, b, w) |
-| config [`0x03`](#0x03example) | Set motion sensor GPIO pin |
-| config [`0x04`](#0x04example) | Get motion sensor GPIO pin |
-| config [`0x05`](#0x05example) | Set server address (ex.: "http://rpi-server:50833)" |
-| config [`0x06`](#0x06example) | Get server address |
-| config [`0x07`](#0x07example) | Set PWM range |
-| info   [`0x21`](#0x21example) | Get picow temp. |
-| info   [`0x22`](#0x22example) | Get picow disk-usage |
-| info   [`0x23`](#0x23example) | Get version |
-| led    [`0x41`](#0x41example) | Set GPIO LED pins duty (pwm-range) |
-| led    [`0x42`](#0x42example) | Get GPIO LED pins duty (pwm-range) |
-| motion [`0x61`](#0x61example) | Get motion sensor data |
+|        Command                | Data Type | Description |
+| ----------------------------: | :-------- | :---------- |
+| config [`0x01`](#0x01example) | decimal... | Set LED/GPIO configurations for colors (ex: r, g, b, w) |
+| config [`0x02`](#0x02example) | decimal... | Get the current LED/GPIO configuration for colors (ex: r, g, b, w) |
+| config [`0x03`](#0x03example) | decimal | Set motion sensor GPIO pin |
+| config [`0x04`](#0x04example) | decimal | Get motion sensor GPIO pin |
+| config [`0x05`](#0x05example) | string | Set server address (ex.: "http://rpi-server:50833)" |
+| config [`0x06`](#0x06example) | string | Get server address |
+| config [`0x07`](#0x07example) | decimal | Set PWM range |
+| info   [`0x21`](#0x21example) | float as string | Get picow temp. |
+| info   [`0x22`](#0x22example) | string | Get picow disk-usage |
+| info   [`0x23`](#0x23example) | string | Get version |
+| led    [`0x41`](#0x41example) | decimal... | Set GPIO LED pins duty (pwm-range) |
+| led    [`0x42`](#0x42example) | decimal... | Get GPIO LED pins duty (pwm-range) |
+| motion [`0x61`](#0x61example) | string | Get motion sensor data |
 
 <a id="0x01example"></a>
 
@@ -52,7 +52,7 @@
 - **group**: config `0x01`
 - **data**: GP pins 0..3
 - **data length**: `0x04` (_dynamic_)
-- **data type**: decimal 
+- **data type**: decimal...
 
 ```python
 [0x01, 0x04, 0x00, 0x01, 0x02, 0x03]
@@ -75,7 +75,7 @@
 - **group**: config `0x02`
 - **data**: GP pins 0..3
 - **data length**: `0x04` (_dynamic_)
-- **data type**: decimal
+- **data type**: decimal...
 
 ```python
 [0x02, 0x04, 0x00, 0x01, 0x02, 0x03]
@@ -168,8 +168,8 @@
 
 ```python
 [
-    0x06,                                     # requested command
-    0x1b,                                     # data string length
+    0x06,
+    0x1b,
     0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, # http://
     0x31, 0x39, 0x32, 0x2e,                   # 192.
     0x31, 0x36, 0x38, 0x2e,                   # 168.
@@ -295,7 +295,7 @@
 - **group**: led `0x41`
 - **data**: min-max number per pin in order based on [pwm-range configuration](#0x07example) and [LED/GPIO configuration](#0x01example)
 - **data length**: `0x04` (4), (_dynamic_)
-- **data type**: decimal
+- **data type**: decimal...
 
 ```python
 [
@@ -325,7 +325,7 @@
 - **group**: led `0x42`
 - **data**: min-max number per pin in order based on [pwm-range configuration](#0x07example) and [LED/GPIO configuration](#0x01example)
 - **data length**: `0x04` (4), (_dynamic_)
-- **data type**: decimal
+- **data type**: decimal...
 
 ```python
 [
