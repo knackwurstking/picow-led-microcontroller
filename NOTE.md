@@ -192,7 +192,28 @@
 
 ## Example: Get picow temp.
 
-@todo: ...
+### Data (Request)
+
+- **group**: info `0x21`
+
+```python
+[0x21, 0x00]
+```
+
+### Data (Response)
+
+- **group**: info `0x21`
+- **data**: ...
+- **data length**: ...
+- **data type**: ...
+
+```python
+[
+    0x21,
+    0x00, # TODO: length
+    # TODO: ...
+]
+```
 
 <a id="0x22example"></a>
 
