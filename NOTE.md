@@ -37,9 +37,9 @@
 | info   [`0x21`](#0x21example) | Get picow temp. |
 | info   [`0x22`](#0x22example) | Get picow disk-usage |
 | info   [`0x23`](#0x23example) | Get version |
-| let    [`0x41`](#0x41example) | Set GPIO LED pins duty (pwm-range) |
-| let    [`0x42`](#0x42example) | Get GPIO LED pins duty (pwm-range) |
-| let    [`0x61`](#0x61example) | Get motion sensor data |
+| led    [`0x41`](#0x41example) | Set GPIO LED pins duty (pwm-range) |
+| led    [`0x42`](#0x42example) | Get GPIO LED pins duty (pwm-range) |
+| motion [`0x61`](#0x61example) | Get motion sensor data |
 
 <a id="0x01example"></a>
 
@@ -280,16 +280,28 @@
 
 ## Example: Set GPIO LED pins duty (pwm-range)
 
+### Data (Request)
+
+- **group**: led `0x41`
+
 @todo: ...
 
 <a id="0x42example"></a>
 
 ## Example: Get GPIO LED pins duty (pwm-range)
 
+### Data (Request)
+
+- **group**: led `0x42`
+
 @todo: ...
 
 <a id="0x61example"></a>
 
 ## Example: Get motion sensor data
+
+### Data (Request)
+
+- **group**: motion `0x61`
 
 @todo: ...
