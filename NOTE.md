@@ -45,6 +45,8 @@
 
 ## Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)
 
+> No server response
+
 ### Data (Request)
 
 - **group**: config `0x01`
@@ -83,6 +85,8 @@
 
 ## Example: Set motion sensor GPIO pin
 
+> No server response
+
 ### Data (Request)
 
 - **group**: config `0x03`
@@ -120,6 +124,8 @@
 <a id="0x05example"></a>
 
 ## Example: Set server address (ex.: "http://rpi-server:50833)"
+
+> No server response
 
 ### Data (Request)
 
@@ -176,6 +182,8 @@
 <a id="0x07example"></a>
 
 ## Example: Set PWM range
+
+> No server response
 
 ### Data (Request)
 
@@ -280,6 +288,8 @@
 
 ## Example: Set GPIO LED pins duty (pwm-range)
 
+> No server response
+
 ### Data (Request)
 
 - **group**: led `0x41`
@@ -336,4 +346,21 @@
 
 - **group**: motion `0x61`
 
-@todo: ...
+```python
+[0x61, 0x00]
+```
+
+### Data (Response)
+
+- **group**: motion `0x61`
+- **data**: 5452 - time in ms from last motion detect event
+- **data length**: `0x04` (4), (_dynamic_)
+- **data type**: string
+
+```python
+[
+    0x61,
+    0x04,
+    0x35, 0x34, 0x35, 0x32 # 5452
+]
+```
