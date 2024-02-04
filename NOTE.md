@@ -220,7 +220,30 @@
 
 ## Example: Get picow disk-usage
 
-@todo: ...
+### Data (Request)
+
+- **group**: info `0x22`
+
+```python
+[0x22, 0x00]
+```
+
+### Data (Response)
+
+- **group**: info `0x22`
+- **data**: "471040 397312" ("\<used> \<free>") (space in bytes)
+- **data length**: `0x0d` (13)
+- **data type**: string
+
+```python
+[
+    0x22,
+    0x0d,
+    0x34, 0x37, 0x31, 0x30, 0x34, 0x30, # 471040
+    0x20, # space
+    0x33, 0x39, 0x37, 0x33, 0x31, 0x32 # 397312
+]
+```
 
 <a id="0x23example"></a>
 
