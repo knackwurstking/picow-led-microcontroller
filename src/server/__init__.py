@@ -7,7 +7,9 @@ def start():
     r_list = [sock]
 
     while True:
-        readable, __writable__, __errored__ = select.select(r_list, [], [], 0)
+        readable, __writable__, __errored__ = select.select(
+            r_list, [], [], 0
+        )  # TODO: maybe find a better timeout value
 
         for s in readable:
             if s is sock:
@@ -15,6 +17,7 @@ def start():
                 r_list.append(client)
             else:
                 # TODO: recv data from client
+                #   - read data byte for byte (nonblocking)
                 ...
 
         # TODO: check errored sockets
