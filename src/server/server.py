@@ -25,7 +25,11 @@ def main_loop(server_socket: socket.socket):
     errored_sockets = []
 
     while True:
-        print(f"Waiting for client... [server_socket={server_socket.getsockname()}]", end="\r", file=sys.stderr)
+        print(
+            f"Waiting for client... [server_socket={server_socket.getsockname()}]",
+            end="\r",
+            file=sys.stderr,
+        )
 
         if readable_sockets.__len__() == 0:
             readable_sockets.append(server_socket)
@@ -34,7 +38,11 @@ def main_loop(server_socket: socket.socket):
             readable_sockets, writable_sockets, errored_sockets, 0.25
         )
 
-        if readable.__len__() == 0 and writable.__len__() == 0 and errored.__len__() == 0:
+        if (
+            readable.__len__() == 0
+            and writable.__len__() == 0
+            and errored.__len__() == 0
+        ):
             continue
 
         print(file=sys.stderr)
