@@ -3,7 +3,7 @@ from . import config
 __all__ = [
     "ALL_COMMANDS",
     "config",
-    "parse",
+    "run",
 ]
 
 ALL_COMMANDS = [
