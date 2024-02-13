@@ -18,7 +18,7 @@
 
 ## Binary Communication Table
 
-> First byte will be the command and the second byte the data length
+> First byte will be the command, and the second byte the data length
 
 **config** commands in range from `0x01` -- `0x20`  
 **info** commands in range from `0x21` -- `0x40`  
@@ -353,7 +353,7 @@
 ### Data (Response)
 
 - **group**: motion `0x61`
-- **data**: 5452 - time in ms from last motion detect event
+- **data**: 5452 -- time in ms from last motion detect event
 - **data length**: `0x04` (4), (_dynamic_)
 - **data type**: string
 
