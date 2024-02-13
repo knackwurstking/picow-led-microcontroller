@@ -20,10 +20,10 @@
 
 > First byte will be the command and the second byte the data length
 
-**config** commands in range from `0x01` - `0x20`  
-**info** commands in range from `0x21` - `0x40`  
-**led** commands in range from `0x41` - `0x60`  
-**motion** commands in range from `0x61` - `0x80`  
+**config** commands in range from `0x01` -- `0x20`  
+**info** commands in range from `0x21` -- `0x40`  
+**led** commands in range from `0x41` -- `0x60`  
+**motion** commands in range from `0x61` -- `0x80`  
 
 |        Command                | Data Type | Description |
 | ----------------------------: | :-------- | :---------- |
