@@ -27,10 +27,16 @@ def start(host: str, port: int = 0):
 
 def _start_main_loop(server_socket: socket.socket):
     while True:
-        print(f"Waiting for client...", file=sys.stderr)
+        print(f"Waiting for client... ({server_socket.getsockname()})", end="\r", file=sys.stderr)
+
         readable, writable, errored = select.select(
             _readable_sockets, [], [], 0.25
         )  # TODO: maybe find a better timeout value?
+
+        if readable.__len__() == 0 and writable.__len__() == 0 and errored.__len__() == 0:
+            continue
+
+        print(file=sys.stderr)
 
         _handle_readable(server_socket, readable)
         _handle_writable(writable)
@@ -38,6 +44,8 @@ def _start_main_loop(server_socket: socket.socket):
 
 
 def _handle_readable(server_socket: socket.socket, readable: list[socket.socket]):
+    print(f"_handle_readable: {server_socket} {readable}", file=sys.stderr)
+
     for s in readable:
         if s is server_socket:
             client, addr = s.accept()
@@ -73,6 +81,8 @@ def _handle_client_data(client: socket.socket, data: list[bytes]):
 
 
 def _handle_writable(writable: list[socket.socket]):
+    print(f"_handle_writable: {writable}", file=sys.stderr)
+
     for s in writable:
         print(f"socket writable {s}", file=sys.stderr)
 
@@ -81,6 +91,8 @@ def _handle_writable(writable: list[socket.socket]):
 
 
 def _handle_errored(errored: list[socket.socket]):
+    print(f"_handle_errored: {errored}", file=sys.stderr)
+
     for s in errored:
         print(f"socket error: {s}", file=sys.stderr)
 
