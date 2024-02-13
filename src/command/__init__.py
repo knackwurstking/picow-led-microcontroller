@@ -2,8 +2,8 @@ from . import config
 
 __all__ = [
     "ALL_COMMANDS",
-    "config",
     "run",
+    "config",
 ]
 
 ALL_COMMANDS = [
