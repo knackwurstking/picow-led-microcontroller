@@ -5,11 +5,11 @@ __all__ = [
     "get_color_pins",
 ]
 
-SET_COLOR_PINS: bytes = 0x01
-GET_COLOR_PINS: bytes = 0x02
+SET_COLOR_PINS: int = int(0x01)
+GET_COLOR_PINS: int = int(0x02)
 
 
-def set_color_pins(length: int, args: list[bytes]) -> None:
+def set_color_pins(length: int, args: bytearray) -> None:
     if args.__len__() != length:
         return None
 
@@ -22,11 +22,11 @@ def set_color_pins(length: int, args: list[bytes]) -> None:
     ...
 
 
-def get_color_pins(length: int, args: list[bytes]) -> None | list[bytes]:
+def get_color_pins(length: int, args: bytearray) -> None | bytearray:
     if args.__len__() != length or length != 0:
-        return False
+        return None
 
     # TODO: run command and return bytearray
     ...
 
-    return [GET_COLOR_PINS, 0x00]
+    return bytearray([GET_COLOR_PINS, 0x00])

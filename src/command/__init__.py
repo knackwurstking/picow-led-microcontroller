@@ -12,7 +12,7 @@ ALL_COMMANDS = [
 ]
 
 
-def run(command: bytes, args: list[bytes]) -> None | list[bytes]:
+def run(command: bytes, args: bytearray) -> None | bytearray:
     for cmd, fn in ALL_COMMANDS:
         if cmd == command:
             return fn(int(args[0]), args[1:])
