@@ -1,13 +1,14 @@
+from typing import Callable
+
 import select
 import socket
+
+ondata: Callable[[socket.socket, list[bytes]]] | None = None
 
 _readable_sockets = []
 
 
 def start():
-    # TODO: needed callbacks:
-    #   "ondata(s: socket, data: bytearray)"
-
     server_socket = socket.socket()
     _readable_sockets.append(server_socket)
     _start_main_loop(server_socket)
@@ -30,8 +31,7 @@ def _handle_readable(server_socket: socket.socket, readable: list[socket.socket]
             client, __addr__ = server_socket.accept()
             _readable_sockets.append(client)
         else:
-            data = _read_from_client(sock)
-            _handle_client_data(data)
+            _handle_client_data(sock, _read_from_client(sock))
 
 
 def _read_from_client(client: socket.socket) -> list[bytes]:
@@ -47,9 +47,9 @@ def _read_from_client(client: socket.socket) -> list[bytes]:
     return data
 
 
-def _handle_client_data(data: list[bytes]):
+def _handle_client_data(client: socket.socket, data: list[bytes]):
     if data.__len__() == 0:
         return
 
-    # TODO: if data run callback "ondata"
-    # ondata(sock, data)
+    if ondata is not None:
+        ondata(client, data)
