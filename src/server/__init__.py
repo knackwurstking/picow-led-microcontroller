@@ -1,11 +1,13 @@
 from typing import Callable
 
+import sys
 import select
 import socket
 
+# NOTE: Don't forget to close the socket
 ondata: Callable[[socket.socket, list[bytes]]] | None = None
 
-_readable_sockets = []
+_readable_sockets: list[socket.socket] = []
 
 
 def start():
@@ -16,13 +18,12 @@ def start():
 
 def _start_main_loop(server_socket: socket.socket):
     while True:
-        readable, __writable__, __errored__ = select.select(
+        readable, __writable__, errored = select.select(
             _readable_sockets, [], [], 0
         )  # TODO: maybe find a better timeout value?
 
         _handle_readable(server_socket, readable)
-
-        # TODO: check errored sockets
+        _handle_errored(errored)
 
 
 def _handle_readable(server_socket: socket.socket, readable: list[socket.socket]):
@@ -53,3 +54,12 @@ def _handle_client_data(client: socket.socket, data: list[bytes]):
 
     if ondata is not None:
         ondata(client, data)
+    else:
+        client.close()
+        _readable_sockets.remove(client)
+
+
+def _handle_errored(errored: list[socket.socket]):
+    for s in errored:
+        print(f"socket error: {s}", file=sys.stderr)
+        s.close()
