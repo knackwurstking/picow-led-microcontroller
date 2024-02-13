@@ -4,8 +4,12 @@ import sys
 import select
 import socket
 
-# NOTE: Don't forget to close the socket
-ondata: Callable[[socket.socket, list[bytes]]] | None = None
+__all__ = [
+    "ondata",
+    "start",
+]
+
+ondata: Callable[[socket.socket, list[bytes]], bool] | None = None
 
 _readable_sockets: list[socket.socket] = []
 
@@ -18,21 +22,22 @@ def start():
 
 def _start_main_loop(server_socket: socket.socket):
     while True:
-        readable, __writable__, errored = select.select(
+        readable, writable, errored = select.select(
             _readable_sockets, [], [], 0
         )  # TODO: maybe find a better timeout value?
 
         _handle_readable(server_socket, readable)
+        _handle_writable(writable)
         _handle_errored(errored)
 
 
 def _handle_readable(server_socket: socket.socket, readable: list[socket.socket]):
-    for sock in readable:
-        if sock is server_socket:
+    for s in readable:
+        if s is server_socket:
             client, __addr__ = server_socket.accept()
             _readable_sockets.append(client)
         else:
-            _handle_client_data(sock, _read_from_client(sock))
+            _handle_client_data(s, _read_from_client(s))
 
 
 def _read_from_client(client: socket.socket) -> list[bytes]:
@@ -53,13 +58,22 @@ def _handle_client_data(client: socket.socket, data: list[bytes]):
         return
 
     if ondata is not None:
-        ondata(client, data)
+        if ondata(client, data):
+            _readable_sockets.remove(client)
     else:
         client.close()
         _readable_sockets.remove(client)
+
+
+def _handle_writable(writable: list[socket.socket]):
+    for s in writable:
+        print(f"socket writable {s}")
+        s.close()
+        _readable_sockets.remove(s)
 
 
 def _handle_errored(errored: list[socket.socket]):
     for s in errored:
         print(f"socket error: {s}", file=sys.stderr)
         s.close()
+        _readable_sockets.remove(s)
