@@ -27,7 +27,7 @@ def start(host: str, port: int = 0):
 
 def _start_main_loop(server_socket: socket.socket):
     while True:
-        print(f"Waiting for client...")
+        print(f"Waiting for client...", file=sys.stderr)
         readable, writable, errored = select.select(
             _readable_sockets, [], [], 0.25
         )  # TODO: maybe find a better timeout value?
