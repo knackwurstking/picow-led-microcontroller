@@ -12,4 +12,4 @@ def on_data(client: socket.socket, data: list[bytes]):
 
 if __name__ == "__main__":
     server.ondata = on_data
-    server.start()
+    server.start("0.0.0.0", 3000)
