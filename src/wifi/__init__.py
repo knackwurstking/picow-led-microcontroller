@@ -8,5 +8,5 @@ def check() -> bool:
     return True
 
 
-def connect():
-    pass
+def connect() -> bool:
+    return True
