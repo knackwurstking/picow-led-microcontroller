@@ -30,16 +30,6 @@ def main_loop(server_socket: socket.socket):
     errored_sockets = []
 
     while True:
-        if c.DEBUG:
-            print(
-                f"Waiting for client... [server_socket={server_socket.getsockname()}]",
-                end="\r",
-                file=sys.stderr,
-            )
-
-        if readable_sockets.__len__() == 0:
-            readable_sockets.append(server_socket)
-
         if not wifi.check():
             # TODO: Turn of the picow status led
 
@@ -66,8 +56,18 @@ def main_loop(server_socket: socket.socket):
 
                 time.sleep(5)
 
+        if c.DEBUG:
+            print(
+                f"Waiting for client... [server_socket={server_socket.getsockname()}]",
+                end="\r",
+                file=sys.stderr,
+            )
+
+        if readable_sockets.__len__() == 0:
+            readable_sockets.append(server_socket)
+
         try:
-            readable_sockets, writable_sockets, errored_sockets = select.select(
+            readable, writable, errored = select.select(
                 readable_sockets, writable_sockets, errored_sockets, 0.25
             )
         except Exception as ex:
@@ -80,15 +80,15 @@ def main_loop(server_socket: socket.socket):
             continue
 
         if (
-            readable_sockets.__len__() == 0
-            and writable_sockets.__len__() == 0
-            and errored_sockets.__len__() == 0
+            readable.__len__() == 0
+            and writable.__len__() == 0
+            and errored.__len__() == 0
         ):
             continue
 
         if c.DEBUG:
             print(file=sys.stderr)
 
-        readable_sockets = handler.readable(server_socket, readable_sockets)
-        writable_sockets = handler.writable(writable_sockets)
-        errored_sockets = handler.errored(errored_sockets)
+        readable_sockets = handler.readable(server_socket, readable)
+        writable_sockets = handler.writable(writable)
+        errored_sockets = handler.errored(errored)

@@ -15,6 +15,7 @@ def read_from_client(client: socket.socket) -> list[bytes]:
 
     data: list[bytes] = []
 
+    # TODO: Need to find a way for the command last byte(s) to end the current recv loop
     while True:
         chunk = client.recv(1)
         if chunk:
