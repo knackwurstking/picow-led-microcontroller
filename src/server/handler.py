@@ -31,7 +31,8 @@ def readable(
                 print(f"connected client from {addr}", file=sys.stderr)
         else:
             utils.handle_client_data(s, utils.read_from_client(s))
-            s.close()
+            if s.fileno() != -1:  # NOTE: append socket to clients if not closed
+                clients.append(s)
 
     return clients
 
