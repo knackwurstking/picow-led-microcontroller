@@ -15,21 +15,11 @@ def read_from_client(client: socket.socket) -> list[bytes]:
 
     data: list[bytes] = []
 
-    end = 0
-    while end == 2:
-        # NOTE: Newline "\n" to end
+    while True:
         chunk = client.recv(1)
         if chunk:
-            if chunk == 0x5C and end == 0:
-                end = 1
-                continue
-
-            if chunk == 0x6E and end == 1:
-                end = 2
-                continue
-
-            if end == 1:
-                end = 0
+            if chunk == b"\n":
+                break
 
             data.append(chunk)
         else:
