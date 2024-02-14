@@ -1,6 +1,5 @@
-from typing import Callable
-
 import socket
+from typing import Callable
 
 __all__ = ["ondata"]
 

@@ -1,7 +1,11 @@
-import sys
 import select
 import socket
+import sys
+import time
 
+import config as c
+
+from .. import wifi
 from . import handler
 
 __all__ = [
@@ -25,28 +29,54 @@ def main_loop(server_socket: socket.socket):
     errored_sockets = []
 
     while True:
-        print(
-            f"Waiting for client... [server_socket={server_socket.getsockname()}]",
-            end="\r",
-            file=sys.stderr,
-        )
+        if c.DEBUG:
+            print(
+                f"Waiting for client... [server_socket={server_socket.getsockname()}]",
+                end="\r",
+                file=sys.stderr,
+            )
 
         if readable_sockets.__len__() == 0:
             readable_sockets.append(server_socket)
 
-        readable, writable, errored = select.select(
-            readable_sockets, writable_sockets, errored_sockets, 0.25
-        )
+        if not wifi.check():
+            try:
+                wifi.connect()
+            except Exception as ex:
+                # TODO: do a machine reset
+                ...
+
+                if c.DEBUG:
+                    print(
+                        f"exception wile thying to connect to wifi: {ex}",
+                        file=sys.stderr,
+                    )
+
+                time.sleep(5)
+
+        try:
+            readable_sockets, writable_sockets, errored_sockets = select.select(
+                readable_sockets, writable_sockets, errored_sockets, 0.25
+            )
+        except Exception as ex:
+            if c.DEBUG:
+                print(
+                    f"got an exception while running select.select: {ex}",
+                    file=sys.stderr,
+                )
+
+            continue
 
         if (
-            readable.__len__() == 0
-            and writable.__len__() == 0
-            and errored.__len__() == 0
+            readable_sockets.__len__() == 0
+            and writable_sockets.__len__() == 0
+            and errored_sockets.__len__() == 0
         ):
             continue
 
-        print(file=sys.stderr)
+        if c.DEBUG:
+            print(file=sys.stderr)
 
-        readable_sockets = handler.readable(server_socket, readable)
-        writable_sockets = handler.writable(writable)
-        errored_sockets = handler.errored(errored)
+        readable_sockets = handler.readable(server_socket, readable_sockets)
+        writable_sockets = handler.writable(writable_sockets)
+        errored_sockets = handler.errored(errored_sockets)
