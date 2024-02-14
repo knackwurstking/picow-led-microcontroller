@@ -77,6 +77,14 @@ def main_loop(server_socket: socket.socket):
                     file=sys.stderr,
                 )
 
+            # Remove dead sockets
+            for s in readable_sockets.copy():
+                if c.DEBUG:
+                    print(f"Remove socket {s} from readable_sockets")
+
+                if s.fileno() == -1:
+                    readable_sockets.remove(s)
+
             continue
 
         if (
