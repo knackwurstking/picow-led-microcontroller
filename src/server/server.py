@@ -41,15 +41,26 @@ def main_loop(server_socket: socket.socket):
             readable_sockets.append(server_socket)
 
         if not wifi.check():
+            # TODO: Turn of the picow status led
+
             try:
-                wifi.connect()
+                if c.DEBUG:
+                    print("Try to connect to wifi...", file=sys.stderr)
+
+                if wifi.connect():
+                    # TODO: Turn on the picow status led
+                    pass
+                else:
+                    # TODO: Oooops, wait some seconds and try again
+                    raise Exception("Oooops, wifi connection failed!")
+
             except Exception as ex:
                 # TODO: do a machine reset
                 ...
 
                 if c.DEBUG:
                     print(
-                        f"exception wile thying to connect to wifi: {ex}",
+                        f'Exception wile trying to connect to wifi: "{ex}"',
                         file=sys.stderr,
                     )
 
@@ -62,7 +73,7 @@ def main_loop(server_socket: socket.socket):
         except Exception as ex:
             if c.DEBUG:
                 print(
-                    f"got an exception while running select.select: {ex}",
+                    f'Got an exception while running select.select: "{ex}"',
                     file=sys.stderr,
                 )
 
