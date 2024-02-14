@@ -3,9 +3,10 @@ import socket
 import sys
 import time
 
+import wifi
+
 import config as c
 
-from .. import wifi
 from . import handler
 
 __all__ = [
