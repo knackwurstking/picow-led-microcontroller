@@ -1,3 +1,4 @@
+import logging
 import socket
 import sys
 
@@ -11,24 +12,18 @@ __all__ = ["readable", "writable", "errored"]
 def readable(
     server: socket.socket, sockets: list[socket.socket]
 ) -> list[socket.socket]:
-    if c.DEBUG:
-        print(
-            f"handler.readable: server={server.getsockname()} sockets={sockets.__len__()}",
-            file=sys.stderr,
-        )
+    logging.debug(f"server={server.getsockname()} sockets={sockets.__len__()}")
 
     clients: list[socket.socket] = []
 
     for s in sockets:
         if s is server:
-            if c.DEBUG:
-                print("waiting for client accept...", file=sys.stderr)
+            logging.debug("Waiting for client accept...")
 
             client, addr = s.accept()
             clients.append(client)
 
-            if c.DEBUG:
-                print(f"connected client from {addr}", file=sys.stderr)
+            logging.debug(f"Connected client from {addr}")
         else:
             utils.handle_client_data(s, utils.read_from_client(s))
             if s.fileno() != -1:  # NOTE: append socket to clients if not closed
@@ -38,31 +33,24 @@ def readable(
 
 
 def writable(sockets: list[socket.socket]) -> list[socket.socket]:
-    if c.DEBUG:
-        print(
-            f"handler.writable: sockets={sockets.__len__()}", file=sys.stderr)
+    logging.debug(f"sockets={sockets.__len__()}")
 
     clients: list[socket.socket] = []
 
     for s in sockets:
-        if c.DEBUG:
-            print(f"socket writable s={s}", file=sys.stderr)
-
+        logging.debug(f"Socket writable s={s}")
         s.close()
 
     return clients
 
 
 def errored(sockets: list[socket.socket]) -> list[socket.socket]:
-    if c.DEBUG:
-        print(f"handler.errored: sockets={sockets.__len__()}", file=sys.stderr)
+    logging.debug(f"sockets={sockets.__len__()}")
 
     clients: list[socket.socket] = []
 
     for s in sockets:
-        if c.DEBUG:
-            print(f"socket error: s={s}", file=sys.stderr)
-
+        logging.debug(f"Socket error: s={s}")
         s.close()
 
     return clients

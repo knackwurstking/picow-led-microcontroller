@@ -1,3 +1,4 @@
+import logging
 import socket
 import sys
 
@@ -6,13 +7,18 @@ import config as c
 import server
 
 
+# TODO: handle client data and (maybe) send a response
 def ondata(client: socket.socket, data: list[bytes]):
-    # TODO: handle client data and send a response or just close and exit
-    if c.DEBUG:
-        print(
-            f"ondata: client={client.getsockname()}, data={data}", file=sys.stderr)
+    logging.debug(f"[main.ondata] client={client.getsockname()}, data={data}")
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        stream=sys.stderr,
+        level=c.LOGGING_LEVEL,
+        format="[%(asctime)s] [%(levelname)s] [%(filename)s] [%(module)s] [%(funcName)s] %(message)s",
+    )
+
+    logging.info(f"Server starts on port {c.PORT}")
     server.callbacks.ondata = ondata
-    server.start("0.0.0.0", 3000)
+    server.start(c.HOST, c.PORT)
