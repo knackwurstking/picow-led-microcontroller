@@ -30,31 +30,7 @@ def main_loop(server_socket: socket.socket):
     errored_sockets = []
 
     while True:
-        if not wifi.check():
-            # TODO: Turn of the picow status led
-
-            try:
-                if c.DEBUG:
-                    print("Try to connect to wifi...", file=sys.stderr)
-
-                if wifi.connect():
-                    # TODO: Turn on the picow status led
-                    pass
-                else:
-                    # TODO: Oooops, wait some seconds and try again
-                    raise Exception("Oooops, wifi connection failed!")
-
-            except Exception as ex:
-                # TODO: do a machine reset
-                ...
-
-                if c.DEBUG:
-                    print(
-                        f'Exception wile trying to connect to wifi: "{ex}"',
-                        file=sys.stderr,
-                    )
-
-                time.sleep(5)
+        checkWifi()
 
         if c.DEBUG:
             print(
@@ -100,3 +76,31 @@ def main_loop(server_socket: socket.socket):
         readable_sockets = handler.readable(server_socket, readable)
         writable_sockets = handler.writable(writable)
         errored_sockets = handler.errored(errored)
+
+
+def checkWifi():
+    if not wifi.check():
+        # TODO: Turn of the picow status led
+
+        try:
+            if c.DEBUG:
+                print("Try to connect to wifi...", file=sys.stderr)
+
+            if wifi.connect():
+                # TODO: Turn on the picow status led
+                pass
+            else:
+                # TODO: Oooops, wait some seconds and try again
+                raise Exception("Oooops, wifi connection failed!")
+
+        except Exception as ex:
+            # TODO: do a machine reset
+            ...
+
+            if c.DEBUG:
+                print(
+                    f'Exception wile trying to connect to wifi: "{ex}"',
+                    file=sys.stderr,
+                )
+
+            time.sleep(5)
