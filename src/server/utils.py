@@ -28,7 +28,6 @@ def read_from_client(client: socket.socket) -> list[bytes]:
     return data
 
 
-# TODO: strip "\r" from data?
 def handle_client_data(client: socket.socket, data: list[bytes]):
     if c.DEBUG:
         print(
@@ -38,3 +37,5 @@ def handle_client_data(client: socket.socket, data: list[bytes]):
 
     if callbacks.ondata is not None and data.__len__() > 0:
         callbacks.ondata(client, data)
+    elif data.__len__() == 0:
+        client.close()
