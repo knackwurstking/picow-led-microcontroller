@@ -12,8 +12,6 @@ def ondata(client: socket.socket, data: list[bytes]):
         print(
             f"ondata: client={client.getsockname()}, data={data}", file=sys.stderr)
 
-    return True
-
 
 if __name__ == "__main__":
     server.callbacks.ondata = ondata
