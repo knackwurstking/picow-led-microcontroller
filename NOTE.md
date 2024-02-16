@@ -1,30 +1,30 @@
 # What this project needs to do
 
 - [What this project needs to do](#what-this-project-needs-to-do)
-    - [Binary Communication Table](#binary-communication-table)
-    - [Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)](#0x01example)
-    - [Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)](#0x02example)
-    - [Example: Set motion sensor GPIO pin](#0x03example)
-    - [Example: Get motion sensor GPIO pin](#0x04example)
-    - [Example: Set server address (ex.: "http://rpi-server:50833)"](#0x05example)
-    - [Example: Get server address](#0x06example)
-    - [Example: Set PWM range](#0x07example)
-    - [Example: Get PWM range](#0x08example)
-    - [Example: Get picow temp.](#0x21example)
-    - [Example: Get picow disk-usage](#0x22example)
-    - [Example: Get version](#0x23example)
-    - [Example: Set GPIO LED pins duty (pwm-range)](#0x41example)
-    - [Example: Get GPIO LED pins duty (pwm-range)](#0x42example)
-    - [Example: Get motion sensor data](#0x61example)
+  - [Binary Communication Table](#binary-communication-table)
+  - [Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)](#0x01example)
+  - [Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)](#0x02example)
+  - [Example: Set motion sensor GPIO pin](#0x03example)
+  - [Example: Get motion sensor GPIO pin](#0x04example)
+  - [Example: Set server address (ex.: "http://rpi-server:50833)"](#0x05example)
+  - [Example: Get server address](#0x06example)
+  - [Example: Set PWM range](#0x07example)
+  - [Example: Get PWM range](#0x08example)
+  - [Example: Get picow temp.](#0x21example)
+  - [Example: Get picow disk-usage](#0x22example)
+  - [Example: Get version](#0x23example)
+  - [Example: Set GPIO LED pins duty (pwm-range)](#0x41example)
+  - [Example: Get GPIO LED pins duty (pwm-range)](#0x42example)
+  - [Example: Get motion sensor data](#0x61example)
 
 ## Binary Communication Table
 
 > First byte will be the command, and the second byte the data length
 
-**config** commands in range from `0x01` -- `0x20`  
-**info** commands in range from `0x21` -- `0x40`  
-**led** commands in range from `0x41` -- `0x60`  
-**motion** commands in range from `0x61` -- `0x80`  
+**config** commands in range from `0x01` -- `0x20`\
+**info** commands in range from `0x21` -- `0x40`\
+**led** commands in range from `0x41` -- `0x60`\
+**motion** commands in range from `0x61` -- `0x80`
 
 |        Command                | Data Type | Description |
 | ----------------------------: | :-------- | :---------- |
@@ -32,7 +32,7 @@
 | config [`0x02`](#0x02example) | decimal... | Get the current LED/GPIO configuration for colors (ex: r, g, b, w) |
 | config [`0x03`](#0x03example) | decimal | Set motion sensor GPIO pin |
 | config [`0x04`](#0x04example) | decimal | Get motion sensor GPIO pin |
-| config [`0x05`](#0x05example) | string | Set server address (ex.: "http://rpi-server:50833)" |
+| config [`0x05`](#0x05example) | string | Set server address (ex.: "<http://rpi-server:50833>)" |
 | config [`0x06`](#0x06example) | string | Get server address |
 | config [`0x07`](#0x07example) | decimal | Set PWM range |
 | config [`0x08`](#0x08example) | decimal | Get PWM range |
@@ -125,14 +125,14 @@
 
 <a id="0x05example"></a>
 
-## Example: Set server address (ex.: "http://rpi-server:50833)"
+## Example: Set server address (ex.: "<http://rpi-server:50833>)"
 
 > No server response
 
 ### Data (Request)
 
 - **group**: config `0x05`
-- **data**: "http://192.168.178.21:50833"
+- **data**: "<http://192.168.178.21:50833>"
 - **data length**: `0x1b` (27) (_dynamic_)
 - **data type**: string
 
@@ -164,7 +164,7 @@
 ### Data (Response)
 
 - **group**: config `0x06`
-- **data**: "http://192.168.178.21:50833"
+- **data**: "<http://192.168.178.21:50833>"
 - **data length**: `0x1b` (27) (_dynamic_)
 - **data type**: string
 
@@ -223,7 +223,7 @@
 
 <a id="0x21example"></a>
 
-## Example: Get picow temp.
+## Example: Get picow temp
 
 ### Data (Request)
 
