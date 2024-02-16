@@ -1,7 +1,6 @@
 from . import utils
 
 __all__ = [
-    # commands
     "SET_COLOR_PINS",
     "GET_COLOR_PINS",
     "SET_MOTION_PIN",
@@ -10,7 +9,6 @@ __all__ = [
     "GET_SERVER_ADDR",
     "SET_PWM_RANGE",
     "GET_PWM_RANGE",
-    # command handlers
     "set_color_pins",
     "get_color_pins",
     "set_motion_pin",
