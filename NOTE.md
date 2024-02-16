@@ -9,6 +9,7 @@
     - [Example: Set server address (ex.: "http://rpi-server:50833)"](#0x05example)
     - [Example: Get server address](#0x06example)
     - [Example: Set PWM range](#0x07example)
+    - [Example: Get PWM range](#0x08example)
     - [Example: Get picow temp.](#0x21example)
     - [Example: Get picow disk-usage](#0x22example)
     - [Example: Get version](#0x23example)
@@ -34,6 +35,7 @@
 | config [`0x05`](#0x05example) | string | Set server address (ex.: "http://rpi-server:50833)" |
 | config [`0x06`](#0x06example) | string | Get server address |
 | config [`0x07`](#0x07example) | decimal | Set PWM range |
+| config [`0x08`](#0x08example) | decimal | Get PWM range |
 | info   [`0x21`](#0x21example) | float as string | Get picow temp. |
 | info   [`0x22`](#0x22example) | string | Get picow disk-usage |
 | info   [`0x23`](#0x23example) | string | Get version |
@@ -194,6 +196,29 @@
 
 ```python
 [0x07, 0x02, 0x00, 0x64]
+```
+
+<a id="0x08example"></a>
+
+## Example: Get PWM range
+
+### Data (Request)
+
+- **group**: config `0x08`
+
+```python
+[0x08, 0x00]
+```
+
+### Data (Response)
+
+- **group**: config `0x08`
+- **data**: pwm-range 0-100
+- **data length**: `0x02` (2) (_fixed_)
+- **data type**: decimal
+
+```python
+[0x08, 0x02, 0x00, 0x64]
 ```
 
 <a id="0x21example"></a>
