@@ -28,7 +28,7 @@ def main_loop(server_socket: socket.socket):
     errored_sockets = []
 
     while True:
-        checkWifi()
+        check_wifi()
 
         if readable_sockets.__len__() == 0:
             readable_sockets.append(server_socket)
@@ -62,7 +62,7 @@ def main_loop(server_socket: socket.socket):
         errored_sockets = handler.errored(errored)
 
 
-def checkWifi():
+def check_wifi():
     if not wifi.check():
         # TODO: Turn of the picow status led
 
