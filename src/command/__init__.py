@@ -1,4 +1,4 @@
-from . import config
+from . import config, info
 
 __all__ = [
     "ALL_COMMANDS",
@@ -15,6 +15,9 @@ ALL_COMMANDS = [
     (config.GET_SERVER_ADDR, config.get_server_addr),
     (config.SET_PWM_RANGE, config.set_pwm_range),
     (config.GET_PWM_RANGE, config.get_pwm_range),
+    (info.GET_TEMP, info.get_temp),
+    (info.GET_DISK_USAGE, info.get_disk_usage),
+    (info.GET_VERSION, info.get_version),
 ]
 
 
