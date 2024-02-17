@@ -1,4 +1,4 @@
-from . import config, info, led
+from . import config, info, led, motion
 
 __all__ = [
     "ALL_COMMANDS",
@@ -20,6 +20,7 @@ ALL_COMMANDS = [
     (info.GET_VERSION, info.get_version),
     (led.SET_COLOR_PINS_DUTY, led.set_color_pins_duty),
     (led.GET_COLOR_PINS_DUTY, led.get_color_pins_duty),
+    (motion.GET_MOTION_DATA, motion.get_motion_data),
 ]
 
 
