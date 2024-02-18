@@ -38,8 +38,7 @@ def main_loop(server_socket: socket.socket):
                 readable_sockets, writable_sockets, errored_sockets, 0.25
             )
         except Exception as ex:
-            logging.error(
-                f'Got an exception while running select.select: "{ex}"')
+            logging.error(f'Got an exception while running select.select: "{ex}"')
 
             # Remove dead sockets
             for s in readable_sockets.copy():
@@ -80,6 +79,6 @@ def check_wifi():
             # TODO: do a machine reset
             ...
 
-            logging.debug(f'Exception wile trying to connect to wifi: "{ex}"')
+            logging.debug(f'Exception while trying to connect to wifi: "{ex}"')
 
             time.sleep(5)
