@@ -18,7 +18,7 @@ def ondata(client: socket.socket, data: list[bytes]):
     try:
         result = command.run(data[0], data[1:])
     except Exception as ex:
-        if ex.__str__() == ARGS_ERROR:
+        if ex.__str__() == ARGS_ERROR.__str__():
             # TODO: hex repr. for `data[0]`
             logging.debug(f"Exception while running command '{data[0]}': {ex}")
             client.close()
