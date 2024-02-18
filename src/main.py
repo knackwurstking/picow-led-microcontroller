@@ -33,6 +33,7 @@ def ondata(client: socket.socket, data: list[bytes]):
         return
 
     # TODO: send result to client (if not None), with timeout?
+    # NOTE: add a b"\n" at the end
     ...
 
 
