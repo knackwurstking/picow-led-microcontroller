@@ -2,9 +2,13 @@ __all__ = [
     "validate_args",
 ]
 
+ARGS_ERROR = Exception("args error")
 
-def validate_args(length: int, args: bytearray, fixed=-1) -> bool:
+
+def validate_args(length: int, args: bytearray, fixed=-1):
     if fixed < 0:
-        return args.__len__() == length
+        if args.__len__() != length:
+            raise ARGS_ERROR
 
-    return args.__len__() == length and length == fixed
+    if args.__len__() != length or length != fixed:
+        raise ARGS_ERROR

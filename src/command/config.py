@@ -33,8 +33,7 @@ GET_PWM_RANGE: int = int(0x08)
 
 
 def set_color_pins(length: int, args: bytearray) -> None:
-    if not utils.validate_args(length, args, fixed=-1):
-        return None
+    utils.validate_args(length, args, fixed=-1)
 
     pins: list[int] = []
 
@@ -45,9 +44,8 @@ def set_color_pins(length: int, args: bytearray) -> None:
     ...
 
 
-def get_color_pins(length: int, args: bytearray) -> None | bytearray:
-    if not utils.validate_args(length, args, fixed=0):
-        return None
+def get_color_pins(length: int, args: bytearray) -> bytearray:
+    utils.validate_args(length, args, fixed=0)
 
     # TODO: run command and return bytearray
     ...
@@ -56,42 +54,36 @@ def get_color_pins(length: int, args: bytearray) -> None | bytearray:
 
 
 def set_motion_pin(length: int, args: bytearray) -> None:
-    if not utils.validate_args(length, args, fixed=1):
-        return None
+    utils.validate_args(length, args, fixed=1)
 
     ...
 
 
-def get_motion_pin(length: int, args: bytearray) -> None | bytearray:
-    if not utils.validate_args(length, args, fixed=0):
-        return None
+def get_motion_pin(length: int, args: bytearray) -> bytearray:
+    utils.validate_args(length, args, fixed=0)
 
     ...
 
 
 def set_server_addr(length: int, args: bytearray) -> None:
-    if not utils.validate_args(length, args, fixed=-1):
-        return None
+    utils.validate_args(length, args, fixed=-1)
 
     ...
 
 
-def get_server_addr(length: int, args: bytearray) -> None | bytearray:
-    if not utils.validate_args(length, args, fixed=0):
-        return None
+def get_server_addr(length: int, args: bytearray) -> bytearray:
+    utils.validate_args(length, args, fixed=0)
 
     ...
 
 
 def set_pwm_range(length: int, args: bytearray) -> None:
-    if not utils.validate_args(length, args, fixed=2):
-        return None
+    utils.validate_args(length, args, fixed=2)
 
     ...
 
 
-def get_pwm_range(length: int, args: bytearray) -> None | bytearray:
-    if not utils.validate_args(length, args, fixed=0):
-        return None
+def get_pwm_range(length: int, args: bytearray) -> bytearray:
+    utils.validate_args(length, args, fixed=0)
 
     ...

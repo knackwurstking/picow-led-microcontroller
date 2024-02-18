@@ -4,13 +4,34 @@ import sys
 
 import config as c
 
+from command.utils import ARGS_ERROR
+import command
 import server
 
 
 def ondata(client: socket.socket, data: list[bytes]):
-    logging.debug(f"[main.ondata] client={client.getsockname()}, data={data}")
+    logging.debug(f"client={client.getsockname()}, data={data}")
 
-    # TODO: run command...
+    if data.__len__() == 0:
+        return
+
+    try:
+        result = command.run(data[0], data[1:])
+    except Exception as ex:
+        if ex.__str__() == ARGS_ERROR:
+            # TODO: hex repr. for `data[0]`
+            logging.debug(f"Exception while running command '{data[0]}': {ex}")
+            client.close()
+            return
+
+        # TODO: hex repr. for `data[0]`
+        logging.warning(f"Exception while running command '{data[0]}': {ex}")
+        return
+
+    if result is None:
+        return
+
+    # TODO: send result to client (if not None), with timeout?
     ...
 
 

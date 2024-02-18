@@ -13,14 +13,12 @@ GET_COLOR_PINS_DUTY: int = int(0x42)
 
 
 def set_color_pins_duty(length: int, args: bytearray) -> None:
-    if not utils.validate_args(length, args, fixed=-1):
-        return None
+    utils.validate_args(length, args, fixed=-1)
 
     ...
 
 
-def get_color_pins_duty(length: int, args: bytearray) -> None | bytearray:
-    if not utils.validate_args(length, args, fixed=0):
-        return None
+def get_color_pins_duty(length: int, args: bytearray) -> bytearray:
+    utils.validate_args(length, args, fixed=0)
 
     ...
