@@ -7,9 +7,11 @@ import config as c
 import server
 
 
-# TODO: handle client data and (maybe) send a response
 def ondata(client: socket.socket, data: list[bytes]):
     logging.debug(f"[main.ondata] client={client.getsockname()}, data={data}")
+
+    # TODO: run command...
+    ...
 
 
 if __name__ == "__main__":
