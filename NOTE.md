@@ -1,5 +1,7 @@
 # What this project needs to do
 
+# TODO: Missing b"\\n" endbyte information
+
 - [What this project needs to do](#what-this-project-needs-to-do)
   - [Binary Communication Table](#binary-communication-table)
   - [Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)](#0x01example)
