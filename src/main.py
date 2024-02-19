@@ -1,6 +1,5 @@
 import logging
 import socket
-import sys
 
 import command
 import config as c
@@ -36,7 +35,7 @@ def ondata(client: socket.socket, data: list[bytes]):
 
 if __name__ == "__main__":
     logging.basicConfig(
-        stream=sys.stderr,
+        stream=c.LOGGIN_STREAM,
         level=c.LOGGING_LEVEL,
         format="[%(asctime)s] [%(levelname)s] [%(filename)s] [%(module)s] [%(funcName)s] %(message)s",
     )
