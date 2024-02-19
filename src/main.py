@@ -8,27 +8,23 @@ from command.utils import ARGS_ERROR
 from server.utils import response
 
 
-def ondata(client: socket.socket, data: list[bytes]):
+def ondata(client: socket.socket, data: bytearray):
     logging.debug(f"client={client.getsockname()}, data={data}")
 
     if data.__len__() == 0:
         return
 
     try:
-        result = command.run(data[0], data[1:])
+        result = command.run(int(data[0]), data[1:])
     except Exception as ex:
         if ex.__str__() == ARGS_ERROR.__str__() and type(ex) is type(
             ARGS_ERROR
         ):  # noqa: E501
-            logging.debug(
-                f"Exception while running command '{hex(data[0])}': {ex}"
-            )  # noqa: E501
+            logging.debug(f'Invalid args for command: "{hex(data[0])}"')
             client.close()
             return
 
-        logging.warning(
-            f"Exception while running command '{hex(data[0])}': {ex}"
-        )  # noqa: E501
+        logging.warning(f'Exception: "{data[0]}": {ex}')
         return
 
     if result is None:

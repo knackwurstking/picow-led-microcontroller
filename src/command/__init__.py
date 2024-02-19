@@ -34,8 +34,12 @@ ALL_COMMANDS = [
 ]
 
 
-def run(command: bytes, args: bytearray) -> None | bytearray:
+def run(command: int, args: bytearray) -> None | bytearray:
     for cmd, fn, name in ALL_COMMANDS:
         if cmd == command:
             logging.debug(f'Run command "{name}"...')
             return fn(int(args[0]), args[1:])
+
+    raise Exception(
+        f'command not found "{hex(command)}" with params: {args}'  # noqa: E501
+    )
