@@ -36,7 +36,6 @@ def handle_client_data(client: socket.socket, data: bytearray):
 
 
 def response(client: socket.socket, data: bytearray):
-    # TODO: add some timeout handler
     client.settimeout(config.SOCKET_TIMEOUT_SEND)
     try:
         client.send(data + config.END_BYTE)
