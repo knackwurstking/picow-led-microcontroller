@@ -37,7 +37,7 @@ def ondata(client: socket.socket, data: list[bytes]):
     response(client, data)
 
 
-if __name__ == "__main__":
+def main():
     logging.basicConfig(
         stream=c.LOGGING_STREAM,
         level=c.LOGGING_LEVEL,
@@ -47,3 +47,7 @@ if __name__ == "__main__":
     logging.info(f"Server starts on port {c.PORT}")
     server.callbacks.ondata = ondata
     server.start(c.HOST, c.PORT)
+
+
+if __name__ == "__main__":
+    main()
