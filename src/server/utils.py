@@ -21,6 +21,7 @@ def read_from_client(client: socket.socket) -> bytearray:
 
             data.append(chunk)
         else:
+            client.close()
             break
 
     return data
@@ -31,8 +32,6 @@ def handle_client_data(client: socket.socket, data: bytearray):
 
     if callbacks.ondata is not None and data.__len__() > 0:
         callbacks.ondata(client, data)
-    elif data.__len__() == 0:
-        client.close()
 
 
 def response(client: socket.socket, data: bytearray):
