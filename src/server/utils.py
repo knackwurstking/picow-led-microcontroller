@@ -38,5 +38,11 @@ def handle_client_data(client: socket.socket, data: bytearray):
 def response(client: socket.socket, data: bytearray):
     # TODO: add some timeout handler
     client.settimeout(config.SOCKET_TIMEOUT_SEND)
-    client.send(data + config.END_BYTE)
-    client.settimeout(None)
+    try:
+        client.send(data + config.END_BYTE)
+    except Exception as ex:
+        logging.debug(
+            f'Exception while send response to client "{client.getsockname()}": {ex} [{type(ex)}]'
+        )
+    finally:
+        client.settimeout(None)
