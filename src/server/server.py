@@ -76,8 +76,8 @@ def check_wifi():
                 # TODO: Turn on the picow status led
                 pass
             else:
-                # TODO: Oooops, wait some seconds and try again
-                raise Exception("Oooops, wifi connection failed!")
+                # TODO: Oops, wait some seconds and try again
+                raise Exception("Oops, wifi connection failed!")
 
         except Exception as ex:
             # TODO: do a machine reset
