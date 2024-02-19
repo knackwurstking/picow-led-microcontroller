@@ -2,11 +2,11 @@ import logging
 import socket
 import sys
 
-import config as c
-
-from command.utils import ARGS_ERROR
 import command
+import config as c
 import server
+from command.utils import ARGS_ERROR
+from server.utils import response
 
 
 def ondata(client: socket.socket, data: list[bytes]):
@@ -33,7 +33,7 @@ def ondata(client: socket.socket, data: list[bytes]):
 
     # TODO: send result to client (if not None), with timeout?
     # NOTE: add a b"\n" at the end
-    ...
+    response(client, data)
 
 
 if __name__ == "__main__":
