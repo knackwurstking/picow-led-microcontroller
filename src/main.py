@@ -20,13 +20,16 @@ def ondata(client: socket.socket, data: list[bytes]):
         if ex.__str__() == ARGS_ERROR.__str__() and type(ex) is type(
             ARGS_ERROR
         ):  # noqa: E501
-            # TODO: hex repr. for `data[0]`
-            logging.debug(f"Exception while running command '{data[0]}': {ex}")
+            logging.debug(
+                f"Exception while running command '{hex(data[0])}': {ex}"
+            )  # noqa: E501
             client.close()
             return
 
         # TODO: hex repr. for `data[0]`
-        logging.warning(f"Exception while running command '{data[0]}': {ex}")
+        logging.warning(
+            f"Exception while running command '{hex(data[0])}': {ex}"
+        )  # noqa: E501
         return
 
     if result is None:
