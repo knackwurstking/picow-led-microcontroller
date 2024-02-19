@@ -42,7 +42,9 @@ def main_loop(server_socket: socket.socket):
                 config.SOCKET_TIMEOUT_SELECT,
             )
         except Exception as ex:
-            logging.error(f'Got an exception while running select.select: "{ex}"')
+            logging.error(
+                f'Got an exception while running select.select: "{ex}"'
+            )  # noqa: E501
 
             # Remove dead sockets
             for s in readable_sockets.copy():

@@ -1,8 +1,5 @@
 import logging
 import socket
-import sys
-
-import config as c
 
 from . import utils
 
@@ -26,7 +23,8 @@ def readable(
             logging.debug(f"Connected client from {addr}")
         else:
             utils.handle_client_data(s, utils.read_from_client(s))
-            if s.fileno() != -1:  # NOTE: append socket to clients if not closed
+            # NOTE: append socket to clients if not closed
+            if s.fileno() != -1:
                 clients.append(s)
 
     return clients
