@@ -26,7 +26,6 @@ def ondata(client: socket.socket, data: list[bytes]):
             client.close()
             return
 
-        # TODO: hex repr. for `data[0]`
         logging.warning(
             f"Exception while running command '{hex(data[0])}': {ex}"
         )  # noqa: E501
