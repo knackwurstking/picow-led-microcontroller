@@ -3,6 +3,7 @@ import select
 import socket
 import time
 
+import config
 import wifi
 
 from . import handler
@@ -35,7 +36,10 @@ def main_loop(server_socket: socket.socket):
 
         try:
             readable, writable, errored = select.select(
-                readable_sockets, writable_sockets, errored_sockets, 0.25
+                readable_sockets,
+                writable_sockets,
+                errored_sockets,
+                config.SOCKET_TIMEOUT_SELECT,
             )
         except Exception as ex:
             logging.error(f'Got an exception while running select.select: "{ex}"')

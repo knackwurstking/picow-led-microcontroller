@@ -1,6 +1,8 @@
 import logging
 import socket
 
+import config
+
 from . import callbacks
 
 __all__ = ["read_from_client", "handle_client_data"]
@@ -14,7 +16,7 @@ def read_from_client(client: socket.socket) -> bytearray:
     while True:
         chunk = client.recv(1)
         if chunk:
-            if chunk == b"\n":
+            if chunk == config.END_BYTE:
                 break
 
             data.append(chunk)
@@ -34,5 +36,7 @@ def handle_client_data(client: socket.socket, data: bytearray):
 
 
 def response(client: socket.socket, data: bytearray):
-    # NOTE: add a b"\n" at the end
-    ...
+    # TODO: add some timeout handler
+    client.settimeout(config.SOCKET_TIMEOUT_SEND)
+    client.send(data + config.END_BYTE)
+    client.settimeout(None)
