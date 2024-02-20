@@ -33,9 +33,3 @@ COLOR_PWM_RANGE_MIN: min = 0
 COLOR_PWM_RANGE_MAX: min = 100
 
 SERVER_ADDRESS: str = ""
-
-# TODO: set/get config values (handler to run if a value changes)
-#   - color pins
-#   - motion pin
-#   - server address
-#   - color pwm range
