@@ -1,3 +1,5 @@
+from gp import color, motion
+
 from . import utils
 
 __all__ = [
@@ -40,8 +42,7 @@ def set_color_pins(length: int, args: bytearray) -> None:
     for arg in args:
         pins.append(int(arg))
 
-    # TODO: run command
-    ...
+    color.set_pins(*pins)
 
 
 def get_color_pins(length: int, args: bytearray) -> bytearray:
