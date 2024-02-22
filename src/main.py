@@ -33,12 +33,16 @@ def ondata(client: socket.socket, data: bytearray):
     response(client, data)
 
 
-def main():
+def set_logger(stream, level):
     logging.basicConfig(
-        stream=c.LOGGING_STREAM,
-        level=c.LOGGING_LEVEL,
+        stream=stream,
+        level=level,
         format="[%(asctime)s] [%(levelname)s] [%(filename)s] [%(module)s] [%(funcName)s] %(message)s",  # noqa: E501
     )
+
+
+def main():
+    set_logger(c.LOGGING_STREAM, c.LOGGING_LEVEL)
 
     logging.info(f"Server starts on port {c.PORT}")
     server.callbacks.ondata = ondata
