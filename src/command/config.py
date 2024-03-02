@@ -48,21 +48,22 @@ def set_color_pins(length: int, args: bytearray) -> None:
 def get_color_pins(length: int, args: bytearray) -> bytearray:
     utils.validate_args(length, args, fixed=0)
 
-    # TODO: run command and return bytearray
-    ...
+    pins = color.get_pins()
 
-    return bytearray([GET_COLOR_PINS, 0x00])
+    return bytearray([GET_COLOR_PINS, pins.__len__()] + pins)
 
 
 def set_motion_pin(length: int, args: bytearray) -> None:
     utils.validate_args(length, args, fixed=1)
 
+    # TODO: set motion pin
     ...
 
 
 def get_motion_pin(length: int, args: bytearray) -> bytearray:
     utils.validate_args(length, args, fixed=0)
 
+    # TODO: get motion pin
     ...
 
 
