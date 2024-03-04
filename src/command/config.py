@@ -56,20 +56,23 @@ def get_color_pins(length: int, args: bytearray) -> bytearray:
 def set_motion_pin(length: int, args: bytearray) -> None:
     utils.validate_args(length, args, fixed=1)
 
-    # TODO: set motion pin
-    ...
+    motion.set_pin(int(args[0]))
 
 
 def get_motion_pin(length: int, args: bytearray) -> bytearray:
     utils.validate_args(length, args, fixed=0)
 
-    # TODO: get motion pin
-    ...
+    pin = motion.get_Pin()
+    if pin is None:
+        return bytearray([GET_MOTION_PIN, 0x00])
+
+    return bytearray([GET_MOTION_PIN, 0x01, pin])
 
 
 def set_server_addr(length: int, args: bytearray) -> None:
     utils.validate_args(length, args, fixed=-1)
 
+    # TODO: convert args to string
     ...
 
 
