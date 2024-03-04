@@ -24,7 +24,7 @@ def set_pin(number: int) -> None:
     ...
 
 
-def get_pin() -> int:
+def get_pin() -> int | None:
     """Returns the current motion sensor pin (-1 if disabled)"""
 
     ...
