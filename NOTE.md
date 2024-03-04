@@ -1,25 +1,30 @@
-# What this project needs to do
+<!-- vscode-markdown-toc -->
 
-# TODO: Missing b"\\n" endbyte information
+- [Binary Communication Table](#BinaryCommunicationTable)
+- [Example: Set GPIO configurations for colors (ex: r, g, b, w)](#Example:SetGPIOconfigurationsforcolorsex:rgbw)
+- [Example: Get the current GPIO configuration for colors (ex: r, g, b, w)](#Example:GetthecurrentGPIOconfigurationforcolorsex:rgbw)
+- [Example: Set motion sensor GPIO pin](#Example:SetmotionsensorGPIOpin)
+- [Example: Get motion sensor GPIO pin](#Example:GetmotionsensorGPIOpin)
+- [Example: Set motion sensor timeout](#Example:Setmotionsensortimeout)
+- [Example: Get motion sensor timeout](#Example:Getmotionsensortimeout)
+- [Example: Set PWM range](#Example:SetPWMrange)
+- [Example: Get PWM range](#Example:GetPWMrange)
+- [Example: Get picow temp](#Example:Getpicowtemp)
+- [Example: Get picow disk-usage](#Example:Getpicowdisk-usage)
+- [Example: Get version](#Example:Getversion)
+- [Example: Set GPIO pins duty (pwm-range)](#Example:SetGPIOpinsdutypwm-range)
+- [Example: Get GPIO pins duty (pwm-range)](#Example:GetGPIOpinsdutypwm-range)
+- [Example: Get motion sensor data](#Example:Getmotionsensordata)
 
-- [What this project needs to do](#what-this-project-needs-to-do)
-  - [Binary Communication Table](#binary-communication-table)
-  - [Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)](#0x01example)
-  - [Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)](#0x02example)
-  - [Example: Set motion sensor GPIO pin](#0x03example)
-  - [Example: Get motion sensor GPIO pin](#0x04example)
-  - [Example: Set server address (ex.: "http://rpi-server:50833)"](#0x05example)
-  - [Example: Get server address](#0x06example)
-  - [Example: Set PWM range](#0x07example)
-  - [Example: Get PWM range](#0x08example)
-  - [Example: Get picow temp.](#0x21example)
-  - [Example: Get picow disk-usage](#0x22example)
-  - [Example: Get version](#0x23example)
-  - [Example: Set GPIO LED pins duty (pwm-range)](#0x41example)
-  - [Example: Get GPIO LED pins duty (pwm-range)](#0x42example)
-  - [Example: Get motion sensor data](#0x61example)
+<!-- vscode-markdown-toc-config
+	numbering=false
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc --># What this project needs to do
 
-## Binary Communication Table
+# TODO: Missing b"\\n" End-Byte information
+
+## <a name='BinaryCommunicationTable'></a>Binary Communication Table
 
 > First byte will be the command, and the second byte the data length
 
@@ -28,26 +33,24 @@
 **led** commands in range from `0x41` -- `0x60`\
 **motion** commands in range from `0x61` -- `0x80`
 
-|        Command                | Data Type | Description |
-| ----------------------------: | :-------- | :---------- |
-| config [`0x01`](#0x01example) | decimal... | Set LED/GPIO configurations for colors (ex: r, g, b, w) |
-| config [`0x02`](#0x02example) | decimal... | Get the current LED/GPIO configuration for colors (ex: r, g, b, w) |
-| config [`0x03`](#0x03example) | decimal | Set motion sensor GPIO pin |
-| config [`0x04`](#0x04example) | decimal | Get motion sensor GPIO pin |
-| config [`0x05`](#0x05example) | string | Set server address (ex.: "<http://rpi-server:50833>)" |
-| config [`0x06`](#0x06example) | string | Get server address |
-| config [`0x07`](#0x07example) | decimal | Set PWM range |
-| config [`0x08`](#0x08example) | decimal | Get PWM range |
-| info   [`0x21`](#0x21example) | float as string | Get picow temp. |
-| info   [`0x22`](#0x22example) | string | Get picow disk-usage |
-| info   [`0x23`](#0x23example) | string | Get version |
-| led    [`0x41`](#0x41example) | decimal... | Set GPIO LED pins duty (pwm-range) |
-| led    [`0x42`](#0x42example) | decimal... | Get GPIO LED pins duty (pwm-range) |
-| motion [`0x61`](#0x61example) | string | Get motion sensor data |
+|                                                                  Command | Data Type       | Description                                                    |
+| -----------------------------------------------------------------------: | :-------------- | :------------------------------------------------------------- |
+|          config [`0x01`](#Example:SetGPIOconfigurationsforcolorsex:rgbw) | decimal...      | Set GPIO configurations for colors (ex: r, g, b, w)            |
+| config [`0x02`](#Example:GetthecurrentGPIOconfigurationforcolorsex:rgbw) | decimal...      | Get the current GPIO configuration for colors (ex: r, g, b, w) |
+|                         config [`0x03`](#Example:SetmotionsensorGPIOpin) | decimal         | Set motion sensor GPIO pin                                     |
+|                         config [`0x04`](#Example:SetmotionsensorGPIOpin) | decimal         | Get motion sensor GPIO pin                                     |
+|                         config [`0x05`](#Example:Setmotionsensortimeout) | string          | Set motion sensor timeout                                      |
+|                         config [`0x06`](#Example:Getmotionsensortimeout) | string          | Get motion sensor timeout                                      |
+|                                    config [`0x07`](#Example:SetPWMrange) | decimal         | Set PWM range                                                  |
+|                                    config [`0x08`](#Example:GetPWMrange) | decimal         | Get PWM range                                                  |
+|                                     info [`0x21`](#Example:Getpicowtemp) | float as string | Get picow temp.                                                |
+|                               info [`0x22`](#Example:Getpicowdisk-usage) | string          | Get picow disk-usage                                           |
+|                                       info [`0x23`](#Example:Getversion) | string          | Get version                                                    |
+|                          led [`0x41`](#Example:SetGPIOpinsdutypwm-range) | decimal...      | Set GPIO pins duty (pwm-range)                                 |
+|                          led [`0x42`](#Example:GetGPIOpinsdutypwm-range) | decimal...      | Get GPIO pins duty (pwm-range)                                 |
+|                            motion [`0x61`](#Example:Getmotionsensordata) | string          | Get motion sensor data                                         |
 
-<a id="0x01example"></a>
-
-## Example: Set LED/GPIO configurations for colors (ex: r, g, b, w)
+## <a name='Example:SetGPIOconfigurationsforcolorsex:rgbw'></a>Example: Set GPIO configurations for colors (ex: r, g, b, w)
 
 > No server response
 
@@ -62,9 +65,7 @@
    [0x01, 0x04, 0x00, 0x01, 0x02, 0x03]
    ```
 
-<a id="0x02example"></a>
-
-## Example: Get the current LED/GPIO configuration for colors (ex: r, g, b, w)
+## <a name='Example:GetthecurrentGPIOconfigurationforcolorsex:rgbw'></a>Example: Get the current GPIO configuration for colors (ex: r, g, b, w)
 
 1. <u>**Data (Request)**</u>
 
@@ -85,9 +86,7 @@
    [0x02, 0x04, 0x00, 0x01, 0x02, 0x03]
    ```
 
-<a id="0x03example"></a>
-
-## Example: Set motion sensor GPIO pin
+## <a name='Example:SetmotionsensorGPIOpin'></a>Example: Set motion sensor GPIO pin
 
 > No server response
 
@@ -102,9 +101,7 @@
    [0x03, 0x01, 0x0d]
    ```
 
-<a id="0x04example"></a>
-
-## Example: Get motion sensor GPIO pin
+## <a name='Example:GetmotionsensorGPIOpin'></a>Example: Get motion sensor GPIO pin
 
 1. <u>**Data (Request)**</u>
 
@@ -125,35 +122,31 @@
    [0x04, 0x01, 0x0d]
    ```
 
-<a id="0x05example"></a>
+## <a name='Example:Setmotionsensortimeout'></a>Example: Set motion sensor timeout
 
-## Example: Set server address (ex.: "<http://rpi-server:50833>)"
+The motion sensor timeout will reset the value back to 0 if a specific timeout
+(milliseconds) is reached.
 
 > No server response
 
 1. <u>**Data (Request)**</u>
 
    - **group**: config `0x05`
-   - **data**: "<http://192.168.178.21:50833>"
-   - **data length**: `0x1b` (27) (_dynamic_)
+   - **data**: 60000 (60 seconds)
+   - **data length**: `0x05` (5) (_dynamic_)
    - **data type**: string
 
    ```python
    [
        0x05,
-       0x1b,
-       0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, # http://
-       0x31, 0x39, 0x32, 0x2e,                   # 192.
-       0x31, 0x36, 0x38, 0x2e,                   # 168.
-       0x31, 0x37, 0x38, 0x2e,                   # 178.
-       0x32, 0x31, 0x3a,                         # 21:
-       0x35, 0x30, 0x38, 0x33, 0x33              # 50833
+       0x05,
+       0x06, 0x00, 0x00, 0x00, 0x00, # 60000
    ]
    ```
 
-<a id="0x06example"></a>
+## <a name='Example:Getmotionsensortimeout'></a>Example: Get motion sensor timeout
 
-## Example: Get server address
+Returns the motion sensor timeout in milliseconds.
 
 1. <u>**Data (Request)**</u>
 
@@ -166,26 +159,19 @@
 1. <u>**Data (Response)**</u>
 
    - **group**: config `0x06`
-   - **data**: "<http://192.168.178.21:50833>"
-   - **data length**: `0x1b` (27) (_dynamic_)
+   - **data**: 60000 (60 seconds)
+   - **data length**: `0x05` (5) (_dynamic_)
    - **data type**: string
 
    ```python
    [
        0x06,
-       0x1b,
-       0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, # http://
-       0x31, 0x39, 0x32, 0x2e,                   # 192.
-       0x31, 0x36, 0x38, 0x2e,                   # 168.
-       0x31, 0x37, 0x38, 0x2e,                   # 178.
-       0x32, 0x31, 0x3a,                         # 21:
-       0x35, 0x30, 0x38, 0x33, 0x33              # 50833
+       0x05,
+       0x06, 0x00, 0x00, 0x00, 0x00, # 60000
    ]
    ```
 
-<a id="0x07example"></a>
-
-## Example: Set PWM range
+## <a name='Example:SetPWMrange'></a>Example: Set PWM range
 
 > No server response
 
@@ -200,9 +186,7 @@
    [0x07, 0x02, 0x00, 0x64]
    ```
 
-<a id="0x08example"></a>
-
-## Example: Get PWM range
+## <a name='Example:GetPWMrange'></a>Example: Get PWM range
 
 1. <u>**Data (Request)**</u>
 
@@ -223,9 +207,7 @@
    [0x08, 0x02, 0x00, 0x64]
    ```
 
-<a id="0x21example"></a>
-
-## Example: Get picow temp
+## <a name='Example:Getpicowtemp'></a>Example: Get picow temp
 
 1. <u>**Data (Request)**</u>
 
@@ -251,9 +233,7 @@
    ]
    ```
 
-<a id="0x22example"></a>
-
-## Example: Get picow disk-usage
+## <a name='Example:Getpicowdisk-usage'></a>Example: Get picow disk-usage
 
 1. <u>**Data (Request)**</u>
 
@@ -280,9 +260,7 @@
    ]
    ```
 
-<a id="0x23example"></a>
-
-## Example: Get version
+## <a name='Example:Getversion'></a>Example: Get version
 
 1. <u>**Data (Request)**</u>
 
@@ -311,9 +289,7 @@
    ]
    ```
 
-<a id="0x41example"></a>
-
-## Example: Set GPIO LED pins duty (pwm-range)
+## <a name='Example:SetGPIOpinsdutypwm-range'></a>Example: Set GPIO pins duty (pwm-range)
 
 > No server response
 
@@ -335,9 +311,7 @@
    ]
    ```
 
-<a id="0x42example"></a>
-
-## Example: Get GPIO LED pins duty (pwm-range)
+## <a name='Example:GetGPIOpinsdutypwm-range'></a>Example: Get GPIO pins duty (pwm-range)
 
 1. <u>**Data (Request)**</u>
 
@@ -365,9 +339,9 @@
    ]
    ```
 
-<a id="0x61example"></a>
+## <a name='Example:Getmotionsensordata'></a>Example: Get motion sensor data
 
-## Example: Get motion sensor data
+A value of 0 means no motion detected, or timeout reached since the last activation
 
 1. <u>**Data (Request)**</u>
 

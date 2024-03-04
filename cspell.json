@@ -1,1 +1,29 @@
-{"version":"0.2","words":["Pico","thonny","rshell","picow","GPIO","ondata","levelname","REUSEADDR","onchange"],"flagWords":[],"language":"en"}
+{
+    "version": "0.2",
+    "words": [
+        "Getmotionsensor",
+        "Getmotionsensordata",
+        "Getmotionsensortimeout",
+        "Getpicowdisk",
+        "Getpicowtemp",
+        "Getthecurrent",
+        "Getversion",
+        "GPIO",
+        "levelname",
+        "Oconfigurationforcolorsex",
+        "Oconfigurationsforcolorsex",
+        "onchange",
+        "ondata",
+        "Opinsdutypwm",
+        "Pico",
+        "picow",
+        "REUSEADDR",
+        "rgbw",
+        "rshell",
+        "Setmotionsensor",
+        "Setmotionsensortimeout",
+        "thonny"
+    ],
+    "flagWords": [],
+    "language": "en"
+}
