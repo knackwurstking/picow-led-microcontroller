@@ -13,8 +13,16 @@ ALL_COMMANDS = [
     (config.GET_COLOR_PINS, config.get_color_pins, "config.get_color_pins"),
     (config.SET_MOTION_PIN, config.set_motion_pin, "config.set_motion_pin"),
     (config.GET_MOTION_PIN, config.get_motion_pin, "config.get_motion_pin"),
-    (config.SET_SERVER_ADDR, config.set_server_addr, "config.set_server_addr"),
-    (config.GET_SERVER_ADDR, config.get_server_addr, "config.get_server_addr"),
+    (
+        config.SET_MOTION_TIMEOUT,
+        config.set_motion_timeout,
+        "config.set_motion_timeout",
+    ),
+    (
+        config.GET_MOTION_TIMEOUT,
+        config.get_motion_timeout,
+        "config.get_motion_timeout",
+    ),
     (config.SET_PWM_RANGE, config.set_pwm_range, "config.set_pwm_range"),
     (config.GET_PWM_RANGE, config.get_pwm_range, "config.get_pwm_range"),
     (info.GET_TEMP, info.get_temp, "info.get_temp"),
