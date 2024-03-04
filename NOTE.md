@@ -1,3 +1,5 @@
+> Maybe replace this with [NOTE_communication.md](/NOTE_communication.md)
+
 <!-- vscode-markdown-toc -->
 
 - [Binary Communication Table](#BinaryCommunicationTable)

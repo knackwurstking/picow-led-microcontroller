@@ -1,13 +1,28 @@
 # NOTE Communication
 
+<!-- vscode-markdown-toc -->
+
+- [Commands Overview](#CommandsOverview)
+- [JSON (typescript) interface](#JSONtypescriptinterface)
+- [JSON Example: Set/Get GPIO pins for LEDs](#JSONExample:SetGetGPIOpinsforLEDs)
+- [Listen for motion sensor events](#Listenformotionsensorevents)
+
+<!-- vscode-markdown-toc-config
+	numbering=false
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+
+## <a name='CommandsOverview'></a>Commands Overview
+
 - `config`
   - `set`
-    - `led <gp:nr> ...`: Set GPIO configuration for LEDs (ex.: rgbw)
+    - `led <gp:nr> ...`: [Set GPIO configuration for LEDs (ex.: rgbw)](#SetGPIOpinsforLEDs)
     - `motion <gp:nr>`: Set motion sensor pin
     - `motion-timeout <milliseconds:nr>`: Set motion sensor timeout value
     - `pwm-range <min:nr> <max:nr>`: Set PWM range
   - `get`
-    - `led`: Get GPIO configuration for LEDs (ex.: rgbw)
+    - `led`: [Get GPIO configuration for LEDs (ex.: rgbw)](#GetGPIOpinsforLEDs)
     - `motion`: Get motion sensor pin
     - `motion-timeout`: Get motion sensor timeout value
     - `pwm-range`: Get PWM range
@@ -25,27 +40,31 @@
   - `get`
     - `data`: Get motion sensor data
   - `event`
-    - `???`: Listen for motion sensor events
+    - `watch`: [Listen for motion sensor events](#Listenformotionsensorevents)
 
-## JSON (typescript) interface
-
-Client Request:
+## <a name='JSONtypescriptinterface'></a>JSON (typescript) interface
 
 ```typescript
 interface Request {
-  id: number;
+  id?: number;
   group: "config" | "info" | "led" | "motion";
   type: "set" | "get" | "event";
   command: string;
   args?: (number | string)[] | null;
 }
+
+interface Response {
+    id: number; # zero if no id in request
+    error: string | null,
+    data: any,
+}
 ```
 
-## JSON: `Command`
+## <a name='JSONExample:SetGetGPIOpinsforLEDs'></a>JSON Example: Set/Get GPIO pins for LEDs
 
 > `id` some identification number, to identify multiple responses
 
-Set GPIO pins for LEDs (ex.: rgbw)
+<a name="SetGPIOpinsforLEDs"></a>Set GPIO pins for LEDs (ex.: set pins for rgbw to 0-3)
 
 ```json
 {
@@ -57,7 +76,17 @@ Set GPIO pins for LEDs (ex.: rgbw)
 }
 ```
 
-Get GPIO pins
+Server response on success
+
+```json
+{
+  "id": 1,
+  "error": null,
+  "data": null
+}
+```
+
+<a name="GetGPIOpinsforLEDs"></a>Get GPIO pins
 
 ```json
 {
@@ -67,4 +96,26 @@ Get GPIO pins
   "command": "led",
   "args": null
 }
+```
+
+Server response on success
+
+```json
+{
+  "id": 2,
+  "error": null,
+  "data": [0, 1, 2, 3]
+}
+```
+
+## <a name='Listenformotionsensorevents'></a>Listen for motion sensor events
+
+This will return a data stream separated with newlines "\\n" every time a motion event happened
+
+Example:
+
+```json
+{ "id": 0, "error": null, "data": null }
+{ "id": 0, "error": null, "data": null }
+{ "id": 0, "error": null, "data": null }
 ```
