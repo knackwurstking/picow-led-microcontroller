@@ -1,14 +1,15 @@
 import logging
+from dataclasses import dataclass
 
 from . import config, info, led, motion
 
 __all__ = [
-    "ALL_COMMANDS",
+    "COMMANDS",
     "run",
-    "config",
 ]
 
-ALL_COMMANDS = [
+# TODO: update commands...
+COMMANDS = [
     (config.SET_COLOR_PINS, config.set_color_pins, "config.set_color_pins"),
     (config.GET_COLOR_PINS, config.get_color_pins, "config.get_color_pins"),
     (config.SET_MOTION_PIN, config.set_motion_pin, "config.set_motion_pin"),
@@ -42,12 +43,12 @@ ALL_COMMANDS = [
 ]
 
 
-def run(command: int, args: bytearray) -> None | bytearray:
-    for cmd, fn, name in ALL_COMMANDS:
-        if cmd == command:
-            logging.debug(f'Run command "{name}"...')
-            return fn(int(args[0]), args[1:])
+@dataclass
+class Response:
+    id: int
+    error: str | None
+    data: any
 
-    raise Exception(
-        f'command not found "{hex(command)}" with params: {args}'  # noqa: E501
-    )
+
+def run(id: int, group: str, type: str, command: str, *args) -> Response:
+    # TODO: iter commands and run, return response with/without error and data
