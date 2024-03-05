@@ -27,9 +27,9 @@ class Command:
 
         if self.group == GROUP_CONFIG:
             if self.type == TYPE_SETTER:
-                response = config.run_setter(self.command, *args)
+                response = config.run_setter(self.id, self.command, *args)
             elif self.type == TYPE_GETTER:
-                response = config.run_getter(self.command, *args)
+                response = config.run_getter(self.id, self.command, *args)
             else:
                 response.error = (
                     f'Type "{self.type}"not found for group "{self.group}"!'
@@ -39,7 +39,7 @@ class Command:
 
         if self.group == GROUP_INFO:
             if self.type == TYPE_GETTER:
-                response = info.run_getter(self.command, *args)
+                response = info.run_getter(self.id, self.command, *args)
             else:
                 response.error = (
                     f'Type "{self.type}"not found for group "{self.group}"!'
@@ -49,9 +49,9 @@ class Command:
 
         if self.group == GROUP_LED:
             if self.type == TYPE_SETTER:
-                response = led.run_setter(self.command, *args)
+                response = led.run_setter(self.id, self.command, *args)
             elif self.type == TYPE_GETTER:
-                response = led.run_getter(self.command, *args)
+                response = led.run_getter(self.id, self.command, *args)
             else:
                 response.error = (
                     f'Type "{self.type}"not found for group "{self.group}"!'
@@ -61,9 +61,9 @@ class Command:
 
         if self.group == GROUP_MOTION:
             if self.type == TYPE_GETTER:
-                response = motion.run_getter(self.command, *args)
+                response = motion.run_getter(self.id, self.command, *args)
             elif self.type == TYPE_EVENT:
-                response = motion.run_event(self.command, *args)
+                response = motion.run_event(self.id, self.command, *args)
             else:
                 response.error = (
                     f'Type "{self.type}"not found for group "{self.group}"!'
