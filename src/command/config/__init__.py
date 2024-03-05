@@ -3,6 +3,30 @@ from ..response import Response
 __all__ = ["run_setter", "run_getter"]
 
 
+def set_led_pins(*pins): ...
+
+
+def get_led_pins(): ...
+
+
+def set_motion_pin(pin: int): ...
+
+
+def get_motion_pin(): ...
+
+
+def set_motion_timeout_value(timeout: int): ...
+
+
+def get_motion_timeout_value(): ...
+
+
+def set_pwm_range(min: int, max: int): ...
+
+
+def get_pwm_range(): ...
+
+
 def run_setter(command: str, *args) -> Response: ...
 
 
