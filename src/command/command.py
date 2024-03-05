@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
 from . import config, info, led, motion
+from .response import Response
 
-__all__ = ["Response", "Command"]
+__all__ = ["Command"]
 
 TYPE_GETTER = "get"
 TYPE_SETTER = "set"
@@ -12,13 +13,6 @@ GROUP_CONFIG = "config"
 GROUP_INFO = "info"
 GROUP_LED = "led"
 GROUP_MOTION = "motion"
-
-
-@dataclass
-class Response:
-    id: int
-    error: str | None
-    data: any
 
 
 @dataclass
