@@ -7,6 +7,8 @@ from . import callbacks
 
 __all__ = ["read_from_client", "handle_client_data", "response"]
 
+# TODO: use new json data communication instead of bytearray
+
 
 def read_from_client(client: socket.socket) -> bytearray:
     logging.debug(f"client={client.getsockname()}")
