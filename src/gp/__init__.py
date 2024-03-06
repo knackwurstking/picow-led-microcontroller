@@ -1,16 +1,16 @@
-from . import color as _color
+from . import led as _led
 from . import motion as _motion
 
 __all__ = [
-    "color",
+    "led",
     "motion",
 ]
 
 
-def _init_color() -> _color.GpColor:
-    global color
-    color = _color.GpColor()  # TODO: set cached pins
-    return color
+def _init_led() -> _led.GpLED:
+    global led
+    led = _led.GpLED()  # TODO: set cached pins
+    return led
 
 
 def _init_motion() -> _motion.GpMotion:
@@ -19,5 +19,5 @@ def _init_motion() -> _motion.GpMotion:
     return motion
 
 
-color: _color.GpColor = _init_color()
+led: _led.GpLED = _init_led()
 motion: _motion.GpMotion = _init_motion()

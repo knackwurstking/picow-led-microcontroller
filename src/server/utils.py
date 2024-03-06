@@ -39,7 +39,7 @@ def response(client: socket.socket, data: bytearray):
     try:
         client.send(data + config.END_BYTE)
     except Exception as ex:
-        logging.debug(
+        logging.error(
             f'Exception while send response to client "{client.getsockname()}": {ex} [{type(ex)}]'  # noqa: E501
         )
     finally:

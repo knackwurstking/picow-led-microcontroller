@@ -4,7 +4,6 @@ import socket
 import command
 import config as c
 import server
-from command.utils import ARGS_ERROR
 from server.utils import response
 
 
@@ -16,21 +15,19 @@ def ondata(client: socket.socket, data: bytearray):
 
     try:
         result = command.run(int(data[0]), data[1:])
-    except Exception as ex:
-        if ex.__str__() == ARGS_ERROR.__str__() and type(ex) is type(
-            ARGS_ERROR
-        ):  # noqa: E501
-            logging.debug(f'Invalid args for command: "{hex(data[0])}"')
-            client.close()
+
+        if result is None:
             return
 
-        logging.warning(f'Exception: "{data[0]}": {ex}')
-        return
+        response(client, data)
+    except Exception as ex:
+        message = f'Exception: "{data[0]}": {ex}'
+        logging.error(message)
 
-    if result is None:
-        return
+        # TODO: Send error response back to client?
+        ...
 
-    response(client, data)
+        return
 
 
 def set_logger(stream, level):

@@ -5,11 +5,11 @@ __all__ = ["run_setter", "run_getter"]
 
 
 def set_led_pins(*pins: int) -> None:
-    gp.color.set_pins(*pins)
+    gp.led.set_pins(*pins)
 
 
 def get_led_pins() -> list[int]:
-    return gp.color.get_pins()
+    return gp.led.get_pins()
 
 
 def set_motion_pin(pin: int) -> None: ...

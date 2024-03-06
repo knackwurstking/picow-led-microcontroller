@@ -3,19 +3,19 @@ from typing import Callable
 
 __all__ = [
     "onchange",
-    "GpColor",
+    "GpLED",
 ]
 
 onchange: Callable[[list[int]], None] | None = None
 
 
-class GpColor:
+class GpLED:
     _pins: list[int]
 
     def __init__(self, *pins) -> None:
         self._pins = list(pins)
 
-    def set_pins(self, *pins: int) -> GpColor:
+    def set_pins(self, *pins: int) -> GpLED:
         self._pins = list(pins)
         return self
 
