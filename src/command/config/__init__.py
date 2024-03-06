@@ -1,12 +1,15 @@
 from ..response import Response
+import gp
 
 __all__ = ["run_setter", "run_getter"]
 
 
-def set_led_pins(*pins: int) -> None: ...
+def set_led_pins(*pins: int) -> None:
+    gp.color.set_pins(*pins)
 
 
-def get_led_pins() -> list[int]: ...
+def get_led_pins() -> list[int]:
+    return gp.color.get_pins()
 
 
 def set_motion_pin(pin: int) -> None: ...

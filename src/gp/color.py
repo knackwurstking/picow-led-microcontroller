@@ -1,32 +1,23 @@
-import logging
+from __future__ import annotations
 from typing import Callable
-
-import config
 
 __all__ = [
     "onchange",
-    "start",
-    "set_pins",
-    "get_pins",
+    "GpColor",
 ]
 
 onchange: Callable[[list[int]], None] | None = None
 
 
-def start() -> None:
-    """Starts the color service"""
+class GpColor:
+    _pins: list[int]
 
-    ...
+    def __init__(self, *pins) -> None:
+        self._pins = list(pins)
 
+    def set_pins(self, *pins: int) -> GpColor:
+        self._pins = list(pins)
+        return self
 
-def set_pins(*pins: int) -> None:
-    """Changes the current color pins to use"""
-    logging.debug(f"*pins={pins}")
-
-    ...
-
-
-def get_pins() -> list[int]:
-    """Returns the current color pins"""
-
-    ...
+    def get_pins(self) -> list[int]:
+        return self.pins
