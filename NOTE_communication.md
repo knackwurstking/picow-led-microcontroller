@@ -38,9 +38,9 @@
     - `duty`: Get GPIO pin duty
 - `motion`
   - `get`
-    - `data`: Get motion sensor data
+    - `last-motion`: Get motion sensor data
   - `event`
-    - `watch`: [Listen for motion sensor events](#Listenformotionsensorevents)
+    - `watch-motions`: [Listen for motion sensor events](#Listenformotionsensorevents)
 
 ## <a name='JSONtypescriptinterface'></a>JSON (typescript) interface
 
