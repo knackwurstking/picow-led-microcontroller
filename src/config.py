@@ -22,14 +22,12 @@ END_BYTE = b"\n"
 SOCKET_TIMEOUT_SELECT: int | float | None = 0.25
 SOCKET_TIMEOUT_SEND: int | float | None = 0.5
 
-
 # color pins in order (ex.: [r, g, b, w])
 COLOR_PINS: list[int] = []
 
+LED_PWM_RANGE_MIN: min = 0
+LED_PWM_RANGE_MAX: min = 100
+
 # motion pin set to -1 will disable the motion sensor
 MOTION_PIN: int = -1
-
-COLOR_PWM_RANGE_MIN: min = 0
-COLOR_PWM_RANGE_MAX: min = 100
-
-SERVER_ADDRESS: str = ""
+MOTION_TIMEOUT: int = 60000  # 60 seconds
