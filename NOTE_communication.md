@@ -24,7 +24,7 @@
   - `get`
     - `led`: [Get GPIO configuration for LEDs (ex.: rgbw)](#GetGPIOpinsforLEDs)
     - `motion`: Get motion sensor pin
-    - `motion-timeout`: Get motion sensor timeout value
+    - `motion-timeout`: Get motion sensor timeout value in milliseconds
     - `pwm-range`: Get PWM range
 - `info`
   - `get`
