@@ -71,6 +71,7 @@ def run_setter(id: int, command: str, *args) -> dc.Response:
         run_command = set_pwm_range
     else:
         response.error = f'Command "{command}" not found!'
+        return response
 
     try:
         response.data = run_command(*args)
