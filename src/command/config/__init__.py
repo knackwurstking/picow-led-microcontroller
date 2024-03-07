@@ -21,10 +21,12 @@ def get_motion_pin() -> int:
     return gp.motion.get_pin()
 
 
-def set_motion_timeout_value(timeout: int) -> None: ...
+def set_motion_timeout_value(timeout: int) -> None:
+    gp.motion.set_motion_timeout(timeout)
 
 
-def get_motion_timeout_value() -> int: ...
+def get_motion_timeout_value() -> int:
+    return gp.motion.get_motion_timeout()
 
 
 def set_pwm_range(min: int, max: int) -> None: ...
