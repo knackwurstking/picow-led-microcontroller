@@ -1,11 +1,11 @@
+import json
 import logging
 import socket
-import json
 
 import config
 
-from . import callbacks
 from .. import dc
+from . import callbacks
 
 __all__ = ["read_from_client", "handle_client_data", "response"]
 

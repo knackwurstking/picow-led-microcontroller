@@ -1,5 +1,5 @@
-from . import command
 from .. import dc
+from . import command
 
 __all__ = [
     "run",

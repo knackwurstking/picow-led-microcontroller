@@ -1,5 +1,5 @@
-from typing import Union
 from dataclasses import dataclass
+from typing import Union
 
 __all__ = ["Response", "Request", "validate_request"]
 

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from . import config, info, led, motion
 from .. import dc
+from . import config, info, led, motion
 
 __all__ = ["Command"]
 
