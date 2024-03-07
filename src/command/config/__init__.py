@@ -59,10 +59,23 @@ def get_pwm_range() -> list[int, int]:
 def run_setter(id: int, command: str, *args) -> dc.Response:
     response = dc.Response(id, None, None)
 
+    run_command = None
+
     if command == "led":
-        response.data = set_led_pins(id, *args)
+        run_command = set_led_pins
+    elif command == "motion":
+        run_command = set_motion_pin
+    elif command == "motion-timeout":
+        run_command = set_motion_timeout_value
+    elif command == "pwm-range":
+        run_command = set_pwm_range
     else:
         response.error = f'Command "{command}" not found!'
+
+    try:
+        response.data = run_command(*args)
+    except Exception as ex:
+        response.error = str(ex)
 
     return response
 
@@ -70,9 +83,23 @@ def run_setter(id: int, command: str, *args) -> dc.Response:
 def run_getter(id: int, command: str, *args) -> dc.Response:
     response = dc.Response(id, None, None)
 
+    run_command = None
+
     if command == "led":
-        response.data = get_led_pins(id)
+        run_command = get_led_pins
+    if command == "motion":
+        run_command = get_motion_pin
+    elif command == "motion-timeout":
+        run_command = get_motion_timeout_value
+    elif command == "pwm-range":
+        run_command = get_pwm_range
     else:
         response.error = f'Command "{command}" not found!'
+        return response
+
+    try:
+        response.data = run_command(*args)
+    except Exception as ex:
+        response.error = str(ex)
 
     return response
