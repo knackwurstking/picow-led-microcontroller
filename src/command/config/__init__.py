@@ -13,10 +13,12 @@ def get_led_pins() -> list[int]:
     return gp.led.get_pins()
 
 
-def set_motion_pin(pin: int) -> None: ...
+def set_motion_pin(pin: int) -> None:
+    gp.motion.set_pin(pin)
 
 
-def get_motion_pin() -> int | None: ...
+def get_motion_pin() -> int:
+    return gp.motion.get_pin()
 
 
 def set_motion_timeout_value(timeout: int) -> None: ...
