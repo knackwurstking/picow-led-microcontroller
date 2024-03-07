@@ -5,7 +5,7 @@ import socket
 import command
 import config as c
 import server
-from server.utils import response
+from server import utils
 
 from . import dc
 
@@ -39,14 +39,14 @@ def ondata(client: socket.socket, data: bytearray):
         if result is None:
             return
 
-        response(client, req)
+        if req.id != -1:
+            utils.response(client, result)
     except Exception as ex:
-        message = f"Exception: {ex}"
+        message = f"exception: {ex}"
         logging.error(message)
 
-        # TODO: try to send error response back to client
-        ...
-
+        if req.id != -1:
+            utils.response(client, dc.Response(req.id, message, None))
         return
 
 

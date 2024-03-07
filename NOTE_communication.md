@@ -68,7 +68,7 @@ interface Response {
 
 ```json
 {
-  "id": 1,
+  "id": 0,
   "group": "config",
   "type": "set",
   "command": "led",
@@ -80,7 +80,7 @@ Server response on success
 
 ```json
 {
-  "id": 1,
+  "id": 0,
   "error": null,
   "data": null
 }
@@ -90,7 +90,7 @@ Server response on success
 
 ```json
 {
-  "id": 2,
+  "id": -1,
   "group": "config",
   "type": "get",
   "command": "led",
@@ -98,15 +98,7 @@ Server response on success
 }
 ```
 
-Server response on success
-
-```json
-{
-  "id": 2,
-  "error": null,
-  "data": [0, 1, 2, 3]
-}
-```
+The server will not respond if the `id` is set to -1
 
 ## <a name='Listenformotionsensorevents'></a>Listen for motion sensor events
 
