@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from . import config, info, led, motion
-from .response import Response
+from .. import dc
 
 __all__ = ["Command"]
 
@@ -22,54 +22,58 @@ class Command:
     type: str
     command: str
 
-    def run(self, *args) -> Response:
-        response = Response(0, None, None)
+    def run(self, *args) -> dc.Response:
+        resp = dc.Response(0, None, None)
 
         if self.group == GROUP_CONFIG:
-            if self.type == TYPE_SETTER:
-                response = config.run_setter(self.id, self.command, *args)
-            elif self.type == TYPE_GETTER:
-                response = config.run_getter(self.id, self.command, *args)
-            else:
-                response.error = (
-                    f'Type "{self.type}"not found for group "{self.group}"!'
-                )
-
-            return response
+            return self.run_group_config(*args)
 
         if self.group == GROUP_INFO:
-            if self.type == TYPE_GETTER:
-                response = info.run_getter(self.id, self.command, *args)
-            else:
-                response.error = (
-                    f'Type "{self.type}"not found for group "{self.group}"!'
-                )
-
-            return response
+            return self.run_group_info(*args)
 
         if self.group == GROUP_LED:
-            if self.type == TYPE_SETTER:
-                response = led.run_setter(self.id, self.command, *args)
-            elif self.type == TYPE_GETTER:
-                response = led.run_getter(self.id, self.command, *args)
-            else:
-                response.error = (
-                    f'Type "{self.type}"not found for group "{self.group}"!'
-                )
-
-            return response
+            return self.run_group_led(*args)
 
         if self.group == GROUP_MOTION:
-            if self.type == TYPE_GETTER:
-                response = motion.run_getter(self.id, self.command, *args)
-            elif self.type == TYPE_EVENT:
-                response = motion.run_event(self.id, self.command, *args)
-            else:
-                response.error = (
-                    f'Type "{self.type}"not found for group "{self.group}"!'
-                )
+            return self.run_group_motion(*args)
 
-            return response
+        resp.error = f'Type "{self.group}"not found!'
+        return resp
 
-        response.error = f'Type "{self.group}"not found!'
-        return response
+    def run_group_config(self, *args) -> dc.Response:
+        if self.type == TYPE_SETTER:
+            resp = config.run_setter(self.id, self.command, *args)
+        elif self.type == TYPE_GETTER:
+            resp = config.run_getter(self.id, self.command, *args)
+        else:
+            resp.error = f'Type "{self.type}"not found for group "{self.group}"!'
+
+        return resp
+
+    def run_group_info(self, *args) -> dc.Response:
+        if self.type == TYPE_GETTER:
+            resp = info.run_getter(self.id, self.command, *args)
+        else:
+            resp.error = f'Type "{self.type}"not found for group "{self.group}"!'
+
+        return resp
+
+    def run_group_led(self, *args) -> dc.Response:
+        if self.type == TYPE_SETTER:
+            resp = led.run_setter(self.id, self.command, *args)
+        elif self.type == TYPE_GETTER:
+            resp = led.run_getter(self.id, self.command, *args)
+        else:
+            resp.error = f'Type "{self.type}"not found for group "{self.group}"!'
+
+        return resp
+
+    def run_group_motion(self, *args) -> dc.Response:
+        if self.type == TYPE_GETTER:
+            resp = motion.run_getter(self.id, self.command, *args)
+        elif self.type == TYPE_EVENT:
+            resp = motion.run_event(self.id, self.command, *args)
+        else:
+            resp.error = f'Type "{self.type}"not found for group "{self.group}"!'
+
+        return resp

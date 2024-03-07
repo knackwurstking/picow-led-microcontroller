@@ -1,19 +1,19 @@
 import logging
 import socket
+import json
 
 import config
 
 from . import callbacks
+from .. import dc
 
 __all__ = ["read_from_client", "handle_client_data", "response"]
-
-# TODO: use new json data communication instead of bytearray
 
 
 def read_from_client(client: socket.socket) -> bytearray:
     logging.debug(f"client={client.getsockname()}")
 
-    data: list[bytes] = []
+    data: bytearray = bytearray()
 
     while True:
         chunk = client.recv(1)
@@ -29,16 +29,18 @@ def read_from_client(client: socket.socket) -> bytearray:
     return data
 
 
-def handle_client_data(client: socket.socket, data: bytearray):
+def handle_client_data(client: socket.socket, data: bytearray) -> None:
     logging.debug(f"client={client.getsockname()}, data={data}")
 
     if callbacks.ondata is not None and data.__len__() > 0:
         callbacks.ondata(client, data)
 
 
-def response(client: socket.socket, data: bytearray):
+def response(client: socket.socket, resp: dc.Response) -> None:
     client.settimeout(config.SOCKET_TIMEOUT_SEND)
+
     try:
+        data = json.dumps(resp)
         client.send(data + config.END_BYTE)
     except Exception as ex:
         logging.error(

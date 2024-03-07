@@ -1,4 +1,4 @@
-from ..response import Response
+from ... import dc
 import gp
 
 __all__ = ["run_setter", "run_getter"]
@@ -30,8 +30,8 @@ def set_pwm_range(min: int, max: int) -> None: ...
 def get_pwm_range() -> list[int, int]: ...
 
 
-def run_setter(id: int, command: str, *args) -> Response:
-    response = Response(id, None, None)
+def run_setter(id: int, command: str, *args) -> dc.Response:
+    response = dc.Response(id, None, None)
 
     if command == "led":
         response.data = set_led_pins(id, *args)
@@ -41,8 +41,8 @@ def run_setter(id: int, command: str, *args) -> Response:
     return response
 
 
-def run_getter(id: int, command: str, *args) -> Response:
-    response = Response(id, None, None)
+def run_getter(id: int, command: str, *args) -> dc.Response:
+    response = dc.Response(id, None, None)
 
     if command == "led":
         response.data = get_led_pins(id)

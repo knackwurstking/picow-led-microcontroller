@@ -1,9 +1,10 @@
 from . import command
+from .. import dc
 
 __all__ = [
     "run",
 ]
 
 
-def run(id: int, group: str, type: str, command: str, *args) -> command.Response:
-    return command.Command(id, group, type, command).run()
+def run(req: dc.Request) -> dc.Response:
+    return command.Command(req.id, req.group, req.type, req.command).run(*req.args)

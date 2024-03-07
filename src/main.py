@@ -1,30 +1,49 @@
 import logging
 import socket
+import json
 
 import command
 import config as c
 import server
 from server.utils import response
+from . import dc
 
 
 def ondata(client: socket.socket, data: bytearray):
     logging.debug(f"client={client.getsockname()}, data={data}")
 
-    if data.__len__() == 0:
-        return
+    req_raw: any = None
 
     try:
-        result = command.run(int(data[0]), data[1:])
+        req_raw = json.loads(data)
+    except Exception:
+        client.close()
+        return
+
+    if not dc.validate_request(req_raw):
+        client.close()
+        return
+
+    req = dc.Request(
+        req_raw.id,
+        req_raw.group,
+        req_raw.type,
+        req_raw.command,
+        req_raw.args,
+    )
+
+    try:
+        result = command.run(req)
 
         if result is None:
             return
 
-        response(client, data)
+        response(client, req)
     except Exception as ex:
-        message = f'Exception: "{data[0]}": {ex}'
+        message = f"Exception: {ex}"
         logging.error(message)
 
-        # TODO: Send error response back to client?
+        # TODO: try to send error response back to client
         ...
 
         return
