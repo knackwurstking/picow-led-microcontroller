@@ -17,8 +17,10 @@ class GpMotion:
         self._pin = pin
 
     def set_pin(self, pin: int) -> GpMotion:
+        """Set the motion sensor Gp Pin, disable with -1"""
         self._pin = pin
         return self
 
     def get_pin(self) -> int:
+        """Returns the current motion sensor pin in use (-1 means its disabled)"""
         return self.pin
