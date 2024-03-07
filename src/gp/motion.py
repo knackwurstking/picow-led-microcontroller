@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Callable
 
+from .. import config
+
 __all__ = [
     "onchange",
     "GpMotion",
@@ -14,7 +16,9 @@ class GpMotion:
     _pin: int  # NOTE: use -1 to unset pin
     _motion_timeout: int  # NOTE: resets the timer
 
-    def __init__(self, pin: int = -1, motion_timeout: int = 60000) -> None:
+    def __init__(
+        self, pin: int = config.MOTION_PIN, motion_timeout: int = config.MOTION_TIMEOUT
+    ) -> None:
         self._pin = pin
         self._motion_timeout = motion_timeout
 
@@ -28,9 +32,10 @@ class GpMotion:
         """Returns the current motion sensor pin in use (-1 means its disabled)"""
         return self.pin
 
-    def set_motion_timeout(self, value: int) -> None:
+    def set_motion_timeout(self, value: int) -> GpMotion:
         # TODO: update local config (save to pico)
         self.set_motion_timeout = value
+        return self
 
     def get_motion_timeout(self, value: int) -> int:
         return self._motion_timeout
