@@ -37,5 +37,5 @@ class GpMotion:
         self._motion_timeout = value
         return self
 
-    def get_motion_timeout(self, value: int) -> int:
+    def get_motion_timeout(self) -> int:
         return self._motion_timeout

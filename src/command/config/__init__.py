@@ -1,7 +1,8 @@
+from typing import Tuple, Callable
 import dc
 import gp
 
-__all__ = ["run_setter", "run_getter"]
+__all__ = ["run"]
 
 
 def set_led_pins(*pins: int) -> None:
@@ -51,14 +52,40 @@ def set_pwm_range(min: int, max: int) -> None:
     gp.led.set_pwm_range(min, max)
 
 
-def get_pwm_range() -> list[int, int]:
+def get_pwm_range() -> Tuple[int, int]:
     return gp.led.get_pwm_range()
 
 
-def run_setter(id: int, command: str, *args) -> dc.Response:
+def run(id: int, _type: str, command: str, *args) -> dc.Response:
     response = dc.Response(id, None, None)
+    run_command: Callable | None = None
 
-    run_command = None
+    if _type == "set":
+        try:
+            run_command = get_setter_command(command)
+        except Exception as ex:
+            response.error = str(ex)
+    elif _type == "get":
+        try:
+            run_command = get_getter_command(command)
+        except Exception as ex:
+            response.error = str(ex)
+    else:
+        response.error = f'"{_type}" command "{command}" not found!'
+
+    if run_command is None:
+        return response
+
+    try:
+        response.data = run_command(*args)
+    except Exception as ex:
+        response.error = str(ex)
+
+    return response
+
+
+def get_setter_command(command: str) -> Callable | None:
+    run_command: Callable | None = None
 
     if command == "led":
         run_command = set_led_pins
@@ -69,37 +96,23 @@ def run_setter(id: int, command: str, *args) -> dc.Response:
     elif command == "pwm-range":
         run_command = set_pwm_range
     else:
-        response.error = f'Command "{command}" not found!'
-        return response
+        raise Exception(f'command "{command}" not found!')
 
-    try:
-        response.data = run_command(*args)
-    except Exception as ex:
-        response.error = str(ex)
-
-    return response
+    return run_command
 
 
-def run_getter(id: int, command: str, *args) -> dc.Response:
-    response = dc.Response(id, None, None)
-
-    run_command = None
+def get_getter_command(command: str) -> Callable | None:
+    run_command: Callable | None = None
 
     if command == "led":
         run_command = get_led_pins
-    if command == "motion":
+    elif command == "motion":
         run_command = get_motion_pin
     elif command == "motion-timeout":
         run_command = get_motion_timeout_value
     elif command == "pwm-range":
         run_command = get_pwm_range
     else:
-        response.error = f'Command "{command}" not found!'
-        return response
+        raise Exception(f'command "{command}" not found!')
 
-    try:
-        response.data = run_command(*args)
-    except Exception as ex:
-        response.error = str(ex)
-
-    return response
+    return run_command

@@ -2,6 +2,7 @@ import logging
 import sys
 
 __all__ = [
+    "VERSION",
     "HOST",
     "PORT",
     "LOGGING_STREAM",
@@ -10,6 +11,8 @@ __all__ = [
     "SOCKET_TIMEOUT_SELECT",
     "SOCKET_TIMEOUT_SEND",
 ]
+
+VERSION = "0.0.1"
 
 HOST = "0.0.0.0"
 PORT = 3000

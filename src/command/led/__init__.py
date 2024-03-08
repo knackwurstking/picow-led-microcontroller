@@ -2,7 +2,7 @@ from typing import Callable
 
 import dc
 
-__all__ = ["run_setter", "run_getter"]
+__all__ = ["run"]
 
 
 def set_duty(duty_cycle: int, pin: int | None = None) -> None:
@@ -16,18 +16,20 @@ def get_duty(*pins: int) -> int | None: ...
 
 def run(id: int, _type: str, command: str, *args) -> dc.Response:
     response = dc.Response(id, None, None)
-
     run_command: Callable | None = None
 
-    if command == "duty":
-        if _type == "set":
+    if _type == "set":
+        try:
             run_command = set_duty
-        elif _type == "get":
+        except Exception as ex:
+            response.error = str(ex)
+    elif _type == "get":
+        try:
             run_command = get_duty
-        else:
-            response.error = f'"{_type}" command "{command}" not found!'
+        except Exception as ex:
+            response.error = str(ex)
     else:
-        response.error = f'command "{command}" not found!'
+        response.error = f'"{_type}" command "{command}" not found!'
 
     if run_command is None:
         return response
@@ -38,3 +40,25 @@ def run(id: int, _type: str, command: str, *args) -> dc.Response:
         response.error = str(ex)
 
     return response
+
+
+def get_setter_command(command: str) -> Callable | None:
+    run_command: Callable | None = None
+
+    if command == "duty":
+        run_command = set_duty
+    else:
+        raise Exception(f'command "{command}" not found!')
+
+    return run_command
+
+
+def get_getter_command(command: str) -> Callable | None:
+    run_command: Callable | None = None
+
+    if command == "duty":
+        run_command = get_duty
+    else:
+        raise Exception(f'command "{command}" not found!')
+
+    return run_command
