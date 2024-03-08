@@ -1,15 +1,31 @@
+import os
 from typing import Callable
 
-import dc
 import config
+import dc
+from picozero import pico_temp_sensor  # type: ignore
 
 __all__ = ["run"]
 
 
-def get_temp() -> float: ...
+def get_temp() -> float:
+    return pico_temp_sensor.temp
 
 
-def get_disk_usage() -> dict[str, int]: ...
+def get_disk_usage() -> dict[str, int]:
+    disk = os.statvfs("/")
+
+    block_size = disk[0]
+    total_blocks = disk[2]
+    free_blocks = disk[3]
+
+    used = (block_size * total_blocks) - (block_size * free_blocks)
+    free = block_size * free_blocks
+
+    return {
+        "used": used,
+        "free": free,
+    }
 
 
 def get_version() -> str:
