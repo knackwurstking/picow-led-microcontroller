@@ -17,10 +17,10 @@
 
 - `config`
   - `set`
-    - `led <gp:nr> ...`: [Set GPIO configuration for LEDs (ex.: rgbw)](#SetGPIOpinsforLEDs)
-    - `motion <gp:nr>`: Set motion sensor pin
-    - `motion-timeout <milliseconds:nr>`: Set motion sensor timeout value
-    - `pwm-range <min:nr> <max:nr>`: Set PWM range
+    - `led <gp:int> ...`: [Set GPIO configuration for LEDs (ex.: rgbw)](#SetGPIOpinsforLEDs)
+    - `motion <gp:int>`: Set motion sensor pin
+    - `motion-timeout <milliseconds:int>`: Set motion sensor timeout value
+    - `pwm-range <min:int> <max:int>`: Set PWM range
   - `get`
     - `led`: [Get GPIO configuration for LEDs (ex.: rgbw)](#GetGPIOpinsforLEDs)
     - `motion`: Get motion sensor pin
@@ -33,9 +33,9 @@
     - `version`: Get picow version
 - `led`
   - `set`
-    - `duty <nr>`: Set GPIO pin duty (PWM range min/max range)
+    - `duty <cycle:int> [<pin:int>]`: Set GPIO pin duty (PWM range min/max range)
   - `get`
-    - `duty`: Get GPIO pin duty
+    - `duty [<pin:int>]`: Get GPIO pin duty
 - `motion`
   - `get`
     - `last-motion`: Get motion sensor data
