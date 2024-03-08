@@ -10,11 +10,10 @@ def set_duty(duty_cycle: int, pin: int | None = None) -> None:
     """Change the LED brightness (optional specify a specific pin,
     if not all pins are used)"""
     if pin is None or pin < 0:
-        # TODO: set duty for all pins
-        ...
-    else:
-        # TODO: set duty for a specific pin
-        ...
+        gp.led.set_duty(duty_cycle)
+        return
+
+    gp.led.set_pin_duty(pin, duty_cycle)
 
 
 def get_duty(pin: int | None = None) -> list[int] | int | None:
