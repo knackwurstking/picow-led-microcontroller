@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Union
+from typing import Union, Any
 
 __all__ = ["Response", "Request", "validate_request"]
 
@@ -8,7 +8,7 @@ __all__ = ["Response", "Request", "validate_request"]
 class Response:
     id: int
     error: str | None
-    data: any
+    data: Any
 
 
 @dataclass
@@ -20,7 +20,7 @@ class Request:
     args: list[Union[int, float, str]]
 
 
-def validate_request(req: any) -> bool:
+def validate_request(req: Any) -> bool:
     if not isinstance(req.id, int):
         return False
 

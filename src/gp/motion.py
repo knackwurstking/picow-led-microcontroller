@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Callable
 
-from .. import config
+import config
 
 __all__ = [
     "onchange",
@@ -30,11 +30,11 @@ class GpMotion:
 
     def get_pin(self) -> int:
         """Returns the current motion sensor pin in use (-1 means its disabled)"""
-        return self.pin
+        return self._pin
 
     def set_motion_timeout(self, value: int) -> GpMotion:
         # TODO: update local config (save to pico)
-        self.set_motion_timeout = value
+        self._motion_timeout = value
         return self
 
     def get_motion_timeout(self, value: int) -> int:

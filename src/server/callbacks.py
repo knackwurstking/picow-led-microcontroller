@@ -3,4 +3,4 @@ from typing import Callable
 
 __all__ = ["ondata"]
 
-ondata: Callable[[socket.socket, bytearray], None] | None = None
+ondata: Callable[[socket.socket, bytes], None] | None = None

@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
-from .. import dc
+import dc
+
 from . import config, info, led, motion
 
 __all__ = ["Command"]
@@ -25,6 +26,7 @@ class Command:
     def run(self, *args) -> dc.Response:
         resp = dc.Response(0, None, None)
 
+        # TODO: kick this type shit (see led commands)
         if self.group == GROUP_CONFIG:
             return self.run_group_config(*args)
 

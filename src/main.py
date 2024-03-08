@@ -1,19 +1,18 @@
+from typing import Any
 import json
 import logging
 import socket
 
 import command
 import config as c
+import dc
 import server
-from server import utils
-
-from . import dc
 
 
 def ondata(client: socket.socket, data: bytearray):
     logging.debug(f"client={client.getsockname()}, data={data}")
 
-    req_raw: any = None
+    req_raw: Any = None
 
     try:
         req_raw = json.loads(data)
@@ -40,13 +39,13 @@ def ondata(client: socket.socket, data: bytearray):
             return
 
         if req.id != -1:
-            utils.response(client, result)
+            server.utils.response(client, result)
     except Exception as ex:
         message = f"exception: {ex}"
         logging.error(message)
 
         if req.id != -1:
-            utils.response(client, dc.Response(req.id, message, None))
+            server.utils.response(client, dc.Response(req.id, message, None))
         return
 
 

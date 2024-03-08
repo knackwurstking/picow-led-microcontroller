@@ -1,4 +1,5 @@
-from .. import dc
+import dc
+
 from . import command
 
 __all__ = [
