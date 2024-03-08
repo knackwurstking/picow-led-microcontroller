@@ -8,6 +8,7 @@ __all__ = ["run"]
 def get_last_motion() -> int | None: ...
 
 
+# TODO: pass client socket to the `server.writable_sockets` (get it from gp.motion.watch())
 def event_watch_motions(host: str, port: int) -> ...: ...
 
 
