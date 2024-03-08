@@ -26,6 +26,7 @@ class GpLED:
         self._pwm_range = (pwm_range_min, pwm_range_max)
 
     def set_pins(self, *pins: int) -> GpLED:
+        # TODO: cache this to the pico device
         self._pins = list(pins)
         return self
 
