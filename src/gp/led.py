@@ -32,6 +32,13 @@ class GpLED:
     def get_pins(self) -> list[int]:
         return self._pins
 
+    def has_pin(self, pin: int) -> bool:
+        for pin in self._pins:
+            if pin == pin:
+                return True
+
+        return False
+
     def set_pwm_range(self, min: int, max: int) -> GpLED:
         # TODO: cache this to the pico device
         self._pwm_range = (min, max)
@@ -39,3 +46,11 @@ class GpLED:
 
     def get_pwm_range(self) -> Tuple[int, int]:
         return self._pwm_range
+
+    def set_duty(self, cycle: int): ...
+
+    def get_duty(self) -> list[int]: ...
+
+    def set_pin_duty(self, pin: int, cycle: int): ...
+
+    def get_pin_duty(self, pin: int) -> int: ...
