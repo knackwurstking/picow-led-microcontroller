@@ -1,3 +1,5 @@
+from typing import Callable
+
 import dc
 
 __all__ = ["run_setter", "run_getter"]
@@ -15,7 +17,7 @@ def get_duty(*pins: int) -> int | None: ...
 def run(id: int, _type: str, command: str, *args) -> dc.Response:
     response = dc.Response(id, None, None)
 
-    run_command = None
+    run_command: Callable | None = None
 
     if command == "duty":
         if _type == "set":
@@ -26,6 +28,8 @@ def run(id: int, _type: str, command: str, *args) -> dc.Response:
             response.error = f'"{_type}" command "{command}" not found!'
     else:
         response.error = f'command "{command}" not found!'
+
+    if run_command is None:
         return response
 
     try:
