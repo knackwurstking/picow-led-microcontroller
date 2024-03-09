@@ -1,3 +1,4 @@
+import socket
 from dataclasses import dataclass
 
 import dc
@@ -23,7 +24,7 @@ class Command:
     type: str
     command: str
 
-    def run(self, *args) -> dc.Response:
+    def run(self, client: socket.socket, *args) -> dc.Response:
         resp = dc.Response(0, None, None)
 
         if self.group == GROUP_CONFIG:
@@ -36,7 +37,7 @@ class Command:
             return led.run(self.id, self.type, self.command, *args)
 
         if self.group == GROUP_MOTION:
-            ...
+            return motion.run(client, self.id, self.type, self.command, *args)
 
         resp.error = f'Type "{self.group}"not found!'
         return resp

@@ -34,3 +34,6 @@ LED_PWM_RANGE_MAX: int = 100
 # motion pin set to -1 will disable the motion sensor
 MOTION_PIN: int = -1
 MOTION_TIMEOUT: int = 60000  # 60 seconds
+
+RESPONSE_MOTION_ID = -2
+RESPONSE_DISABLED_ID = -1

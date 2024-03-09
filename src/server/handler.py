@@ -3,7 +3,7 @@ import socket
 
 from . import utils
 
-__all__ = ["readable", "writable", "errored"]
+__all__ = ["readable", "errored"]
 
 
 def readable(
@@ -36,25 +36,9 @@ def readable(
     return clients
 
 
-def writable(sockets: list[socket.socket]) -> list[socket.socket]:
+def errored(sockets: list[socket.socket]) -> None:
     logging.debug(f"sockets={sockets.__len__()}")
-
-    clients: list[socket.socket] = []
-
-    for s in sockets:
-        logging.debug(f"Socket writable s={s}")
-        s.close()
-
-    return clients
-
-
-def errored(sockets: list[socket.socket]) -> list[socket.socket]:
-    logging.debug(f"sockets={sockets.__len__()}")
-
-    clients: list[socket.socket] = []
 
     for s in sockets:
         logging.debug(f"Socket error: s={s}")
         s.close()
-
-    return clients

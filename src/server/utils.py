@@ -43,6 +43,7 @@ def response(client: socket.socket, resp: dc.Response) -> None:
         data = json.dumps(resp)
         client.send(data.encode() + config.END_BYTE)
     except Exception as ex:
+        client.close()  # TODO: only close if exception is not a timeout?
         logging.error(
             f'Exception while send response to client "{client.getsockname()}": {ex} [{type(ex)}]'  # noqa: E501
         )

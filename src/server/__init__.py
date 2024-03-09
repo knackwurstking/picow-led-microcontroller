@@ -4,24 +4,21 @@ import socket
 import time
 
 import config
+import dc
+import gp
 import wifi
 
-from . import callbacks, handler, server, utils
+from . import callbacks, handler, utils
 
 __all__ = [
     "callbacks",
     "handler",
     "utils",
     "start",
-    "readable_sockets",
-    "writable_sockets",
-    "errored_sockets",
+    "event_sockets",
 ]
 
-
-readable_sockets: list[socket.socket] = []
-writable_sockets: list[socket.socket] = []
-errored_sockets: list[socket.socket] = []
+event_sockets: list[socket.socket] = []
 
 
 def start(host: str, port: int = 0):
@@ -35,10 +32,11 @@ def start(host: str, port: int = 0):
 
 
 def main_loop(server_socket: socket.socket):
-    global readable_sockets, writable_sockets, errored_sockets
+    readable_sockets: list[socket.socket] = []
 
     while True:
         check_wifi()
+        check_motion()
 
         if readable_sockets.__len__() == 0:
             readable_sockets.append(server_socket)
@@ -46,8 +44,8 @@ def main_loop(server_socket: socket.socket):
         try:
             readable, writable, errored = select.select(
                 readable_sockets,
-                writable_sockets,
-                errored_sockets,
+                [],
+                [],
                 config.SOCKET_TIMEOUT_SELECT,
             )
         except Exception as ex:
@@ -70,11 +68,14 @@ def main_loop(server_socket: socket.socket):
             continue
 
         readable_sockets = handler.readable(server_socket, readable)
-        writable_sockets = handler.writable(writable)
-        errored_sockets = handler.errored(errored)
+
+        if writable.__len__() > 0:
+            logging.debug(f"There are writable sockets ({writable.__len__()})")
+
+        handler.errored(errored)
 
 
-def check_wifi():
+def check_wifi() -> None:
     if not wifi.check():
         # TODO: Turn of the picow status led
 
@@ -95,3 +96,19 @@ def check_wifi():
             logging.debug(f'Exception while trying to connect to wifi: "{ex}"')
 
             time.sleep(5)
+
+
+def check_motion() -> None:
+    motion = gp.motion.check()
+
+    if event_sockets.__len__() == 0 or not motion:
+        return
+
+    errored: list[socket.socket] = []
+    for s in event_sockets:
+        utils.response(s, dc.Response(config.RESPONSE_MOTION_ID, None, motion))
+        if s.fileno() == -1:
+            errored.append(s)
+
+    for s in errored:
+        event_sockets.remove(s)

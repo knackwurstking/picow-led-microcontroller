@@ -1,27 +1,25 @@
+import socket
 from typing import Callable
 
 import dc
+import server
 
 __all__ = ["run"]
 
 
-def get_last_motion() -> int | None: ...
+def event_start(client: socket.socket) -> None:
+    server.event_sockets.append(client)
 
 
-# TODO: pass client socket to the `server.writable_sockets` (get it from gp.motion.watch())
-def event_watch_motions(host: str, port: int) -> ...: ...
+def event_stop(client: socket.socket) -> None:
+    server.event_sockets.remove(client)
 
 
-def run(id: int, _type: str, command: str, *args) -> dc.Response:
+def run(client: socket.socket, id: int, _type: str, command: str, *args) -> dc.Response:
     response = dc.Response(id, None, None)
     run_command: Callable | None = None
 
-    if _type == "get":
-        try:
-            run_command = get_getter_command(command)
-        except Exception as ex:
-            response.error = str(ex)
-    elif _type == "event":
+    if _type == "event":
         try:
             run_command = get_event_command(command)
         except Exception as ex:
@@ -33,29 +31,23 @@ def run(id: int, _type: str, command: str, *args) -> dc.Response:
         return response
 
     try:
-        response.data = run_command(*args)
+        if _type == "event":
+            response.data = run_command(client)
+        else:
+            response.data = run_command(*args)
     except Exception as ex:
         response.error = str(ex)
 
     return response
 
 
-def get_getter_command(command: str) -> Callable | None:
-    run_command: Callable | None = None
-
-    if command == "last-motion":
-        run_command = get_last_motion
-    else:
-        raise Exception(f'command "{command}" not found!')
-
-    return run_command
-
-
 def get_event_command(command: str) -> Callable | None:
     run_command: Callable | None = None
 
-    if command == "watch-motions":
-        run_command = event_watch_motions
+    if command == "start":
+        run_command = event_start
+    elif command == "stop":
+        run_command = event_stop
     else:
         raise Exception(f'command "{command}" not found!')
 

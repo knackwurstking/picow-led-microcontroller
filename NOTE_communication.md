@@ -37,10 +37,9 @@
   - `get`
     - `duty [<pin:int>]`: Get GPIO pin duty
 - `motion`
-  - `get`
-    - `last-motion`: Get motion sensor data
   - `event`
-    - `watch-motions`: [Listen for motion sensor events](#Listenformotionsensorevents)
+    - `start`: Start tracking motion events (default id of -2 will be used)
+    - `stop`: Stop tracking motion events (default id of -2 will be used)
 
 ## <a name='JSONtypescriptinterface'></a>JSON (typescript) interface
 

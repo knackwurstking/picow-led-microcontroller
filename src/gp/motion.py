@@ -6,36 +6,8 @@ from typing import Callable
 import config
 
 __all__ = [
-    "onchange",
     "GpMotion",
 ]
-
-onchange: Callable[[int], None] | None = None
-
-
-class Watcher:
-    _host: str
-    _port: int
-    _client: socket.socket | None
-
-    def __init__(self, host: str, port: int):
-        self._host = host
-        self._port = port
-        self._client = None
-
-    def start(self) -> Watcher:
-        # TODO: try connecting to client and store client socket in `self.client`
-        ...
-
-        return self
-
-    def stop(self) -> Watcher:
-        ...
-
-        return self
-
-    def get_client(self) -> socket.socket | None:
-        return self._client
 
 
 class GpMotion:
@@ -66,7 +38,6 @@ class GpMotion:
     def get_motion_timeout(self) -> int:
         return self._motion_timeout
 
-    def get_last_motion(self) -> int: ...
-
-    def watch(self, host: str, port: int) -> Watcher:
-        return Watcher(host, port).start()
+    def check(self) -> bool:
+        ...
+        return False

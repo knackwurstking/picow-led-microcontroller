@@ -33,12 +33,14 @@ def ondata(client: socket.socket, data: bytearray):
     )
 
     try:
-        result = command.run(req)
+        result = command.run(client, req)
 
         if result is None:
             return
 
-        if req.id != -1:
+        if req.id != c.RESPONSE_DISABLED_ID or (
+            result.id != c.RESPONSE_MOTION_ID or result.error is not None
+        ):
             server.utils.response(client, result)
     except Exception as ex:
         message = f"exception: {ex}"
