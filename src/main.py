@@ -9,13 +9,13 @@ import dc
 import server
 
 
-def ondata(client: socket.socket, data: bytearray):
-    logging.debug(f"client={client.getsockname()}, data={data}")
+def ondata(client: socket.socket, data: bytes):
+    logging.debug(f"client={client.getsockname()}, data={data!r}")
 
     req_raw: Any = None
 
     try:
-        req_raw = json.loads(data)
+        req_raw = json.loads(data.strip())
     except Exception:
         client.close()
         return
