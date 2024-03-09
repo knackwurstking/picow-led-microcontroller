@@ -3,13 +3,14 @@ from typing import Callable
 
 import config
 import dc
-from picozero import pico_temp_sensor  # type: ignore
+# from picozero import pico_temp_sensor  # type: ignore
 
 __all__ = ["run"]
 
 
 def get_temp() -> float:
-    return pico_temp_sensor.temp
+    # return pico_temp_sensor.temp
+    return 23.35  # TODO: testing
 
 
 def get_disk_usage() -> dict[str, int]:
