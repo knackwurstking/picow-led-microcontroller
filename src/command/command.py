@@ -31,7 +31,7 @@ class Command:
             return config.run(self.id, self.type, self.command, *args)
 
         if self.group == GROUP_INFO:
-            return config.run(self.id, self.type, self.command, *args)
+            return info.run(self.id, self.type, self.command, *args)
 
         if self.group == GROUP_LED:
             return led.run(self.id, self.type, self.command, *args)
