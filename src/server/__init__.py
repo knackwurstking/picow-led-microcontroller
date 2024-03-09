@@ -104,11 +104,11 @@ def check_motion() -> None:
     if event_sockets.__len__() == 0 or not motion:
         return
 
-    errored: list[socket.socket] = []
+    closed: list[socket.socket] = []
     for s in event_sockets:
         utils.response(s, dc.Response(config.RESPONSE_MOTION_ID, None, motion))
         if s.fileno() == -1:
-            errored.append(s)
+            closed.append(s)
 
-    for s in errored:
+    for s in closed:
         event_sockets.remove(s)
