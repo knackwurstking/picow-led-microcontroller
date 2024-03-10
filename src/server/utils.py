@@ -23,7 +23,6 @@ def read_from_client(client: socket.socket) -> bytes:
 
             data += chunk
         else:
-            client.close()
             break
 
     return data
@@ -40,12 +39,20 @@ def response(client: socket.socket, resp: dc.Response) -> None:
     client.settimeout(config.SOCKET_TIMEOUT_SEND)
 
     try:
-        data = json.dumps(resp)
+        data = json.dumps(
+            {
+                "id": resp.id,
+                "error": resp.error,
+                "data": resp.data,
+            }
+        )
         client.send(data.encode() + config.END_BYTE)
+    except socket.timeout:
+        pass
     except Exception as ex:
-        client.close()  # TODO: only close if exception is not a timeout?
         logging.error(
             f'Exception while send response to client "{client.getsockname()}": {ex} [{type(ex)}]'  # noqa: E501
         )
+        client.close()  # TODO: only close if exception is not a timeout?
     finally:
         client.settimeout(None)

@@ -1,5 +1,6 @@
+import logging
 from dataclasses import dataclass
-from typing import Union, Any
+from typing import Any, Union
 
 __all__ = ["Response", "Request", "validate_request"]
 
@@ -21,27 +22,31 @@ class Request:
 
 
 def validate_request(req: Any) -> bool:
-    if not isinstance(req.id, int):
-        return False
-
-    if not isinstance(req.group, str):
-        return False
-
-    if not isinstance(req.type, str):
-        return False
-
-    if not isinstance(req.command, str):
-        return False
-
-    if not isinstance(req.args, list):
-        return False
-
-    for arg in req.args:
-        if (
-            not isinstance(arg, int)
-            and not isinstance(arg, float)
-            and not isinstance(arg, str)
-        ):
+    try:
+        if not isinstance(req["id"], int):
             return False
+
+        if not isinstance(req["group"], str):
+            return False
+
+        if not isinstance(req["type"], str):
+            return False
+
+        if not isinstance(req["command"], str):
+            return False
+
+        if not isinstance(req["args"], list):
+            return False
+
+        for arg in req["args"]:
+            if (
+                not isinstance(arg, int)
+                and not isinstance(arg, float)
+                and not isinstance(arg, str)
+            ):
+                return False
+    except Exception as ex:
+        logging.warn(f"Exception while validate request data: {ex}")
+        return False
 
     return True

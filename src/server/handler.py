@@ -30,6 +30,7 @@ def readable(
             utils.handle_client_data(s, data)
 
             # NOTE: append socket to clients if not closed
+            logging.debug(f"socket fileno: {s.fileno()}")
             if s.fileno() != -1:
                 clients.append(s)
 

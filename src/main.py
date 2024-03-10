@@ -16,20 +16,22 @@ def ondata(client: socket.socket, data: bytes):
 
     try:
         req_raw = json.loads(data.strip())
-    except Exception:
+    except Exception as ex:
+        logging.debug(f"Exception while parsing json data: {ex}")
         client.close()
         return
 
     if not dc.validate_request(req_raw):
+        logging.debug(f"Invalid request: {req_raw}")
         client.close()
         return
 
     req = dc.Request(
-        req_raw.id,
-        req_raw.group,
-        req_raw.type,
-        req_raw.command,
-        req_raw.args,
+        req_raw["id"],
+        req_raw["group"],
+        req_raw["type"],
+        req_raw["command"],
+        req_raw["args"],
     )
 
     try:
