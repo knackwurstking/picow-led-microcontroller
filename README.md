@@ -3,7 +3,7 @@
 <!-- vscode-markdown-toc -->
 
 - [Command Table](#CommandTable)
-- [Response / Request interface](#ResponseRequestinterface)
+- [Request / Response Interface](#RequestResponseInterface)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -31,16 +31,22 @@
 | motion | event | start          | -                                          | -                                |
 | motion | event | stop           | -                                          | -                                |
 
-## <a name='ResponseRequestinterface'></a>Response / Request interface
+## <a name='RequestResponseInterface'></a>Request / Response Interface
 
-> TODO: info about special `id` handling (-1 / no-response)
+> NOTE: If the `Request` id is set to `-1`, the pico will skip the server response
 
 ```typescript
 interface Request {
-  // TODO: ...
+  id?: number;
+  group: string;
+  type: string;
+  command: string;
+  args?: (string | number)[];
 }
 
 interface Response {
-  // TODO: ...
+  id: number;
+  error: string | null;
+  data: any | null;
 }
 ```
