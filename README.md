@@ -3,14 +3,13 @@
 <!-- vscode-markdown-toc -->
 
 - [Command Table](#CommandTable)
+- [Response / Request interface](#ResponseRequestinterface)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc --># PicoW LED Micro Controller
-
-<!-- TODO: add commands overview (table like?) -->
 
 ## <a name='CommandTable'></a>Command Table
 
@@ -31,3 +30,17 @@
 | led    | get   | duty           | `<pin (number \| null)>`                   | `number[] \| number \| null`     |
 | motion | event | start          | -                                          | -                                |
 | motion | event | stop           | -                                          | -                                |
+
+## <a name='ResponseRequestinterface'></a>Response / Request interface
+
+> TODO: info about special `id` handling (-1 / no-response)
+
+```typescript
+interface Request {
+  // TODO: ...
+}
+
+interface Response {
+  // TODO: ...
+}
+```
