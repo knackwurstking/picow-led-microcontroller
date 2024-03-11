@@ -23,7 +23,7 @@ class Request:
 
 def validate_request(req: Any) -> bool:
     try:
-        if not isinstance(req["id"], int):
+        if not isinstance(req.get("id", 0), int):
             return False
 
         if not isinstance(req["group"], str):
@@ -35,10 +35,10 @@ def validate_request(req: Any) -> bool:
         if not isinstance(req["command"], str):
             return False
 
-        if not isinstance(req["args"], list):
+        if not isinstance(req.get("args", []), list):
             return False
 
-        for arg in req["args"]:
+        for arg in req.get("args", []):
             if (
                 not isinstance(arg, int)
                 and not isinstance(arg, float)

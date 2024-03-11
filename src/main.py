@@ -27,11 +27,11 @@ def ondata(client: socket.socket, data: bytes):
         return
 
     req = dc.Request(
-        req_raw["id"],
+        req_raw.get("id", 0),
         req_raw["group"],
         req_raw["type"],
         req_raw["command"],
-        req_raw["args"],
+        req_raw.get("args", []),
     )
 
     try:
