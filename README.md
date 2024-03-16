@@ -1,15 +1,16 @@
-# PicoW LED Microcontroller
-
 <!-- vscode-markdown-toc -->
 
-- [Command Table](#CommandTable)
-- [Request / Response Interface](#RequestResponseInterface)
+- [PicoW LED Micro Controller](#picow-led-micro-controller)
+  - [Command Table](#command-table)
+  - [Request / Response Interface](#request--response-interface)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
 	autoSave=true
 	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc --># PicoW LED Micro Controller
+<!-- /vscode-markdown-toc -->
+
+# PicoW LED Micro Controller
 
 ## <a name='CommandTable'></a>Command Table
 
