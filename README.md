@@ -1,18 +1,14 @@
-<!-- vscode-markdown-toc -->
-
-- [PicoW LED Micro Controller](#picow-led-micro-controller)
-  - [Command Table](#command-table)
-  - [Request / Response Interface](#request--response-interface)
-
-<!-- vscode-markdown-toc-config
-	numbering=false
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->
-
 # PicoW LED Micro Controller
 
-## <a name='CommandTable'></a>Command Table
+- [General Info](#general-info)
+- [Command Table](#command-table)
+- [Request / Response Interface](#request-response-interface)
+
+## <a id="general-info"></a>General Info
+
+Default Port: 3000  
+
+## <a id='command-table'></a>Command Table
 
 | Group  | Type  | Command        | Args                                       | Response Data                    |
 | ------ | ----- | -------------- | ------------------------------------------ | -------------------------------- |
@@ -32,7 +28,7 @@
 | motion | event | start          | -                                          | -                                |
 | motion | event | stop           | -                                          | -                                |
 
-## <a name='RequestResponseInterface'></a>Request / Response Interface
+## <a id='request-response-interface'></a>Request / Response Interface
 
 > NOTE: If the `Request` id is set to `-1`, the pico will skip the server response
 
