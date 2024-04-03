@@ -40,9 +40,7 @@ def ondata(client: socket.socket, data: bytes):
         if result is None:
             return
 
-        if req.id != c.RESPONSE_DISABLED_ID or (
-            result.id != c.RESPONSE_MOTION_ID or result.error is not None
-        ):
+        if req.id != c.ID_DISABLED or result.id != c.ID_MOTION:
             server.utils.response(client, result)
     except Exception as ex:
         message = f"exception: {ex}"

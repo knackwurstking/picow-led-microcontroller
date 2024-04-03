@@ -106,7 +106,7 @@ def check_motion() -> None:
 
     closed: list[socket.socket] = []
     for s in event_sockets:
-        utils.response(s, dc.Response(config.RESPONSE_MOTION_ID, None, motion))
+        utils.response(s, dc.Response(config.ID_MOTION, None, motion))
         if s.fileno() == -1:
             closed.append(s)
 

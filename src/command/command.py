@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import dc
 
 from . import config, info, led, motion
+import config as c
 
 __all__ = ["Command"]
 
@@ -25,7 +26,7 @@ class Command:
     command: str
 
     def run(self, client: socket.socket, *args) -> dc.Response:
-        resp = dc.Response(0, None, None)
+        resp = dc.Response(c.ID_DEFAULT, None, None)
 
         if self.group == GROUP_CONFIG:
             return config.run(self.id, self.type, self.command, *args)
