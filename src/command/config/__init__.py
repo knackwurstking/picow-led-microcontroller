@@ -2,8 +2,6 @@ from typing import Tuple, Callable
 import dc
 import gp
 
-__all__ = ["run"]
-
 
 def set_led_pins(*pins: int) -> None:
     for pin in list(pins):
@@ -18,31 +16,6 @@ def set_led_pins(*pins: int) -> None:
 
 def get_led_pins() -> list[int]:
     return gp.led.get_pins()
-
-
-def set_motion_pin(pin: int) -> None:
-    if not isinstance(pin, int):
-        raise Exception(f"pin needs to be from type {type(int)}")
-
-    if pin < -1:
-        pin = -1
-
-    gp.motion.set_pin(pin)
-
-
-def get_motion_pin() -> int:
-    return gp.motion.get_pin()
-
-
-def set_motion_timeout_value(timeout: int) -> None:
-    if not isinstance(timeout, int):
-        raise Exception(f"timeout needs to be from type {type(int)}")
-
-    gp.motion.set_motion_timeout(timeout)
-
-
-def get_motion_timeout_value() -> int:
-    return gp.motion.get_motion_timeout()
 
 
 def set_pwm_range(min: int, max: int) -> None:
@@ -89,10 +62,6 @@ def get_setter_command(command: str) -> Callable | None:
 
     if command == "led":
         run_command = set_led_pins
-    elif command == "motion":
-        run_command = set_motion_pin
-    elif command == "motion-timeout":
-        run_command = set_motion_timeout_value
     elif command == "pwm-range":
         run_command = set_pwm_range
     else:
@@ -106,10 +75,6 @@ def get_getter_command(command: str) -> Callable | None:
 
     if command == "led":
         run_command = get_led_pins
-    elif command == "motion":
-        run_command = get_motion_pin
-    elif command == "motion-timeout":
-        run_command = get_motion_timeout_value
     elif command == "pwm-range":
         run_command = get_pwm_range
     else:

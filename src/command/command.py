@@ -3,10 +3,9 @@ from dataclasses import dataclass
 
 import dc
 
-from . import config, info, led, motion
+from . import config, info, led
 import config as c
 
-__all__ = ["Command"]
 
 TYPE_GETTER = "get"
 TYPE_SETTER = "set"
@@ -15,7 +14,6 @@ TYPE_EVENT = "event"
 GROUP_CONFIG = "config"
 GROUP_INFO = "info"
 GROUP_LED = "led"
-GROUP_MOTION = "motion"
 
 
 @dataclass
@@ -36,9 +34,6 @@ class Command:
 
         if self.group == GROUP_LED:
             return led.run(self.id, self.type, self.command, *args)
-
-        if self.group == GROUP_MOTION:
-            return motion.run(client, self.id, self.type, self.command, *args)
 
         resp.error = f'Type "{self.group}"not found!'
         return resp

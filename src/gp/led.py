@@ -4,10 +4,6 @@ from typing import Callable, Tuple
 
 import config
 
-__all__ = [
-    "onchange",
-    "GpLED",
-]
 
 onchange: Callable[[list[int]], None] | None = None
 

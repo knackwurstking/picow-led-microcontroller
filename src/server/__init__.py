@@ -10,13 +10,6 @@ import wifi
 
 from . import callbacks, handler, utils
 
-__all__ = [
-    "callbacks",
-    "handler",
-    "utils",
-    "start",
-    "event_sockets",
-]
 
 event_sockets: list[socket.socket] = []
 
@@ -36,7 +29,6 @@ def main_loop(server_socket: socket.socket):
 
     while True:
         check_wifi()
-        check_motion()
 
         if readable_sockets.__len__() == 0:
             readable_sockets.append(server_socket)
@@ -96,19 +88,3 @@ def check_wifi() -> None:
             logging.debug(f'Exception while trying to connect to wifi: "{ex}"')
 
             time.sleep(5)
-
-
-def check_motion() -> None:
-    motion = gp.motion.check()
-
-    if event_sockets.__len__() == 0 or not motion:
-        return
-
-    closed: list[socket.socket] = []
-    for s in event_sockets:
-        utils.response(s, dc.Response(config.ID_MOTION, None, motion))
-        if s.fileno() == -1:
-            closed.append(s)
-
-    for s in closed:
-        event_sockets.remove(s)

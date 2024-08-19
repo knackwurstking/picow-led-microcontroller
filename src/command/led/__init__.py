@@ -3,8 +3,6 @@ from typing import Callable
 import dc
 import gp
 
-__all__ = ["run"]
-
 
 def set_duty(duty_cycle: int, pin: int | None = None) -> None:
     """Change the LED brightness (optional specify a specific pin,

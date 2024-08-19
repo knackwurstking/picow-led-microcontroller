@@ -5,8 +5,6 @@ import config
 import dc
 # from picozero import pico_temp_sensor  # type: ignore
 
-__all__ = ["run"]
-
 
 def get_temp() -> float:
     # return pico_temp_sensor.temp

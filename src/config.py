@@ -1,17 +1,6 @@
 import logging
 import sys
 
-__all__ = [
-    "VERSION",
-    "HOST",
-    "PORT",
-    "LOGGING_STREAM",
-    "LOGGING_LEVEL",
-    "END_BYTE",
-    "SOCKET_TIMEOUT_SELECT",
-    "SOCKET_TIMEOUT_SEND",
-]
-
 VERSION = "0.0.1"
 
 HOST = "0.0.0.0"
@@ -31,10 +20,5 @@ COLOR_PINS: list[int] = []
 LED_PWM_RANGE_MIN: int = 0
 LED_PWM_RANGE_MAX: int = 100
 
-# motion pin set to -1 will disable the motion sensor
-MOTION_PIN: int = -1
-MOTION_TIMEOUT: int = 60000  # 60 seconds
-
 ID_DEFAULT = 0
-ID_MOTION = -2
 ID_DISABLED = -1

@@ -3,8 +3,6 @@ import socket
 
 from . import utils
 
-__all__ = ["readable", "errored"]
-
 
 def readable(
     server: socket.socket, sockets: list[socket.socket]
