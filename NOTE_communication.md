@@ -18,13 +18,9 @@
 - `config`
   - `set`
     - `led <gp:int> ...`: [Set GPIO configuration for LEDs (ex.: rgbw)](#SetGPIOpinsforLEDs)
-    - `motion <gp:int>`: Set motion sensor pin
-    - `motion-timeout <milliseconds:int>`: Set motion sensor timeout value
     - `pwm-range <min:int> <max:int>`: Set PWM range
   - `get`
     - `led`: [Get GPIO configuration for LEDs (ex.: rgbw)](#GetGPIOpinsforLEDs)
-    - `motion`: Get motion sensor pin
-    - `motion-timeout`: Get motion sensor timeout value in milliseconds
     - `pwm-range`: Get PWM range
 - `info`
   - `get`
@@ -36,10 +32,6 @@
     - `duty <cycle:int> [<pin:int>]`: Set GPIO pin duty (PWM range min/max range)
   - `get`
     - `duty [<pin:int>]`: Get GPIO pin duty
-- `motion`
-  - `event`
-    - `start`: Start tracking motion events (default id of -2 will be used)
-    - `stop`: Stop tracking motion events (default id of -2 will be used)
 
 ## <a name='JSONtypescriptinterface'></a>JSON (typescript) interface
 
