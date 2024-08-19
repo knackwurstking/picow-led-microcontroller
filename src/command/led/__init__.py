@@ -33,12 +33,13 @@ def run(id: int, _type: str, command: str, *args) -> dc.Response:
 
     if _type == "set":
         try:
+            run_command = get_setter_command(command)
             run_command = set_duty
         except Exception as ex:
             response.error = str(ex)
     elif _type == "get":
         try:
-            run_command = get_duty
+            run_command = get_getter_command(command)
         except Exception as ex:
             response.error = str(ex)
     else:
