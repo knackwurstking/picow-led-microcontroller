@@ -31,6 +31,8 @@ def handle_client_data(client: socket.socket, data: bytes) -> None:
 
     if callbacks.ondata is not None and data.__len__() > 0:
         callbacks.ondata(client, data)
+    else:
+        client.close()
 
 
 def response(client: socket.socket, resp: dc.Response) -> None:

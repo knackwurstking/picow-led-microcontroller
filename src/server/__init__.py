@@ -46,25 +46,19 @@ def main_loop(server_socket: socket.socket):
             # Remove dead sockets
             for s in readable_sockets.copy():
                 logging.debug(f"Remove socket {s} from readable_sockets")
+                readable_sockets.remove(s)
 
-                if s.fileno() == -1:
-                    readable_sockets.remove(s)
-
+            time.sleep(10)
             continue
 
-        if (
-            readable.__len__() == 0
-            and writable.__len__() == 0
-            and errored.__len__() == 0
-        ):
-            continue
-
-        readable_sockets = handler.readable(server_socket, readable)
+        if readable.__len__() > 0:
+            readable_sockets = handler.readable(server_socket, readable)
 
         if writable.__len__() > 0:
             logging.debug(f"There are writable sockets ({writable.__len__()})")
 
-        handler.errored(errored)
+        if errored.__len__() > 0:
+            handler.errored(errored)
 
 
 def check_wifi() -> None:
