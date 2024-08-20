@@ -10,7 +10,6 @@ import wifi
 
 from . import callbacks, handler, utils
 
-
 event_sockets: list[socket.socket] = []
 
 
@@ -48,7 +47,7 @@ def main_loop(server_socket: socket.socket):
                 logging.debug(f"Remove socket {s} from readable_sockets")
                 readable_sockets.remove(s)
 
-            time.sleep(10)
+            time.sleep(1)
             continue
 
         if readable.__len__() > 0:
