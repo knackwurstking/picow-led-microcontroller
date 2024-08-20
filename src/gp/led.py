@@ -19,7 +19,7 @@ class GpLED:
         pwm_range_min: int = config.LED_PWM_RANGE_MIN,
         pwm_range_max: int = config.LED_PWM_RANGE_MAX,
     ) -> None:
-        self.cache = Cache("gp-led")  # TODO: ...
+        self.cache = Cache("gp-led")
         self._pins = list(pins)
         self._pwm_range = (pwm_range_min, pwm_range_max)
 
