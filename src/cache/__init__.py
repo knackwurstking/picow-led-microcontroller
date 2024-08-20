@@ -4,12 +4,12 @@ class Cache:
 
     def read(self):
         if not self.name:
-            return
+            return None
 
         ...  # TODO: load cached file
 
     def write(self):
         if not self.name:
-            return
+            return None
 
         ...  # TODO: write cached file
