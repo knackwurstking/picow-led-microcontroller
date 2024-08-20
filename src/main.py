@@ -55,7 +55,7 @@ def set_logger(stream, level):
     logging.basicConfig(
         stream=stream,
         level=level,
-        format="[%(asctime)s] [%(levelname)s] [%(filename)s] [%(module)s] [%(funcName)s] %(message)s",  # noqa: E501
+        format="[%(asctime)s][%(levelname)s][%(module)s][%(funcName)s] %(message)s",  # noqa: E501
     )
 
 
