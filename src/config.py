@@ -1,4 +1,3 @@
-import logging
 import sys
 
 VERSION = "0.0.1"
@@ -7,7 +6,6 @@ HOST = "0.0.0.0"
 PORT = 3000
 
 LOGGING_STREAM = sys.stderr
-LOGGING_LEVEL = logging.DEBUG
 
 END_BYTE = "\n".encode()
 

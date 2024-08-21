@@ -1,6 +1,6 @@
 import json
-import logging
 import socket
+from sys import stderr
 
 import config
 
@@ -8,7 +8,7 @@ from . import callbacks
 
 
 def read_from_client(client: socket.socket):
-    logging.debug(f"client={client.getsockname()}")
+    print(f"[DEBUG] client={client.getsockname()}", file=stderr)
 
     data: bytes = bytes()
 
@@ -26,7 +26,7 @@ def read_from_client(client: socket.socket):
 
 
 def handle_client_data(client: socket.socket, data: bytes):
-    logging.debug(f"client={client.getsockname()}, data={data!r}")
+    print(f"[DEBUG] client={client.getsockname()}, data={data!r}", file=stderr)
 
     if callbacks.ondata is not None and data.__len__() > 0:
         callbacks.ondata(client, data)
@@ -49,8 +49,9 @@ def response(client: socket.socket, response):
     except socket.timeout:
         pass
     except Exception as ex:
-        logging.error(
-            f'Exception while send response to client "{client.getsockname()}": {ex} [{type(ex)}]'  # noqa: E501
+        print(
+            f'[ERROR] Exception while send response to client "{client.getsockname()}": {ex} [{type(ex)}]',  # noqa: E501
+            file=stderr,
         )
         client.close()  # TODO: only close if exception is not a timeout?
     finally:

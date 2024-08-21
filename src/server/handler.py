@@ -1,5 +1,5 @@
-import logging
 import socket
+from sys import stderr
 
 from . import utils
 
@@ -7,18 +7,21 @@ from . import utils
 def readable(
     server: socket.socket, sockets: list[socket.socket]
 ) -> list[socket.socket]:
-    logging.debug(f"server={server.getsockname()} sockets={sockets.__len__()}")
+    print(
+        f"[DEBUG] server={server.getsockname()} sockets={sockets.__len__()}",
+        file=stderr,
+    )
 
     clients: list[socket.socket] = []
 
     for s in sockets:
         if s is server:
-            logging.debug("Waiting for client accept...")
+            print("[DEBUG] Waiting for client accept...", file=stderr)
 
             client, addr = s.accept()
             clients.append(client)
 
-            logging.debug(f"Connected client from {addr}")
+            print(f"[DEBUG] Connected client from {addr}", file=stderr)
         else:
             data = utils.read_from_client(s)
 
@@ -28,7 +31,7 @@ def readable(
             utils.handle_client_data(s, data)
 
             # NOTE: append socket to clients if not closed
-            logging.debug(f"socket fileno: {s.fileno()}")
+            print(f"[DEBUG] socket fileno: {s.fileno()}", file=stderr)
             if s.fileno() != -1:
                 clients.append(s)
 
@@ -36,8 +39,8 @@ def readable(
 
 
 def errored(sockets: list[socket.socket]) -> None:
-    logging.debug(f"sockets={sockets.__len__()}")
+    print(f"[DEBUG] sockets={sockets.__len__()}", file=stderr)
 
     for s in sockets:
-        logging.debug(f"Socket error: s={s}")
+        print(f"[DEBUG] Socket error: s={s}", file=stderr)
         s.close()

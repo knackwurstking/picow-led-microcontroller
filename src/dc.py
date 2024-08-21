@@ -1,4 +1,4 @@
-import logging
+from sys import stderr
 
 
 def new_response(id, error=None, data=None):
@@ -51,7 +51,10 @@ def validate_request(req) -> bool:
                 return False
 
     except Exception as ex:
-        logging.warn(f"Exception while validate request data: {ex}")
+        print(
+            f"[WARN] Exception while validate request data: {ex}",
+            file=stderr,
+        )
         return False
 
     return True

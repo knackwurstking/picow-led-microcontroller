@@ -1,7 +1,7 @@
-import logging
 import select
 import socket
 import time
+from sys import stderr
 
 import config
 import wifi
@@ -38,11 +38,17 @@ def main_loop(server_socket: socket.socket):
                 config.SOCKET_TIMEOUT_SELECT,
             )
         except Exception as ex:
-            logging.error(f'Got an exception while running select.select: "{ex}"')  # noqa: E501
+            print(
+                f'[ERROR] Got an exception while running select.select: "{ex}"',  # noqa: E501
+                file=stderr,
+            )
 
             # Remove dead sockets
             for s in readable_sockets.copy():
-                logging.debug(f"Remove socket {s} from readable_sockets")
+                print(
+                    f"[DEBUG] Remove socket {s} from readable_sockets",
+                    file=stderr,
+                )
                 readable_sockets.remove(s)
 
             time.sleep(1)
@@ -52,18 +58,21 @@ def main_loop(server_socket: socket.socket):
             readable_sockets = handler.readable(server_socket, readable)
 
         if writable.__len__() > 0:
-            logging.debug(f"There are writable sockets ({writable.__len__()})")
+            print(
+                f"[DEBUG] There are writable sockets ({writable.__len__()})",
+                file=stderr,
+            )
 
         if errored.__len__() > 0:
             handler.errored(errored)
 
 
 def check_wifi() -> None:
-    if not wifi.check():
+    if not wifi.isConnected():
         # TODO: Turn of the picow status led
 
         try:
-            logging.debug("Try to connect to wifi...")
+            print("[DEBUG] Try to connect to wifi...", file=stderr)
 
             if wifi.connect():
                 # TODO: Turn on the picow status led
@@ -76,6 +85,9 @@ def check_wifi() -> None:
             # TODO: do a machine reset
             ...
 
-            logging.debug(f'Exception while trying to connect to wifi: "{ex}"')
+            print(
+                f'[DEBUG] Exception while trying to connect to wifi: "{ex}"',
+                file=stderr,
+            )
 
             time.sleep(5)

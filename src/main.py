@@ -1,6 +1,6 @@
 import json
-import logging
 import socket
+from sys import stderr
 
 import command
 import config as c
@@ -9,19 +9,19 @@ import server
 
 
 def ondata(client: socket.socket, data: bytes):
-    logging.debug(f"client={client.getsockname()}, data={data!r}")
+    print(f"[DEBUG] client={client.getsockname()}, data={data!r}", file=stderr)
 
     req_raw = None
 
     try:
         req_raw = json.loads(data.strip())
     except Exception as ex:
-        logging.debug(f"Exception while parsing json data: {ex}")
+        print(f"[DEBUG] Exception while parsing json data: {ex}", file=stderr)
         client.close()
         return
 
     if not dc.validate_request(req_raw):
-        logging.debug(f"Invalid request: {req_raw}")
+        print(f"[DEBUG] Invalid request: {req_raw}", file=stderr)
         client.close()
         return
 
@@ -46,7 +46,7 @@ def ondata(client: socket.socket, data: bytes):
             server.utils.response(client, result)
     except Exception as ex:
         message = f"exception: {ex}"
-        logging.error(message)
+        print("[ERROR] " + message, file=stderr)
 
         if request["id"] != -1:
             server.utils.response(
@@ -57,18 +57,8 @@ def ondata(client: socket.socket, data: bytes):
         return
 
 
-def set_logger(stream, level):
-    logging.basicConfig(
-        stream=stream,
-        level=level,
-        format="[%(asctime)s][%(levelname)s][%(module)s][%(funcName)s] %(message)s",  # noqa: E501
-    )
-
-
 def main():
-    set_logger(c.LOGGING_STREAM, c.LOGGING_LEVEL)
-
-    logging.info(f"Server starts on port {c.PORT}")
+    print(f"[INFO] Server starts on port {c.PORT}", file=stderr)
     server.callbacks.ondata = ondata
     server.start(c.HOST, c.PORT)
 

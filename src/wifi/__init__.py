@@ -1,7 +1,10 @@
+def isConnected() -> bool:
+    # TODO: Check if device is still online
 
-def check() -> bool:
     return True
 
 
 def connect() -> bool:
+    # TODO: Connect wifi
+
     return True
