@@ -19,4 +19,4 @@ LED_PWM_RANGE_MIN: int = 0
 LED_PWM_RANGE_MAX: int = 100
 
 ID_DEFAULT = 0
-ID_DISABLED = -1
+ID_DISABLED = -1  # Disabled response
