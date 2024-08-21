@@ -1,7 +1,8 @@
-import network
+import secrets
 from sys import stderr
 
-from . import secrets
+import machine
+import network
 
 
 def do_connect():
@@ -16,4 +17,11 @@ def do_connect():
         while not sta_if.isconnected():
             pass
 
-    print("network config:", sta_if.ipconfig("addr4"))
+        enable_led()
+
+    print("network config:", sta_if.ipconfig("addr4"), file=stderr)
+
+
+def enable_led():
+    led = machine.Pin("LED", machine.Pin.OUT)
+    led.on()
