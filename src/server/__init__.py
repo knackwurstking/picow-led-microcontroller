@@ -67,7 +67,7 @@ def main_loop(server_socket: socket.socket):
             handler.errored(errored)
 
 
-def check_wifi() -> None:
+def check_wifi():
     if not wifi.isConnected():
         # TODO: Turn of the picow status led
 
