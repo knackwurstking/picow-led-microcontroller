@@ -1,11 +1,8 @@
-import socket
-from dataclasses import dataclass
-
 import dc
 
-from . import config, info, led
 import config as c
 
+from . import config, info, led
 
 TYPE_GETTER = "get"
 TYPE_SETTER = "set"
@@ -16,14 +13,14 @@ GROUP_INFO = "info"
 GROUP_LED = "led"
 
 
-@dataclass
 class Command:
-    id: int
-    group: str
-    type: str
-    command: str
+    def __init__(self, id, group, _type, command):
+        self.id = id
+        self.group = group
+        self.type = _type
+        self.command = command
 
-    def run(self, client: socket.socket, *args):
+    def run(self, *args):
         resp = dc.new_response(c.ID_DEFAULT)
 
         if self.group == GROUP_CONFIG:
