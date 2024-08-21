@@ -1,3 +1,7 @@
+import os
+import json
+
+
 class Cache:
     def __init__(self, name):
         self.name = name  # NOTE: "gp-led"
@@ -6,10 +10,19 @@ class Cache:
         if not self.name:
             return None
 
-        ...  # TODO: load cached file
+        file_name = self.get_file_name()
+        with open(file_name) as file:
+            return json.load(file)
 
-    def write(self):
+    def write(self, data):
         if not self.name:
             return None
 
-        ...  # TODO: write cached file
+        file_name = self.get_file_name()
+        with open(file_name) as file:
+            json.dump(data, file)
+
+        return None
+
+    def get_file_name(self):
+        return os.path.join("cache", self.name, ".json")

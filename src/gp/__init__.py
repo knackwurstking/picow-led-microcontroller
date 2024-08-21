@@ -1,15 +1,15 @@
-from . import led as _led
+from . import gpled as gpled
 
 
-def _init_led() -> _led.GpLED:
-    led = _led.GpLED()
+def _init_led() -> gpled.GpLED:
+    led = gpled.GpLED()
 
     cache = led.cache.read()
     if isinstance(cache, dict):
         if "pins" in cache:
-            led.set_pins(*cache.pins)
+            led.set_pins(*cache["pins"])
 
     return led
 
 
-led: _led.GpLED = _init_led()
+led: gpled.GpLED = _init_led()
