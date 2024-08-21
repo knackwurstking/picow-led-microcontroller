@@ -13,11 +13,12 @@ def do_connect():
 
     if not sta_if.isconnected():
         sta_if.active(True)
-        print(f"[DEBUG] Try to connect...", file=stderr)
+
+        print("[DEBUG] Try to connect...", file=stderr)
         sta_if.connect(secrets.SSID, secrets.PASS)
 
         while not sta_if.isconnected():
-            print(f"[DEBUG] ...wait for connection...", file=stderr)
+            print("[DEBUG] ...wait for connection...", file=stderr)
             time.sleep(0.25)
 
         enable_led()
