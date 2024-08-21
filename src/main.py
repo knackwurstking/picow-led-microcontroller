@@ -10,8 +10,6 @@ import wifi
 
 
 def ondata(client: socket.socket, data: bytes):
-    print(f"[DEBUG] client={client.getsockname()}, data={data!r}", file=stderr)
-
     req_raw = None
 
     try:

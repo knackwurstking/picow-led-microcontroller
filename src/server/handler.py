@@ -7,11 +7,6 @@ from . import utils
 def readable(
     server: socket.socket, sockets: list[socket.socket]
 ) -> list[socket.socket]:
-    print(
-        f"[DEBUG] server={server.getsockname()} sockets={len(sockets)}",
-        file=stderr,
-    )
-
     clients: list[socket.socket] = []
 
     for s in sockets:

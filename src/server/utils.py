@@ -8,8 +8,6 @@ from . import callbacks
 
 
 def read_from_client(client: socket.socket):
-    print(f"[DEBUG] client={client.getsockname()}", file=stderr)
-
     data: bytes = bytes()
 
     while True:
@@ -26,8 +24,6 @@ def read_from_client(client: socket.socket):
 
 
 def handle_client_data(client: socket.socket, data: bytes):
-    print(f"[DEBUG] client={client.getsockname()}, data={data!r}", file=stderr)
-
     if callbacks.ondata is not None and len(data) > 0:
         callbacks.ondata(client, data)
     else:
@@ -50,7 +46,7 @@ def response(client: socket.socket, response):
         pass
     except Exception as ex:
         print(
-            f'[ERROR] Exception while send response to client "{client.getsockname()}": {ex} [{type(ex)}]',  # noqa: E501
+            f"[ERROR] Exception while send response to client: {ex} [{type(ex)}]",  # noqa: E501
             file=stderr,
         )
         client.close()  # TODO: only close if exception is not a timeout?
