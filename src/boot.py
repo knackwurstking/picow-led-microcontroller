@@ -9,8 +9,6 @@ def do_connect():
     sta_if = network.WLAN(network.STA_IF)
 
     if not sta_if.isconnected():
-        print("[INFO] connecting to network...", file=stderr)
-
         sta_if.active(True)
         sta_if.connect(secrets.SSID, secrets.PASS)
 
@@ -18,8 +16,6 @@ def do_connect():
             pass
 
         enable_led()
-
-    print("network config:", sta_if.ipconfig("addr4"), file=stderr)
 
 
 def enable_led():
