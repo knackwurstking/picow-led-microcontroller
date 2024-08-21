@@ -28,7 +28,7 @@ def read_from_client(client: socket.socket):
 def handle_client_data(client: socket.socket, data: bytes):
     print(f"[DEBUG] client={client.getsockname()}, data={data!r}", file=stderr)
 
-    if callbacks.ondata is not None and data.__len__() > 0:
+    if callbacks.ondata is not None and len(data) > 0:
         callbacks.ondata(client, data)
     else:
         client.close()

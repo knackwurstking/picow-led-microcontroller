@@ -8,7 +8,7 @@ def readable(
     server: socket.socket, sockets: list[socket.socket]
 ) -> list[socket.socket]:
     print(
-        f"[DEBUG] server={server.getsockname()} sockets={sockets.__len__()}",
+        f"[DEBUG] server={server.getsockname()} sockets={len(sockets)}",
         file=stderr,
     )
 
@@ -39,7 +39,7 @@ def readable(
 
 
 def errored(sockets: list[socket.socket]) -> None:
-    print(f"[DEBUG] sockets={sockets.__len__()}", file=stderr)
+    print(f"[DEBUG] sockets={len(sockets)}", file=stderr)
 
     for s in sockets:
         print(f"[DEBUG] Socket error: s={s}", file=stderr)

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from cache import Cache
 import config
 
@@ -22,10 +20,9 @@ class GpLED:
         self._pins = list(pins)
         self._pwm_range = (pwm_range_min, pwm_range_max)
 
-    def set_pins(self, *pins: int) -> GpLED:
+    def set_pins(self, *pins: int):
         # TODO: cache this to the pico device
         self._pins = list(pins)
-        return self
 
     def get_pins(self) -> list[int]:
         return self._pins
@@ -37,10 +34,9 @@ class GpLED:
 
         return False
 
-    def set_pwm_range(self, min: int, max: int) -> GpLED:
+    def set_pwm_range(self, min: int, max: int):
         # TODO: cache this to the pico device
         self._pwm_range = (min, max)
-        return self
 
     def get_pwm_range(self) -> tuple[int, int]:
         return self._pwm_range

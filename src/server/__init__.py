@@ -24,7 +24,7 @@ def main_loop(server_socket: socket.socket):
     readable_sockets: list[socket.socket] = []
 
     while True:
-        if readable_sockets.__len__() == 0:
+        if len(readable_sockets) == 0:
             readable_sockets.append(server_socket)
 
         try:
@@ -51,14 +51,14 @@ def main_loop(server_socket: socket.socket):
             time.sleep(1)
             continue
 
-        if readable.__len__() > 0:
+        if len(readable) > 0:
             readable_sockets = handler.readable(server_socket, readable)
 
-        if writable.__len__() > 0:
+        if len(writable) > 0:
             print(
-                f"[DEBUG] There are writable sockets ({writable.__len__()})",
+                f"[DEBUG] There are writable sockets ({len(writable)})",
                 file=stderr,
             )
 
-        if errored.__len__() > 0:
+        if len(errored) > 0:
             handler.errored(errored)

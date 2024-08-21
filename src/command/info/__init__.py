@@ -2,7 +2,6 @@ import os
 
 import config
 import dc
-# from picozero import pico_temp_sensor  # type: ignore
 
 
 def get_temp() -> float:
