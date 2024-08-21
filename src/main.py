@@ -37,7 +37,7 @@ def ondata(client: socket.socket, data: bytes):
         return
 
     try:
-        result = command.run(client, request)
+        result = command.run(request)
 
         if result is None:
             return

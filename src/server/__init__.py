@@ -4,7 +4,6 @@ import time
 from sys import stderr
 
 import config
-import wifi
 
 from . import callbacks, handler, utils
 
@@ -25,8 +24,6 @@ def main_loop(server_socket: socket.socket):
     readable_sockets: list[socket.socket] = []
 
     while True:
-        check_wifi()
-
         if readable_sockets.__len__() == 0:
             readable_sockets.append(server_socket)
 
@@ -65,29 +62,3 @@ def main_loop(server_socket: socket.socket):
 
         if errored.__len__() > 0:
             handler.errored(errored)
-
-
-def check_wifi():
-    if not wifi.isConnected():
-        # TODO: Turn of the picow status led
-
-        try:
-            print("[DEBUG] Try to connect to wifi...", file=stderr)
-
-            if wifi.connect():
-                # TODO: Turn on the picow status led
-                pass
-            else:
-                # TODO: Oops, wait some seconds and try again
-                raise Exception("Oops, wifi connection failed!")
-
-        except Exception as ex:
-            # TODO: do a machine reset
-            ...
-
-            print(
-                f'[DEBUG] Exception while trying to connect to wifi: "{ex}"',
-                file=stderr,
-            )
-
-            time.sleep(5)
