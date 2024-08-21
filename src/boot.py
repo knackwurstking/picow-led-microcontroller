@@ -1,5 +1,4 @@
 import secrets
-from sys import stderr
 
 import machine
 import network
