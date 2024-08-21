@@ -8,7 +8,7 @@ import dc
 from . import callbacks
 
 
-def read_from_client(client: socket.socket) -> bytes:
+def read_from_client(client: socket.socket):
     logging.debug(f"client={client.getsockname()}")
 
     data: bytes = bytes()
@@ -26,7 +26,7 @@ def read_from_client(client: socket.socket) -> bytes:
     return data
 
 
-def handle_client_data(client: socket.socket, data: bytes) -> None:
+def handle_client_data(client: socket.socket, data: bytes):
     logging.debug(f"client={client.getsockname()}, data={data!r}")
 
     if callbacks.ondata is not None and data.__len__() > 0:
@@ -35,15 +35,15 @@ def handle_client_data(client: socket.socket, data: bytes) -> None:
         client.close()
 
 
-def response(client: socket.socket, resp: dc.Response) -> None:
+def response(client: socket.socket, response):
     client.settimeout(config.SOCKET_TIMEOUT_SEND)
 
     try:
         data = json.dumps(
             {
-                "id": resp.id,
-                "error": resp.error,
-                "data": resp.data,
+                "id": response.id,
+                "error": response.error,
+                "data": response.data,
             }
         )
         client.send(data.encode() + config.END_BYTE)

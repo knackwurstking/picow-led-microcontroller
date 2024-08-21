@@ -23,8 +23,8 @@ class Command:
     type: str
     command: str
 
-    def run(self, client: socket.socket, *args) -> dc.Response:
-        resp = dc.Response(c.ID_DEFAULT, None, None)
+    def run(self, client: socket.socket, *args):
+        resp = dc.new_response(c.ID_DEFAULT)
 
         if self.group == GROUP_CONFIG:
             return config.run(self.id, self.type, self.command, *args)
@@ -35,5 +35,5 @@ class Command:
         if self.group == GROUP_LED:
             return led.run(self.id, self.type, self.command, *args)
 
-        resp.error = f'Type "{self.group}"not found!'
+        resp["error"] = f'Type "{self.group}"not found!'
         return resp

@@ -1,5 +1,2 @@
-import socket
-from typing import Callable
-
-
-ondata: Callable[[socket.socket, bytes], None] | None = None
+# ((socket: socket.socket, data: bytes) => None) | None
+ondata = None

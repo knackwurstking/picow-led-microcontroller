@@ -1,4 +1,3 @@
-from typing import Any
 import json
 import logging
 import socket
@@ -12,7 +11,7 @@ import server
 def ondata(client: socket.socket, data: bytes):
     logging.debug(f"client={client.getsockname()}, data={data!r}")
 
-    req_raw: Any = None
+    req_raw = None
 
     try:
         req_raw = json.loads(data.strip())
@@ -26,28 +25,35 @@ def ondata(client: socket.socket, data: bytes):
         client.close()
         return
 
-    req = dc.Request(
-        req_raw.get("id", 0),
-        req_raw["group"],
-        req_raw["type"],
-        req_raw["command"],
-        req_raw.get("args", []),
-    )
+    try:
+        request = dc.new_request(
+            req_raw.get("id", 0),
+            req_raw["group"],
+            req_raw["type"],
+            req_raw["command"],
+            req_raw.get("args", []),
+        )
+    except AssertionError:
+        return
 
     try:
-        result = command.run(client, req)
+        result = command.run(client, request)
 
         if result is None:
             return
 
-        if req.id != c.ID_DISABLED:
+        if request["id"] != c.ID_DISABLED:
             server.utils.response(client, result)
     except Exception as ex:
         message = f"exception: {ex}"
         logging.error(message)
 
-        if req.id != -1:
-            server.utils.response(client, dc.Response(req.id, message, None))
+        if request["id"] != -1:
+            server.utils.response(
+                client,
+                dc.new_response(request["id"], error=message),
+            )
+
         return
 
 

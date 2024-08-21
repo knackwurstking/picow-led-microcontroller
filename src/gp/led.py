@@ -1,17 +1,16 @@
 from __future__ import annotations
 
-from typing import Callable, Tuple
-
 from cache import Cache
 import config
 
 
-onchange: Callable[[list[int]], None] | None = None
+# ((data: int[] | None) => void) | None
+onchange = None
 
 
 class GpLED:
     _pins: list[int]
-    _pwm_range: Tuple[int, int]
+    _pwm_range: tuple[int, int]
 
     def __init__(
         self,
@@ -43,7 +42,7 @@ class GpLED:
         self._pwm_range = (min, max)
         return self
 
-    def get_pwm_range(self) -> Tuple[int, int]:
+    def get_pwm_range(self) -> tuple[int, int]:
         return self._pwm_range
 
     def set_duty(self, cycle: int): ...

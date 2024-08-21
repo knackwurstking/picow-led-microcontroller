@@ -1,25 +1,31 @@
 import logging
-from dataclasses import dataclass
-from typing import Any, Union
 
 
-@dataclass
-class Response:
-    id: int
-    error: str | None
-    data: Any
+def new_response(id, error=None, data=None):
+    return {
+        "id": id,
+        "error": error,
+        "data": data,
+    }
 
 
-@dataclass
-class Request:
-    id: int
-    group: str
-    type: str
-    command: str
-    args: list[Union[int, float, str]]
+def new_request(id, group, _type, command, args):
+    assert isinstance(id, int)
+    assert isinstance(group, str)
+    assert isinstance(_type, str)
+    assert isinstance(command, str)
+    assert isinstance(args, list)
+
+    return {
+        "id": id,
+        "group": group,
+        "type": _type,
+        "command": command,
+        "args": args,
+    }
 
 
-def validate_request(req: Any) -> bool:
+def validate_request(req) -> bool:
     try:
         if not isinstance(req.get("id", 0), int):
             return False
@@ -43,6 +49,7 @@ def validate_request(req: Any) -> bool:
                 and not isinstance(arg, str)
             ):
                 return False
+
     except Exception as ex:
         logging.warn(f"Exception while validate request data: {ex}")
         return False
