@@ -6,6 +6,7 @@ import command
 import config as c
 import dc
 import server
+import wifi
 
 
 def ondata(client: socket.socket, data: bytes):
@@ -58,8 +59,10 @@ def ondata(client: socket.socket, data: bytes):
 
 
 def main():
-    print(f"[INFO] Server starts on port {c.PORT}", file=stderr)
+    wifi.do_connect()
     server.callbacks.ondata = ondata
+
+    print(f"[INFO] Server starts on port {c.PORT}", file=stderr)
     server.start(c.HOST, c.PORT)
 
 
