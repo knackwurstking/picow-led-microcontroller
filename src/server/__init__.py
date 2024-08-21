@@ -4,8 +4,6 @@ import socket
 import time
 
 import config
-import dc
-import gp
 import wifi
 
 from . import callbacks, handler, utils

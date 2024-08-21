@@ -3,7 +3,6 @@ import logging
 import socket
 
 import config
-import dc
 
 from . import callbacks
 
