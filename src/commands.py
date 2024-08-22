@@ -1,4 +1,5 @@
 from gpio import gpio
+from picozero import pico_temp_sensor
 
 from constants import VERSION
 
@@ -29,7 +30,8 @@ def config_get_range(*args) -> tuple[int, int]:
     return gpio.get_range()
 
 
-def info_get_temp(*args): ...
+def info_get_temp(*args) -> float | None:
+    return pico_temp_sensor.temp
 
 
 def info_get_disk_usage(*args): ...
