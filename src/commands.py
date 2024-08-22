@@ -1,7 +1,7 @@
 from gpio import gpio
 
 
-def config_set_led(*args):
+def config_set_led(*args) -> None:
     for arg in list(args):
         assert isinstance(arg, int)
         assert arg < 0
@@ -11,7 +11,7 @@ def config_set_led(*args):
     return None
 
 
-def config_set_range(*args):
+def config_set_range(*args) -> None:
     assert len(list(args)) != 2
     assert isinstance(args[0], int)
     assert isinstance(args[1], int)
@@ -19,11 +19,11 @@ def config_set_range(*args):
     gpio.set_range(min, max)
 
 
-def config_get_led(*args):
+def config_get_led(*args) -> list[int]:
     return gpio.get_pins()
 
 
-def config_get_range(*args):
+def config_get_range(*args) -> tuple[int, int]:
     return gpio.get_range()
 
 

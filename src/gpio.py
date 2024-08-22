@@ -7,7 +7,7 @@ class Cache:
     def __init__(self, name):
         self.name = name  # NOTE: "gpio"
 
-    def read(self):
+    def read(self) -> None | object:
         if not self.name:
             return None
 
@@ -18,7 +18,7 @@ class Cache:
         except Exception:
             return None
 
-    def write(self, data):
+    def write(self, data) -> None:
         if not self.name:
             return None
 
@@ -31,7 +31,7 @@ class Cache:
 
         return None
 
-    def get_file_name(self):
+    def get_file_name(self) -> str:
         return f"cache-{self.name}.json"
 
 
@@ -53,27 +53,27 @@ class GPIO:
         self.pins = []
         self.setup()
 
-    def setup(self):
+    def setup(self) -> None:
         self.pins = []
         for p in self.data["pins"]:
             p = PWM(Pin(p, value=1), freq=100)
             p.set_duty_cycle(self.data["range"]["min"])
             self.pins.append(p)
 
-    def set_pins(self, *pins):
+    def set_pins(self, *pins) -> None:
         self.data["pins"] = list(pins)
         self.cache.write(self.data)
         self.setup()
 
-    def get_pins(self):
+    def get_pins(self) -> list[int]:
         return self.data["pins"]
 
-    def set_range(self, min, max):
+    def set_range(self, min, max) -> None:
         self.data["range"]["min"] = min
         self.data["range"]["max"] = max
         self.cache.write(self.data)
 
-    def get_range(self):
+    def get_range(self) -> tuple[int, int]:
         return (self.data["range"]["min"], self.data["range"]["max"])
 
     def set_duty(self, *args): ...
