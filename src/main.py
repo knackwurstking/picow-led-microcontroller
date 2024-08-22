@@ -8,6 +8,7 @@ import network
 
 from secrets import PASS, SSID
 from constants import HOST, PORT, END_BYTE
+from commands import COMMANDS
 
 
 def main():
@@ -91,7 +92,13 @@ def setup():
     print(f"[DEBUG] ...ifconfig={sta_if.ifconfig()}", file=stderr)
 
 
-def run(client, request): ...
+def run(client, request):
+    response_data = COMMANDS[request["group"]][request["type"]][request["command"]](
+        *request["args"]
+    )
+
+    # TODO: Send response to client (if id is not -1)
+    ...
 
 
 def enable_led():
