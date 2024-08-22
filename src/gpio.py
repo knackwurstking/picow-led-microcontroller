@@ -1,5 +1,7 @@
 import json
 
+from constants import U16_MAX
+
 from machine import PWM, Pin
 
 
@@ -50,17 +52,23 @@ class GPIO:
         if isinstance(data, dict):
             self.data = data
 
-        self.pins = []
+        self._pins = []
+        self._duty = []
         self.setup()
 
     def setup(self) -> None:
-        self.pins = []
+        self._pins = []
+        self._duty = []
+
         for p in self.data["pins"]:
             p = PWM(Pin(p, value=1), freq=100)
-            p.set_duty_cycle(self.data["range"]["min"])
-            self.pins.append(p)
 
-    def set_pins(self, *pins) -> None:
+            p.set_duty_cycle(self.data["range"]["min"])
+
+            self._pins.append(p)
+            self._duty.append(self.data["range"]["min"])
+
+    def set_pins(self, *pins: int) -> None:
         self.data["pins"] = list(pins)
         self.cache.write(self.data)
         self.setup()
@@ -68,7 +76,7 @@ class GPIO:
     def get_pins(self) -> list[int]:
         return self.data["pins"]
 
-    def set_range(self, min, max) -> None:
+    def set_range(self, min: int, max: int) -> None:
         self.data["range"]["min"] = min
         self.data["range"]["max"] = max
         self.cache.write(self.data)
@@ -76,9 +84,26 @@ class GPIO:
     def get_range(self) -> tuple[int, int]:
         return (self.data["range"]["min"], self.data["range"]["max"])
 
-    def set_duty(self, *args): ...
+    def set_duty(self, *duty: int) -> None:
+        for i, p in enumerate(self._pins):
+            if len(duty) < i + 1:
+                p.duty_u16(
+                    int(
+                        (1 - (self.data["range"]["min"] / self.data["range"]["max"]))
+                        * U16_MAX
+                    ),
+                )
 
-    def get_duty(self): ...
+                self._duty.append(self.data["range"]["min"])
+            else:
+                p.duty_u16(
+                    int((1 - (duty[i] / self.data["range"]["max"])) * U16_MAX),
+                )
+
+                self._duty.append(duty[i])
+
+    def get_duty(self) -> list[int]:
+        return self._duty
 
 
 gpio = GPIO()

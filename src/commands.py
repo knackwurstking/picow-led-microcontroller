@@ -1,3 +1,4 @@
+import os
 from gpio import gpio
 from picozero import pico_temp_sensor
 
@@ -19,7 +20,7 @@ def config_set_range(*args) -> None:
     assert isinstance(args[0], int)
     assert isinstance(args[1], int)
 
-    gpio.set_range(min, max)
+    gpio.set_range(args[0], args[1])
 
 
 def config_get_led(*args) -> list[int]:
@@ -34,17 +35,32 @@ def info_get_temp(*args) -> float | None:
     return pico_temp_sensor.temp
 
 
-def info_get_disk_usage(*args): ...
+def info_get_disk_usage(*args) -> str:
+    disk = os.statvfs("/")
+
+    block_size = disk[0]
+    total_blocks = disk[2]
+    free_blocks = disk[3]
+
+    used = (block_size * total_blocks) - (block_size * free_blocks)
+    free = block_size * free_blocks
+
+    return f"{used} {free}"
 
 
 def info_get_version(*args) -> str:
     return VERSION
 
 
-def led_set_duty(*args): ...
+def led_set_duty(*args) -> None:
+    for arg in list(args):
+        assert isinstance(arg, int)
+
+    gpio.set_duty(*args)
 
 
-def led_get_duty(*args): ...
+def led_get_duty(*args) -> list[int]:
+    return gpio.get_duty()
 
 
 # NOTE: each command takes `*args` as parameter and
