@@ -1,5 +1,7 @@
 from gpio import gpio
 
+from constants import VERSION
+
 
 def config_set_led(*args) -> None:
     for arg in list(args):
@@ -33,7 +35,8 @@ def info_get_temp(*args): ...
 def info_get_disk_usage(*args): ...
 
 
-def info_get_version(*args): ...
+def info_get_version(*args) -> str:
+    return VERSION
 
 
 def led_set_duty(*args): ...
