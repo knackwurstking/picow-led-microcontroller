@@ -53,9 +53,12 @@ class GPIO:
         self.pins = []
         self.setup()
 
-    def setup(*args):
-        # TODO: Create pins, setup pwm range, ...
-        ...
+    def setup(self):
+        self.pins = []
+        for p in self.data["pins"]:
+            p = PWM(Pin(p, value=1), freq=100)
+            p.set_duty_cycle(self.data["range"]["min"])
+            self.pins.append(p)
 
     def set_pins(self, *pins):
         self.data["pins"] = list(pins)
@@ -69,8 +72,6 @@ class GPIO:
         self.data["range"]["min"] = min
         self.data["range"]["max"] = max
         self.cache.write(self.data)
-        # TODO: Update `self.pins`
-        ...
 
     def get_range(self):
         return (self.data["range"]["min"], self.data["range"]["max"])
