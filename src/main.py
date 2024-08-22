@@ -57,9 +57,11 @@ def main():
                 }
 
                 try:
+                    print(f"[DEBUG] group={request["group"]}, type={
+                          request["type"]}, command={request["type"]}")
                     run(client, request)
                 except Exception as ex:
-                    print(f"[WARN] run failed: {ex}", file=stderr)
+                    print(f"[ERROR] run failed: {ex}", file=stderr)
                     client.close()
                     continue
 
@@ -105,6 +107,7 @@ def run(client, request):
         ](*request["args"])
 
     except Exception as ex:
+        print(f"[ERROR] run command failed: {ex}")
         response["error"] = ex
 
     if response["id"] != -1:
