@@ -93,12 +93,25 @@ def setup():
 
 
 def run(client, request):
-    response_data = COMMANDS[request["group"]][request["type"]][request["command"]](
-        *request["args"]
-    )
+    response = {
+        "id": request["id"],
+        "error": None,
+        "data": None,
+    }
 
-    # TODO: Send response to client (if id is not -1)
-    ...
+    try:
+        response["data"] = COMMANDS[request["group"]][request["type"]][
+            request["command"]
+        ](*request["args"])
+
+    except Exception as ex:
+        response["error"] = ex
+
+    if response["id"] != -1:
+        data = json.dumps(response)
+        client.settimeout(0.5)
+        client.send(data.encode() + END_BYTE)
+        client.settimeout(None)
 
 
 def enable_led():
