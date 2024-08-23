@@ -58,7 +58,7 @@ def main():
 
                 try:
                     print(f"[DEBUG] group={request["group"]}, type={
-                          request["type"]}, command={request["type"]}")
+                          request["type"]}, command={request["command"]}")
                     run(client, request)
                 except Exception as ex:
                     print(f"[ERROR] run failed: {ex}", file=stderr)
