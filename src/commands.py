@@ -35,7 +35,7 @@ def info_get_temp(*args) -> float | None:
     return pico_temp_sensor.temp
 
 
-def info_get_disk_usage(*args) -> str:
+def info_get_disk_usage(*args) -> dict:
     disk = os.statvfs("/")
 
     block_size = disk[0]
@@ -45,7 +45,7 @@ def info_get_disk_usage(*args) -> str:
     used = (block_size * total_blocks) - (block_size * free_blocks)
     free = block_size * free_blocks
 
-    return f"{used} {free}"
+    return {"used": used, "free": free}
 
 
 def info_get_version(*args) -> str:
