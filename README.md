@@ -12,11 +12,11 @@ Default Port: 3000
 
 **Set**:
 
-| Group  | Command   | Args          | Response Data |
-| ------ | --------- | ------------- | ------------- |
-| config | led       | `<pin> ...`   | `null`        |
-| config | pwm-range | `<min> <max>` | `null`        |
-| led    | duty      | `<duty> ...`  | `null`        |
+| Group  | Command   | Args           | Response Data |
+| ------ | --------- | -------------- | ------------- |
+| config | led       | `<pin> ...`    | `null`        |
+| config | pwm-range | `<min> <max>`  | `null`        |
+| led    | duty      | `<number> ...` | `null`        |
 
 **Get**:
 
