@@ -62,11 +62,10 @@ class GPIO:
 
         for p in self.data["pins"]:
             p = PWM(Pin(p, value=1), freq=100)
-
-            p.set_duty_cycle(self.data["range"]["min"])
-
             self._pins.append(p)
             self._duty.append(self.data["range"]["min"])
+
+        self.set_duty(*self._duty)
 
     def set_pins(self, *pins: int) -> None:
         self.data["pins"] = list(pins)
