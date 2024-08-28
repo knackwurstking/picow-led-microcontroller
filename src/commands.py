@@ -6,21 +6,21 @@ from constants import VERSION
 
 
 def config_set_led(*args) -> None:
+    pins = []
     for arg in list(args):
-        assert isinstance(arg, int)
-        assert arg < 0
+        pins.append(int(arg))
 
-    gpio.set_pins(*args)
+    gpio.set_pins(*pins)
 
     return None
 
 
 def config_set_range(*args) -> None:
     assert len(list(args)) != 2
-    assert isinstance(args[0], int)
-    assert isinstance(args[1], int)
+    min = int(args[0])
+    max = int(args[1])
 
-    gpio.set_range(args[0], args[1])
+    gpio.set_range(min, max)
 
 
 def config_get_led(*args) -> list[int]:
@@ -53,10 +53,11 @@ def info_get_version(*args) -> str:
 
 
 def led_set_duty(*args) -> None:
+    duty = []
     for arg in list(args):
-        assert isinstance(arg, int)
+        duty.append(int(arg))
 
-    gpio.set_duty(*args)
+    gpio.set_duty(*duty)
 
 
 def led_get_duty(*args) -> list[int]:
