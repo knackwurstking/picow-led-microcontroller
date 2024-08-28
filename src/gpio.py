@@ -84,6 +84,8 @@ class GPIO:
         return (self.data["range"]["min"], self.data["range"]["max"])
 
     def set_duty(self, *duty: int) -> None:
+        self._duty = []
+
         for i, p in enumerate(self._pins):
             if len(duty) < i + 1:
                 p.duty_u16(
