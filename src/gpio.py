@@ -15,7 +15,7 @@ class Cache:
 
         try:
             file_name = self.get_file_name()
-            with open(file_name) as file:
+            with open(file_name, "r") as file:
                 return json.load(file)
         except Exception:
             return None
@@ -26,7 +26,7 @@ class Cache:
 
         try:
             file_name = self.get_file_name()
-            with open(file_name) as file:
+            with open(file_name, "w") as file:
                 json.dump(data, file)
         except Exception:
             pass
