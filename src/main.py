@@ -85,8 +85,7 @@ def handleClient(client):
             }
 
             try:
-                print(f"[DEBUG] group={request["group"]}, type={
-                    request["type"]}, command={request["command"]}")
+                print(f"[DEBUG] {request["group"]} {request["type"]} {request["command"]} {request["args"]}")
                 run(client, request)
 
             except Exception as ex:
@@ -112,9 +111,15 @@ def run(client, request):
             request["command"]
         ](*request["args"])
 
-    except Exception as ex:
-        print(f"[ERROR] run command failed: {ex}")
-        response["error"] = ex
+    except AssertionError:
+        message = f"wrong args"
+        print("[ERROR] " + message)
+        response["error"] = message
+
+    except Exception as e:
+        message = f"[ERROR] run command failed: {str(e)}"
+        print(message)
+        response["error"] = message
 
     if response["id"] != -1:
         data = json.dumps(response)
