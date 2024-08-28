@@ -24,51 +24,7 @@ def main():
             print(f'[INFO] Waiting for client on "{HOST}:{PORT}"', file=stderr)
             client, address = server.accept()
             print(f'[INFO] Connected client from "{address}"', file=stderr)
-
-            data = bytes()
-            while True:
-                chunk = client.recv(1)
-                if chunk == END_BYTE:
-                    break
-
-                if chunk:
-                    data += chunk
-                else:
-                    break
-
-            if len(data) == 0:
-                client.close()
-                continue
-
-            try:
-                data = json.loads(data.strip())
-            except Exception as ex:
-                print(f"[WARN] Convert data to JSON failed: {ex}", file=stderr)
-                client.close()
-                continue
-
-            try:
-                request = {
-                    "id": data.get("id", 0),
-                    "group": data["group"],
-                    "type": data["type"],
-                    "command": data["command"],
-                    "args": data.get("args", []),
-                }
-
-                try:
-                    print(f"[DEBUG] group={request["group"]}, type={
-                          request["type"]}, command={request["command"]}")
-                    run(client, request)
-                except Exception as ex:
-                    print(f"[ERROR] run failed: {ex}", file=stderr)
-                    client.close()
-                    continue
-
-            except Exception as ex:
-                print(f"[WARN] Invalid client request: {ex}", file=stderr)
-                client.close()
-                continue
+            handleClient(client)
 
     finally:
         disable_led()
@@ -92,6 +48,56 @@ def setup():
         enable_led()
 
     print(f"[DEBUG] ...ifconfig={sta_if.ifconfig()}", file=stderr)
+
+
+def handleClient(client):
+    while True:
+        data = bytes()
+        while True:
+            chunk = client.recv(1)
+            if chunk == END_BYTE:
+                break
+
+            if chunk:
+                data += chunk
+            else:
+                break
+
+        if len(data) == 0:
+            client.close()
+            return
+
+        try:
+            data = json.loads(data.strip())
+
+        except Exception as ex:
+            print(f"[WARN] Convert data to JSON failed: {ex}", file=stderr)
+            client.close()
+            return
+
+        try:
+            request = {
+                "id": data.get("id", 0),
+                "group": data["group"],
+                "type": data["type"],
+                "command": data["command"],
+                "args": data.get("args", []),
+            }
+
+            try:
+                print(f"[DEBUG] group={request["group"]}, type={
+                    request["type"]}, command={request["command"]}")
+                run(client, request)
+
+            except Exception as ex:
+                print(f"[ERROR] run failed: {ex}", file=stderr)
+                client.close()
+                return
+
+        except Exception as ex:
+            print(f"[WARN] Invalid client request: {ex}", file=stderr)
+            client.close()
+            return
 
 
 def run(client, request):
