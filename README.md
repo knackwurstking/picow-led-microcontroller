@@ -12,18 +12,18 @@ Default Port: 3000
 
 **Set**:
 
-| Group  | Command   | Args           | Response Data |
-| ------ | --------- | -------------- | ------------- |
-| config | led       | `<pin> ...`    | `null`        |
-| config | pwm-range | `<min> <max>`  | `null`        |
-| led    | duty      | `<number> ...` | `null`        |
+| Group  | Command | Args           | Response Data |
+| ------ | ------- | -------------- | ------------- |
+| config | led     | `<pin> ...`    | `null`        |
+| config | range   | `<min> <max>`  | `null`        |
+| led    | duty    | `<number> ...` | `null`        |
 
 **Get**:
 
 | Group  | Command    | Args | Response Data                    |
 | ------ | ---------- | ---- | -------------------------------- |
 | config | led        | -    | `number[]`                       |
-| config | pwm-range  | -    | `[number, number]`               |
+| config | range      | -    | `[number, number]`               |
 | info   | temp       | -    | `number`                         |
 | info   | disk-usage | -    | `{ used: number, free: number }` |
 | info   | version    | -    | `string`                         |
