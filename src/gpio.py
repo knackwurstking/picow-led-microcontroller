@@ -44,7 +44,7 @@ class GPIO:
             "pins": [],
             "range": {
                 "min": 0,
-                "max": 100,
+                "max": 255,
             },
         }
 
@@ -90,7 +90,8 @@ class GPIO:
             if len(duty) < i + 1:
                 p.duty_u16(
                     int(
-                        (1 - (self.data["range"]["min"] / self.data["range"]["max"]))
+                        (1 - (self.data["range"]["min"] /
+                         self.data["range"]["max"]))
                         * U16_MAX
                     ),
                 )
