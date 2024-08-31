@@ -110,18 +110,28 @@ def run(client, request):
     }
 
     try:
-        response["data"] = COMMANDS[request["group"]][request["type"]][
-            request["command"]
-        ](*request["args"])
+        if request["group"] not in COMMANDS:
+            response["error"] = f'command group "{request["group"]}" not found'
+
+        if request["type"] not in COMMANDS:
+            response["error"] = f'command type "{request["type"]}" not found'
+
+        if request["command"] not in COMMANDS:
+            response["error"] = f'command "{request["command"]}" not found'
+
+        if response["error"] is None:
+            response["data"] = COMMANDS[request["group"]][request["type"]][
+                request["command"]
+            ](*request["args"])
 
     except AssertionError:
-        message = f"wrong args"
+        message = "wrong args"
         print("[ERROR] " + message)
         response["error"] = message
 
     except Exception as e:
-        message = f"run command failed: {str(e)}"
-        print("[ERROR] " + message)
+        message = "command failed to run"
+        print("[ERROR] " + message + ": " + str(e))
         response["error"] = message
 
     if response["id"] != -1:
