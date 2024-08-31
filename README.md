@@ -15,19 +15,17 @@ Default Port: 3000
 | Group  | Command | Args           | Response Data |
 | ------ | ------- | -------------- | ------------- |
 | config | led     | `<pin> ...`    | `null`        |
-| config | range   | `<min> <max>`  | `null`        |
-| led    | duty    | `<number> ...` | `null`        |
+| led    | color   | `<number> ...` | `null`        |
 
 **Get**:
 
 | Group  | Command    | Args | Response Data                    |
 | ------ | ---------- | ---- | -------------------------------- |
 | config | led        | -    | `number[]`                       |
-| config | range      | -    | `[number, number]`               |
 | info   | temp       | -    | `number`                         |
 | info   | disk-usage | -    | `{ used: number, free: number }` |
 | info   | version    | -    | `string`                         |
-| led    | duty       | -    | `[]number`                       |
+| led    | color      | -    | `[]number`                       |
 
 ## <a id='request-response-interface'></a>Request / Response Interface
 

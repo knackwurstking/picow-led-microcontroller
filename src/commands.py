@@ -15,20 +15,8 @@ def config_set_led(*args) -> None:
     return None
 
 
-def config_set_range(*args) -> None:
-    assert len(list(args)) != 2
-    min = int(args[0])
-    max = int(args[1])
-
-    gpio.set_range(min, max)
-
-
 def config_get_led(*args) -> list[int]:
     return gpio.get_pins()
-
-
-def config_get_range(*args) -> tuple[int, int]:
-    return gpio.get_range()
 
 
 def info_get_temp(*args) -> float | None:
@@ -52,7 +40,7 @@ def info_get_version(*args) -> str:
     return VERSION
 
 
-def led_set_duty(*args) -> None:
+def led_set_color(*args) -> None:
     duty = []
     for arg in list(args):
         duty.append(int(arg))
@@ -60,7 +48,7 @@ def led_set_duty(*args) -> None:
     gpio.set_duty(*duty)
 
 
-def led_get_duty(*args) -> list[int]:
+def led_get_color(*args) -> list[int]:
     return gpio.get_duty()
 
 
@@ -70,11 +58,9 @@ COMMANDS = {
     "config": {
         "set": {
             "led": config_set_led,
-            "range": config_set_range,
         },
         "get": {
             "led": config_get_led,
-            "range": config_get_range,
         },
     },
     "info": {
@@ -86,10 +72,10 @@ COMMANDS = {
     },
     "led": {
         "set": {
-            "duty": led_set_duty,
+            "color": led_set_color,
         },
         "get": {
-            "duty": led_get_duty,
+            "color": led_get_color,
         },
     },
 }
