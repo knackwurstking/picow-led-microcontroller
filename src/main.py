@@ -85,7 +85,10 @@ def handleClient(client):
             }
 
             try:
-                print(f"[DEBUG] {request["group"]} {request["type"]} {request["command"]} {request["args"]}")
+                print(
+                    f"[DEBUG] {request["group"]} {request["type"]} {
+                        request["command"]} {request["args"]}"
+                )
                 run(client, request)
 
             except Exception as ex:
@@ -117,8 +120,8 @@ def run(client, request):
         response["error"] = message
 
     except Exception as e:
-        message = f"[ERROR] run command failed: {str(e)}"
-        print(message)
+        message = f"run command failed: {str(e)}"
+        print("[ERROR] " + message)
         response["error"] = message
 
     if response["id"] != -1:
