@@ -113,10 +113,10 @@ def run(client, request):
         if request["group"] not in COMMANDS:
             response["error"] = f'command group "{request["group"]}" not found'
 
-        if request["type"] not in COMMANDS:
+        if request["type"] not in COMMANDS[request["group"]]:
             response["error"] = f'command type "{request["type"]}" not found'
 
-        if request["command"] not in COMMANDS:
+        if request["command"] not in COMMANDS[request["group"]][request["type"]]:
             response["error"] = f'command "{request["command"]}" not found'
 
         if response["error"] is None:
