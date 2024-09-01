@@ -50,8 +50,7 @@ def setup():
             print("[DEBUG] ...wait for connection...", file=stderr)
             sleep(0.25)
 
-        enable_led()
-
+    enable_led()
     print(f"[DEBUG] ...ifconfig={sta_if.ifconfig()}", file=stderr)
 
 
