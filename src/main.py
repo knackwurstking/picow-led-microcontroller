@@ -24,7 +24,12 @@ def main():
             print(f'[INFO] Waiting for client on "{HOST}:{PORT}"', file=stderr)
             client, address = server.accept()
             print(f'[INFO] Connected client from "{address}"', file=stderr)
-            handleClient(client)
+
+            try:
+                handleClient(client)
+            except Exception as e:
+                print(f"[WARN] Handle client exception: {str(e)}")
+                client.close()
 
     finally:
         disable_led()
