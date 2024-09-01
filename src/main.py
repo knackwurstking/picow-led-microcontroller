@@ -21,14 +21,18 @@ def main():
 
     try:
         while True:
-            print(f'[INFO] Waiting for client on "{HOST}:{PORT}"', file=stderr)
+            print(
+                f'[INFO ] Waiting for client on "{
+                    HOST}:{PORT}"',
+                file=stderr,
+            )
             client, address = server.accept()
-            print(f'[INFO] Connected client from "{address}"', file=stderr)
+            print(f'[INFO ] Connected client from "{address}"', file=stderr)
 
             try:
                 handleClient(client)
             except Exception as e:
-                print(f"[WARN] Handle client exception: {str(e)}")
+                print(f"[WARN ] Handle client exception: {str(e)}")
                 client.close()
 
     finally:
@@ -75,7 +79,7 @@ def handleClient(client):
             data = json.loads(data.strip())
 
         except Exception as ex:
-            print(f"[WARN] Convert data to JSON failed: {ex}", file=stderr)
+            print(f"[WARN ] Convert data to JSON failed: {ex}", file=stderr)
             client.close()
             return
 
@@ -90,7 +94,7 @@ def handleClient(client):
 
             try:
                 print(
-                    f"[DEBUG] {request["group"]} {request["type"]} {
+                    f"[DEBUG] Run requested command: {request["group"]} {request["type"]} {
                         request["command"]} {request["args"]}"
                 )
                 run(client, request)
@@ -101,7 +105,7 @@ def handleClient(client):
                 return
 
         except Exception as ex:
-            print(f"[WARN] Invalid client request: {ex}", file=stderr)
+            print(f"[WARN ] Invalid client request: {ex}", file=stderr)
             client.close()
             return
 
