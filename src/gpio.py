@@ -1,4 +1,5 @@
 import json
+from sys import stderr
 
 from constants import U16_MAX
 
@@ -61,7 +62,7 @@ class GPIO:
         self._duty = []
 
         for p in self.data["pins"]:
-            p = PWM(Pin(p, value=1), freq=100)
+            p = PWM(Pin(p, value=1), freq=1000)
             self._pins.append(p)
             self._duty.append(self.data["range"]["min"])
 
@@ -88,20 +89,14 @@ class GPIO:
 
         for i, p in enumerate(self._pins):
             if len(duty) < i + 1:
-                p.duty_u16(
-                    int(
-                        (1 - (self.data["range"]["min"] /
-                         self.data["range"]["max"]))
-                        * U16_MAX
-                    ),
-                )
-
+                value =  int((1 - (self.data["range"]["min"] / self.data["range"]["max"])) * U16_MAX)
+                print(f"[DEBUG] Set pin {p} to duty {value} [duty: {self.data["range"]["min"]}, range (max):{self.data["range"]["max"]}]", file=stderr)
+                p.duty_u16(value)
                 self._duty.append(self.data["range"]["min"])
             else:
-                p.duty_u16(
-                    int((1 - (duty[i] / self.data["range"]["max"])) * U16_MAX),
-                )
-
+                value =  int((1 - (duty[i] / self.data["range"]["max"])) * U16_MAX)
+                print(f"[DEBUG] Set pin {p} to duty {value} [duty: {duty[i]}, range (max):{self.data["range"]["max"]}]", file=stderr)
+                p.duty_u16(value)
                 self._duty.append(duty[i])
 
     def get_duty(self) -> list[int]:
