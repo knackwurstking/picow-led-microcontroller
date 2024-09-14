@@ -138,7 +138,7 @@ def run(client, request):
         response["error"] = message
 
     except Exception as e:
-        message = "command failed to run"
+        message = f"command failed to run: {str(e)} (type: {type(e).__name__})"
         print("[ERROR] " + message + ": " + str(e))
         response["error"] = message
 
