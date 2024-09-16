@@ -62,7 +62,8 @@ class GPIO:
         self._duty = []
 
         for p in self.data["pins"]:
-            p = PWM(Pin(p, value=1), freq=1000)
+            p = PWM(Pin(p, value=1))
+            p.freq(1000)
             self._pins.append(p)
             self._duty.append(self.data["range"]["min"])
 
