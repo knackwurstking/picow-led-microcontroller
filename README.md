@@ -1,14 +1,19 @@
 # PicoW LED Micro Controller
 
-- [General Info](#general-info)
-- [Command Table](#command-table)
-- [Request / Response Interface](#request-response-interface)
+<!--toc:start-->
 
-## <a id="general-info"></a>General Info
+- [PicoW LED Micro Controller](#picow-led-micro-controller)
+  - [General Info](#general-info)
+  - [Command Table](#command-table)
+  - [Request / Response Interface](#request-response-interface)
+
+<!--toc:end-->
+
+## General Info
 
 Default Port: 3000
 
-## <a id='command-table'></a>Command Table
+## Command Table
 
 **Set**:
 
@@ -27,7 +32,7 @@ Default Port: 3000
 | info   | version    | -    | `string`                         |
 | led    | color      | -    | `[]number`                       |
 
-## <a id='request-response-interface'></a>Request / Response Interface
+## Request / Response Interface
 
 > NOTE: If the `Request` id is set to `-1`, the pico will skip the server response
 
