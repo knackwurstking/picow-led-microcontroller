@@ -36,8 +36,6 @@ def main():
 
     finally:
         disable_led()
-        sleep(10)
-        machine.reset()
 
 
 def setup():
@@ -51,9 +49,16 @@ def setup():
         print("[DEBUG] Try to connect...", file=stderr)
         sta_if.connect(SSID, PASS)
 
+        retry_count = 0
         while not sta_if.isconnected():
+            if retry_count > 20:
+                print("[ERROR] Connection failed, retry...")
+                return setup()
+
+            retry_count += 1
+
             print("[DEBUG] ...wait for connection...", file=stderr)
-            sleep(0.25)
+            sleep(0.5)
 
     enable_led()
     print(f"[DEBUG] ...ifconfig={sta_if.ifconfig()}", file=stderr)
