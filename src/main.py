@@ -22,8 +22,7 @@ def main():
     try:
         while True:
             print(
-                f'[INFO ] Waiting for client on "{
-                    HOST}:{PORT}"',
+                f'[INFO ] Waiting for client on "{HOST}:{PORT}"',
                 file=stderr,
             )
             client, address = server.accept()
@@ -37,6 +36,8 @@ def main():
 
     finally:
         disable_led()
+        sleep(10)
+        machine.reset()
 
 
 def setup():
@@ -94,8 +95,9 @@ def handleClient(client):
 
             try:
                 print(
-                    f"[DEBUG] Run requested command: {request["group"]} {request["type"]} {
-                        request["command"]} {request["args"]}"
+                    f"[DEBUG] Run requested command: {request['group']} {
+                        request['type']
+                    } {request['command']} {request['args']}"
                 )
                 run(client, request)
 
