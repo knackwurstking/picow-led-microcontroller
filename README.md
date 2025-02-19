@@ -13,6 +13,8 @@
 
 Default Port: 3000
 
+Download firmware from here: https://micropython.org/download/RPI_PICO_W/
+
 ## Command Table
 
 **Set**:
@@ -38,16 +40,16 @@ Default Port: 3000
 
 ```typescript
 interface Request {
-  id?: number;
-  group: string;
-  type: string;
-  command: string;
-  args?: any[];
+ id?: number;
+ group: string;
+ type: string;
+ command: string;
+ args?: any[];
 }
 
 interface Response {
-  id: number;
-  error: string | null;
-  data: any | null;
+ id: number;
+ error: string | null;
+ data: any | null;
 }
 ```
