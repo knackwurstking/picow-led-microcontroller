@@ -44,7 +44,7 @@ interface Request {
     group: string;
     type: string;
     command: string;
-    args?: any[];
+    args: string[];
 }
 
 interface Response {
