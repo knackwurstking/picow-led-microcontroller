@@ -1,4 +1,4 @@
-# PicoW LED MicroPython
+# PicoW LED Microcontroller
 
 ## v1.0.0 - unreleased
 
