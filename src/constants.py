@@ -1,4 +1,4 @@
-VERSION = "picow-led-micropython 1.0.2"
+VERSION = "picow-led-micropython 2.0.0"
 HOST = "0.0.0.0"
 PORT = 3000
 END_BYTE = "\n".encode()

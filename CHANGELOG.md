@@ -1,5 +1,11 @@
 # PicoW LED MicroPython
 
-## v1.0.2 [2025-02-18]
+## v2.0.0 - unreleased
 
-- Added a machine reset to the finally block after 10 secondary
+**Changed**:
+
+- Rename set/get config "led" command to "pins"
+
+## v1.0.2 - 2025-02-18
+
+> First release
