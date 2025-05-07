@@ -21,7 +21,7 @@ Download firmware from here: https://micropython.org/download/RPI_PICO_W/
 
 | Group  | Command | Args           | Response Data |
 | ------ | ------- | -------------- | ------------- |
-| config | led     | `<pin> ...`    | `null`        |
+| config | pins    | `<pin> ...`    | `null`        |
 | led    | color   | `<number> ...` | `null`        |
 
 **Get**:

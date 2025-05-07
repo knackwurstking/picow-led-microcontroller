@@ -1,11 +1,11 @@
 import os
+
+from constants import VERSION
 from gpio import gpio
 from picozero import pico_temp_sensor
 
-from constants import VERSION
 
-
-def config_set_led(*args) -> None:
+def config_set_pins(*args) -> None:
     pins = []
     for arg in list(args):
         pins.append(int(arg))
@@ -15,7 +15,7 @@ def config_set_led(*args) -> None:
     return None
 
 
-def config_get_led(*args) -> list[int]:
+def config_get_pins(*args) -> list[int]:
     return gpio.get_pins()
 
 
@@ -57,10 +57,10 @@ def led_get_color(*args) -> list[int]:
 COMMANDS = {
     "config": {
         "set": {
-            "led": config_set_led,
+            "pins": config_set_pins,
         },
         "get": {
-            "led": config_get_led,
+            "pins": config_get_pins,
         },
     },
     "info": {
