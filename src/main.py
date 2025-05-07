@@ -1,14 +1,14 @@
-from socket import socket, SOL_SOCKET, SO_REUSEADDR
-from time import sleep
-from sys import stderr
 import json
+from socket import SO_REUSEADDR, SOL_SOCKET, socket
+from sys import stderr
+from time import sleep
 
 import machine
 import network
 
-from secrets import PASS, SSID
-from constants import HOST, PORT, END_BYTE
-from commands import COMMANDS
+from .commands import COMMANDS
+from .constants import END_BYTE, HOST, PORT
+from .secrets import PASS, SSID
 
 
 def main():
@@ -100,9 +100,9 @@ def handleClient(client):
 
             try:
                 print(
-                    f"[DEBUG] Run requested command: {request['group']} {
-                        request['type']
-                    } {request['command']} {request['args']}"
+                    f"[DEBUG] Run requested command: {request['group']} "
+                    + f"{ request['type'] } {request['command']} "
+                    + f"{request['args']}"
                 )
                 run(client, request)
 

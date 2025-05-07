@@ -1,8 +1,9 @@
 import os
 
-from constants import VERSION
 from gpio import gpio
 from picozero import pico_temp_sensor
+
+from .constants import VERSION
 
 
 def config_set_pins(*args) -> None:

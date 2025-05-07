@@ -1,9 +1,9 @@
 import json
 from sys import stderr
 
-from constants import U16_MAX
-
 from machine import PWM, Pin
+
+from .constants import U16_MAX
 
 
 class Cache:
