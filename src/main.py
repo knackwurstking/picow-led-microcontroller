@@ -6,9 +6,9 @@ from time import sleep
 import machine
 import network
 
-from .commands import COMMANDS
-from .constants import END_BYTE, HOST, PORT
-from .secrets import PASS, SSID
+from commands import COMMANDS
+from constants import END_BYTE, HOST, PORT
+from secrets import PASS, SSID
 
 
 def main():

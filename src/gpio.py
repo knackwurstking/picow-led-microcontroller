@@ -3,7 +3,7 @@ from sys import stderr
 
 from machine import PWM, Pin
 
-from .constants import U16_MAX
+from constants import U16_MAX
 
 
 class Cache:
